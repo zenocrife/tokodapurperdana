@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
    <head>
@@ -10,23 +14,70 @@
       <div class="bg-img">
          <div class="content">
             <header>LOGIN</header>
-            <form action="#">
+
+            <form method="POST" action="#">
                <div class="field">
                   <span class="fa fa-user"></span>
-                  <input type="text" required placeholder="Username">
+                  <input type="text" name="user"required placeholder="Username">
                </div>
                <div class="field space">
                   <span class="fa fa-lock"></span>
-                  <input type="password" class="pass-key" required placeholder="Password">
+                  <input type="password" name="pass"class="pass-key" required placeholder="Password">
                   <span class="show">SHOW</span>
                </div>
                <div class="field">
-                  <input type="submit" value="LOGIN">
+                  <input type="submit" name="submit" value="LOGIN">
                </div>
+               <?php
+                  if(isset($_GET['redirect'])){
+                        $url = $_GET['redirect'];
+                        echo "<input type='hidden' name='redirect'>
+                        value ='$url'>";
+                  }
+               ?>
             </form>
-            
+            <?php
+            if (isset($_POST['submit']))
+            {
+               $user = $_POST['user'];
+               $pass = $_POST['pass'];
+
+               $con = new mysqli("localhost","root","mysql","dbdapurperdana");
+
+               $sql = "SELECT * FROM user WHERE username=? and password=?";
+               $stmt = $con->prepare($sql);
+               $stmt->bind_param("ss", $user,$pass);
+               $stmt->execute();
+               $result = $stmt->get_result();
+
+               if ($row = $result->fetch_assoc())
+               {
+                  if ($pass === $row['password'])
+                  {
+                     echo "Password Benar.";
+
+                     $_SESSION['nama'] = $row['username'];
+                     $_SESSION['pwd'] = $row['password'];
+
+                     if (isset($_POST['redirect']))
+                        header("location: ".$_POST['redirect']);
+                     else
+                        header("location: index.php");
+
+                  }
+                  else
+                     echo "Password Salah.";
+               }
+               else{
+                  echo "User Tidak Ditemukan.";	
+               }
+               $con->close();
+
+            }
+            ?>
          </div>
       </div>
+
       <script>
          const pass_field = document.querySelector('.pass-key');
          const showBtn = document.querySelector('.show');
