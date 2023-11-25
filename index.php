@@ -84,7 +84,7 @@
           </ul>
         </li>
         <li class="item">
-          <a href="index.php">PENYESUAIAN</a>
+          <a href="penyesuaian.php">PENYESUAIAN</a>
         </li>
         <li class="item">
           <div class="submenu-item">
@@ -97,7 +97,7 @@
               LAPORAN
             </div>
             <li class="item">
-              <a href="#">LAPORAN PENJUALAN</a>
+              <a href="laporanpenjualan.php">LAPORAN PENJUALAN</a>
             </li>
           </ul>
         </li>
