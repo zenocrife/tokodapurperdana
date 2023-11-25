@@ -77,7 +77,7 @@
 			return $result;
 		}
 
-		public function paginationWithLimit($search, $start, $item = 4){
+		public function paginationWithLimit($search, $start, $item = 7){
 			$stmt = $this->con->prepare('SELECT b.id_barang, b.nama_barang, b.stok_tersedia, b.harga_jual FROM barang b INNER JOIN kategori_barang k ON b.kategori_barang_id_kategori = k.id_kategori WHERE k.nama_kategori LIKE ? LIMIT ?,?');
 			$stmt->bind_param("sii", $search, $start, $item);
 			$stmt->execute();

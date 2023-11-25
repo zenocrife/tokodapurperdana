@@ -5,7 +5,37 @@
     header("location: login.php");
   }
 
+  $barang = new Barang;
 
+  if (isset($_GET['key'])) {
+		$search = "%".$_GET['key']."%";
+	} else {
+		$search = "%";
+	}
+
+	//pagination, awalnya tentuin data per page, total data, dan total pagenya berapa
+	$result = ($barang)->pagination($search);
+	$perpage = 7;
+	$totaldata = $result->num_rows; //untuk dapatkan jumlah data
+	$totalpage = ceil($totaldata/$perpage); //untuk bulatkan ke atas
+
+	//DATA WITH LIMIT
+	if (isset($_GET['page'])) {
+		$page = $_GET['page'];
+	} else {
+		$page = 1;
+	}
+	
+	$start = ($page-1) * $perpage;
+
+	// $sql = "SELECT * FROM cerita WHERE judul LIKE ? LIMIT ?,?";
+	$result = ($barang)->paginationWithLimit($search, $start, $perpage);
+
+	if (isset($_GET['key'])) {
+		$key = $_GET['key'];
+	} else {
+		$key = "";
+	}
 ?>
 
 <!DOCTYPE html>
@@ -104,18 +134,23 @@
             </tr>
           </thead>
 
-          
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Gambar</td>
-              <td>023123</td>
-              <td>Gelas Bening</td>
-              <td>stok 15</td>
-              <td>Rp. 15.000,00</td>
-              <td><button class="add-button">+ Add</button></td>
-            </tr>
-          </tbody>
+          <?php
+            echo '<tbody>';
+              echo '<tr>';
+              while (true) {
+                $num = 1;
+                echo "<td>".$num."</td>";
+                echo '<td>Gambar</td>';
+                echo "<td>".$row['id_barang']."</td>";
+                echo "<td>".$row['nama_barang']."</td>";
+                echo "<td>".$row['stok_tersedia']."</td>";
+                echo "<td>".$row['harga_jual']."</td>";
+                echo '<td><button class="add-button">+ Add</button></td>';
+                $num++;
+              }
+              echo '</tr>';
+            echo '</tbody>';
+          ?>
         </table>
       </div>
 

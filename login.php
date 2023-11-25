@@ -1,7 +1,7 @@
 <?php
-session_start();
+   session_start();
 
-require 'class.php';
+   require 'class.php';
 
 
 ?>
@@ -69,7 +69,8 @@ require 'class.php';
                else{
                   echo "User Tidak Ditemukan.";	
                }
-               $con->close();
+               
+               (new Koneksi)->__destruct();
 
             }
             ?>
