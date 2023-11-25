@@ -117,40 +117,36 @@
             <option value="">Filter By</option>
             <option value="alat makan">Alat Makan</option>
             <option value="alat masak">Alat Masak</option>
+            <input type='text' name='submit' placeholder="Search..." id="search">
           </select>
-          <input type="text" placeholder="Search..." id="search" />
         </div>
       </div>
+
       <div class="table-wrapper">
         <table class="table">
-          <thead>
-            <tr>
-              <th>No.</th>
-              <th>Gambar</th>
-              <th>Kode</th>
-              <th>Nama Barang</th>
-              <th>Stok Tersedia</th>
-              <th>Harga</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-
+          <tr>
+          <th>No.</th>
+          <th>Gambar</th>
+          <th>Kode</th>
+          <th>Nama Barang</th>
+          <th>Stok Tersedia</th>
+          <th>Harga</th>
+          <th colspan=2>Action</th>
+          </tr>
+          
           <?php
-            echo '<tbody>';
-              echo '<tr>';
-                while ($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()) {
                   $num = 1;
+                  echo "<tr>";
                   echo "<td>".$num."</td>";
                   echo '<td>Gambar</td>';
                   echo "<td>".$row['id_barang']."</td>";
                   echo "<td>".$row['nama_barang']."</td>";
                   echo "<td>".$row['stok_tersedia']."</td>";
                   echo "<td>".$row['harga_jual']."</td>";
-                  echo '<td><button class="add-button">+ Add</button></td>';
+                  echo "<td><button class='add-button'>+ Add</button></td>";
                   $num++;
                 }
-              echo '</tr>';
-            echo '</tbody>';
 
             echo"<ul>";
             echo"<li><a href='index.php?page=1&key=$key'>First</a></li>";
