@@ -151,6 +151,23 @@
                 }
               echo '</tr>';
             echo '</tbody>';
+
+            echo"<ul>";
+            echo"<li><a href='index.php?page=1&key=$key'>First</a></li>";
+            if($page != 1){
+                $q = $page - 1;
+                echo"<li><a href='index.php?page=$q&key=$key'>Prev</a></li>";
+            }
+            for($i=1;$i<=$totalpage;$i++){
+                echo"<li><a href='index.php?p=$i&key=$key'>$i</a></li>";
+            }
+            if($page != $totalpage){
+                $q = $page + 1;
+                echo"<li><a href='index.php?page=$q&key=$key'>Next</a></li>";
+            }
+            echo"<li><a href='index.php?page=$totalpage&key=$key'>Last</a></li>";
+        
+            echo"</ul>";
           ?>
         </table>
       </div>
