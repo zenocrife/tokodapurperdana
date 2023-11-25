@@ -50,11 +50,11 @@
 
                if ($row = $result->fetch_assoc())
                {
-                  if ($pass === $row['password'])
+                  if ($pass == $row['password'])
                   {
                      echo "Password Benar.";
 
-                     $_SESSION['nama'] = $row['username'];
+                     $_SESSION['uname'] = $row['username'];
                      $_SESSION['pwd'] = $row['password'];
 
                      if (isset($_POST['redirect']))
@@ -69,8 +69,6 @@
                else{
                   echo "User Tidak Ditemukan.";	
                }
-               
-               (new Koneksi)->__destruct();
 
             }
             ?>

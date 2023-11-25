@@ -3,7 +3,7 @@
 		protected $con;
 
 		public function __construct(){
-			$this->con = new mysqli("localhost", "root", "mysql", "dbdapurperdana");
+			$this->con = new mysqli("localhost", "root", "", "dbdapurperdana");
 		}
 
 		public function getError(){
@@ -52,8 +52,8 @@
 		}
 
         public function cekLogin($uname, $pwd) {
-            $stmt = $this->con->prepare("SELECT * FROM user WHERE username=? and password=?");
-            $stmt->bind_param("ss", $user,$pass);
+            $stmt = $this->con->prepare("SELECT * FROM user WHERE username=? AND password=?");
+            $stmt->bind_param("ss", $user, $pass);
             $stmt->execute();
 
             $result = $stmt->get_result();

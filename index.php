@@ -1,7 +1,7 @@
 <?php
   session_start();
 
-  if (!isset($_SESSION['nama']) && !isset($_SESSION['pwd'])) {
+  if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
     header("location: login.php");
   }
 
@@ -137,17 +137,17 @@
           <?php
             echo '<tbody>';
               echo '<tr>';
-              while (true) {
-                $num = 1;
-                echo "<td>".$num."</td>";
-                echo '<td>Gambar</td>';
-                echo "<td>".$row['id_barang']."</td>";
-                echo "<td>".$row['nama_barang']."</td>";
-                echo "<td>".$row['stok_tersedia']."</td>";
-                echo "<td>".$row['harga_jual']."</td>";
-                echo '<td><button class="add-button">+ Add</button></td>';
-                $num++;
-              }
+                while (true) {
+                  $num = 1;
+                  echo "<td>".$num."</td>";
+                  echo '<td>Gambar</td>';
+                  echo "<td>".$row['id_barang']."</td>";
+                  echo "<td>".$row['nama_barang']."</td>";
+                  echo "<td>".$row['stok_tersedia']."</td>";
+                  echo "<td>".$row['harga_jual']."</td>";
+                  echo '<td><button class="add-button">+ Add</button></td>';
+                  $num++;
+                }
               echo '</tr>';
             echo '</tbody>';
           ?>
