@@ -51,9 +51,9 @@
 			return $result;
 		}
 
-        public function cekLogin($uname, $pwd) {
-            $stmt = $this->con->prepare("SELECT * FROM user WHERE username=? AND password=?");
-            $stmt->bind_param("ss", $user, $pass);
+        public function cekLogin($uname) {
+            $stmt = $this->con->prepare("SELECT * FROM user WHERE username=?");
+            $stmt->bind_param("s", $uname);
             $stmt->execute();
 
             $result = $stmt->get_result();

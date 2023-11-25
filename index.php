@@ -1,11 +1,12 @@
 <?php
   session_start();
+  require 'class.php';
 
   if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
     header("location: login.php");
   }
 
-  $barang = new Barang;
+  $barang = new Barang();
 
   if (isset($_GET['key'])) {
 		$search = "%".$_GET['key']."%";
@@ -137,7 +138,7 @@
           <?php
             echo '<tbody>';
               echo '<tr>';
-                while (true) {
+                while ($row = $result->fetch_assoc()) {
                   $num = 1;
                   echo "<td>".$num."</td>";
                   echo '<td>Gambar</td>';

@@ -3,7 +3,7 @@
 
    require 'class.php';
 
-
+   $objUser = new User();
 ?>
 
 <!DOCTYPE html>
@@ -41,36 +41,33 @@
                ?>
             </form>
             <?php
-            if (isset($_POST['submit']))
-            {
-               $user = $_POST['user'];
-               $pass = $_POST['pass'];
-
-               $result = (new User)->cekLogin($user, $pass);
-
-               if ($row = $result->fetch_assoc())
+               if (isset($_POST['submit']))
                {
-                  if ($pass == $row['password'])
+                  $user = $_POST['user'];
+
+                  $result = ($objUser)->cekLogin($user);
+
+                  if ($row = $result->fetch_assoc())
                   {
-                     echo "Password Benar.";
+                     if ($_POST['pass'] == $row['password'])
+                     {
+                        echo "Password Benar.";
 
-                     $_SESSION['uname'] = $row['username'];
-                     $_SESSION['pwd'] = $row['password'];
+                        $_SESSION['uname'] = $row['username'];
+                        $_SESSION['pwd'] = $row['password'];
 
-                     if (isset($_POST['redirect']))
-                        header("location: ".$_POST['redirect']);
+                        if (isset($_POST['redirect']))
+                           header("location: ".$_POST['redirect']);
+                        else
+                           header("location: index.php");
+                     }
                      else
-                        header("location: index.php");
-
+                        echo "test.";
                   }
-                  else
-                     echo "Password Salah.";
+                  else{
+                     echo "User Tidak Ditemukan.";	
+                  }
                }
-               else{
-                  echo "User Tidak Ditemukan.";	
-               }
-
-            }
             ?>
          </div>
       </div>
