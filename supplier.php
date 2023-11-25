@@ -88,9 +88,11 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Nama Supplier</th>
+                            <th>Nama</th>
                             <th>Alamat</th>
-                            <th>Email</th>
+                            <th>Telepon</th>
+                            <th>Kontak Utama</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -98,7 +100,56 @@
                             <td>1</td>
                             <td>Supplier A</td>
                             <td>Jalan Supplier A No. 123</td>
+                            <td>112233445566</td>
                             <td>supplierA@example.com</td>
+                            <td>
+                                <button class='edit-button'>Edit</button>
+                                <button class='delete-button'>Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Supplier A</td>
+                            <td>Jalan Supplier A No. 123</td>
+                            <td>112233445566</td>
+                            <td>supplierA@example.com</td>
+                            <td>
+                                <button class='edit-button'>Edit</button>
+                                <button class='delete-button'>Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Supplier A</td>
+                            <td>Jalan Supplier A No. 123</td>
+                            <td>112233445566</td>
+                            <td>supplierA@example.com</td>
+                            <td>
+                                <button class='edit-button'>Edit</button>
+                                <button class='delete-button'>Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Supplier A</td>
+                            <td>Jalan Supplier A No. 123</td>
+                            <td>112233445566</td>
+                            <td>supplierA@example.com</td>
+                            <td>
+                                <button class='edit-button'>Edit</button>
+                                <button class='delete-button'>Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Supplier A</td>
+                            <td>Jalan Supplier A No. 123</td>
+                            <td>112233445566</td>
+                            <td>supplierA@example.com</td>
+                            <td>
+                                <button class='edit-button'>Edit</button>
+                                <button class='delete-button'>Delete</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
