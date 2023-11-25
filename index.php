@@ -63,7 +63,7 @@
           <a href="index.php">DASHBOARD</a>
         </li>
         <li class="item">
-          <a href="index.php">SUPPLIER</a>
+          <a href="supplier.php">SUPPLIER</a>
         </li>
         <li class="item">
           <div class="submenu-item">
