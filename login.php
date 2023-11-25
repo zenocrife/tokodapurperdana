@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+require 'class.php';
+
+
 ?>
 
 <!DOCTYPE html>
@@ -42,13 +46,7 @@ session_start();
                $user = $_POST['user'];
                $pass = $_POST['pass'];
 
-               $con = new mysqli("localhost","root","mysql","dbdapurperdana");
-
-               $sql = "SELECT * FROM user WHERE username=? and password=?";
-               $stmt = $con->prepare($sql);
-               $stmt->bind_param("ss", $user,$pass);
-               $stmt->execute();
-               $result = $stmt->get_result();
+               $result = (new User)->cekLogin($user, $pass);
 
                if ($row = $result->fetch_assoc())
                {

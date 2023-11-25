@@ -1,3 +1,13 @@
+<?php
+  session_start();
+
+  if (!isset($_SESSION['nama']) && !isset($_SESSION['pwd'])) {
+    header("location: login.php");
+  }
+
+
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -93,54 +103,11 @@
               <th>Action</th>
             </tr>
           </thead>
+
+          
           <tbody>
             <tr>
               <td>1</td>
-              <td>Gambar</td>
-              <td>023123</td>
-              <td>Gelas Bening</td>
-              <td>stok 15</td>
-              <td>Rp. 15.000,00</td>
-              <td><button class="add-button">+ Add</button></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Gambar</td>
-              <td>023123</td>
-              <td>Gelas Bening</td>
-              <td>stok 15</td>
-              <td>Rp. 15.000,00</td>
-              <td><button class="add-button">+ Add</button></td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Gambar</td>
-              <td>023123</td>
-              <td>Gelas Bening</td>
-              <td>stok 15</td>
-              <td>Rp. 15.000,00</td>
-              <td><button class="add-button">+ Add</button></td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Gambar</td>
-              <td>023123</td>
-              <td>Gelas Bening</td>
-              <td>stok 15</td>
-              <td>Rp. 15.000,00</td>
-              <td><button class="add-button">+ Add</button></td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>Gambar</td>
-              <td>023123</td>
-              <td>Gelas Bening</td>
-              <td>stok 15</td>
-              <td>Rp. 15.000,00</td>
-              <td><button class="add-button">+ Add</button></td>
-            </tr>
-            <tr>
-              <td>6</td>
               <td>Gambar</td>
               <td>023123</td>
               <td>Gelas Bening</td>
@@ -157,5 +124,4 @@
 
   <script src="script.js"></script>
 </body>
-
 </html>
