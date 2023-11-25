@@ -15,7 +15,7 @@ session_start();
          <div class="content">
             <header>LOGIN</header>
 
-            <form method="POST" action="#">
+            <form method="POST" action="">
                <div class="field">
                   <span class="fa fa-user"></span>
                   <input type="text" name="user"required placeholder="Username">
