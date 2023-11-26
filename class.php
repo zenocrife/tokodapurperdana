@@ -3,7 +3,7 @@
 		protected $con;
 
 		public function __construct(){
-			$this->con = new mysqli("localhost", "root", "", "dbdapurperdana");
+			$this->con = new mysqli("localhost", "root", "mysql", "dbdapurperdana");
 		}
 
 		public function getError(){
@@ -103,6 +103,26 @@
 			$stmt = $this->$con->prepare('UPDATE supplier SET nama_supplier=?, alamat_supplier=?, nomor_telepon_supplier=?,WHERE id_supplier=?');
 			$stmt->bind_param("sssi", $namasupplier, $alamat, $notelepon,$idsupplier);
 			$stmt->execute();
+		}
+
+		public function pagination($search){
+			$stmt = $this->con->prepare("SELECT * FROM supplier WHERE id_supplier LIKE ?");
+			$stmt->bind_param("s", $search);
+			$stmt->execute();
+
+			$result = $stmt->get_result();
+
+			return $result;
+		}
+		
+		public function paginationWithLimit($search, $start, $item = 7){
+			$stmt = $this->con->prepare("SELECT * FROM supplier WHERE id_supplier LIKE ? LIMIT ?,?");
+			$stmt->bind_param("sii", $search, $start, $item);
+			$stmt->execute();
+
+			$result = $stmt->get_result();
+
+			return $result;
 		}
 	}
 ?>

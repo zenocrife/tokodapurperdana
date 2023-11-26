@@ -1,3 +1,44 @@
+<?php
+  session_start();
+  require 'class.php';
+
+  if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
+    header("location: login.php");
+  }
+
+  $supplier = new Supplier();
+
+  if (isset($_GET['key'])) {
+		$search = "%".$_GET['key']."%";
+	} else {
+		$search = "%";
+	}
+
+	//pagination, awalnya tentuin data per page, total data, dan total pagenya berapa
+	$result = ($supplier)->pagination($search);
+	$perpage = 7;
+	$totaldata = $result->num_rows; //untuk dapatkan jumlah data
+	$totalpage = ceil($totaldata/$perpage); //untuk bulatkan ke atas
+
+	//DATA WITH LIMIT
+	if (isset($_GET['page'])) {
+		$page = $_GET['page'];
+	} else {
+		$page = 1;
+	}
+	
+	$start = ($page-1) * $perpage;
+
+	// $sql = "SELECT * FROM cerita WHERE judul LIKE ? LIMIT ?,?";
+	$result = ($supplier)->paginationWithLimit($search, $start, $perpage);
+
+	if (isset($_GET['key'])) {
+		$key = $_GET['key'];
+	} else {
+		$key = "";
+	}
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -66,6 +107,7 @@
     <nav class="navbar">
         <i class="fa-solid fa-bars" id="sidebar-close"></i>
     </nav>
+
     <main class="main">
         <div class="container">
             <div class="add-supplier">
@@ -84,73 +126,25 @@
             </div>
             <div class="table-wrapper">
                 <table class="table">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>Telepon</th>
-                            <th>Kontak Utama</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Supplier A</td>
-                            <td>Jalan Supplier A No. 123</td>
-                            <td>112233445566</td>
-                            <td>supplierA@example.com</td>
-                            <td>
-                                <button class='edit-button'>Edit</button>
-                                <button class='delete-button'>Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Supplier A</td>
-                            <td>Jalan Supplier A No. 123</td>
-                            <td>112233445566</td>
-                            <td>supplierA@example.com</td>
-                            <td>
-                                <button class='edit-button'>Edit</button>
-                                <button class='delete-button'>Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Supplier A</td>
-                            <td>Jalan Supplier A No. 123</td>
-                            <td>112233445566</td>
-                            <td>supplierA@example.com</td>
-                            <td>
-                                <button class='edit-button'>Edit</button>
-                                <button class='delete-button'>Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Supplier A</td>
-                            <td>Jalan Supplier A No. 123</td>
-                            <td>112233445566</td>
-                            <td>supplierA@example.com</td>
-                            <td>
-                                <button class='edit-button'>Edit</button>
-                                <button class='delete-button'>Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Supplier A</td>
-                            <td>Jalan Supplier A No. 123</td>
-                            <td>112233445566</td>
-                            <td>supplierA@example.com</td>
-                            <td>
-                                <button class='edit-button'>Edit</button>
-                                <button class='delete-button'>Delete</button>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <tr>
+                        <th>No.</th>
+                        <th>Nama</th>
+                        <th>Alamat</th>
+                        <th>Telepon</th>
+                        <th>Kontak Utama</th>
+                        <th>Actions</th>
+                    </tr>
+                    <?php
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>".$row['id_supplier']."</td>";
+                            echo "<td>".$row['nama_supplier']."</td>";
+                            echo "<td>".$row['alamat_supplier']."</td>";
+                            echo "<td>".$row['nomor_telepon_supplier']."</td>";
+                            echo '<td>kontak utama</td>';
+                            echo "<td><button class='edit-button'>Edit</button><button class='delete-button'>Delete</button></td>";
+                            }
+                    ?>
                 </table>
             </div>
         </div>
