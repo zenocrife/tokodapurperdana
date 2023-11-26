@@ -137,16 +137,14 @@
           
           <?php
             while ($row = $result->fetch_assoc()) {
-                  $num = 1;
                   echo "<tr>";
-                  echo "<td>".$num."</td>";
-                  echo '<td>Gambar</td>';
                   echo "<td>".$row['id_barang']."</td>";
+                  echo '<td>Gambar</td>';
+                  echo "<td>".$row['kategori_barang_id_kategori']."</td>";
                   echo "<td>".$row['nama_barang']."</td>";
                   echo "<td>".$row['stok_tersedia']."</td>";
                   echo "<td>".$row['harga_jual']."</td>";
                   echo "<td><button class='add-button'>+ Add</button></td>";
-                  $num++;
                 }
           ?>
         </table>
