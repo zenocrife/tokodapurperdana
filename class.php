@@ -93,4 +93,16 @@
 			$stmt->execute();
 		}
 	}
+
+	class Supplier extends Koneksi {
+		public function __construct(){
+			parent::__construct();
+		}
+
+		public function updateSupplier($idsupplier, $namasupplier, $alamat, $notelepon){
+			$stmt = $this->$con->prepare('UPDATE supplier SET nama_supplier=?, alamat_supplier=?, nomor_telepon_supplier=?,WHERE id_supplier=?');
+			$stmt->bind_param("sssi", $namasupplier, $alamat, $notelepon,$idsupplier);
+			$stmt->execute();
+		}
+	}
 ?>
