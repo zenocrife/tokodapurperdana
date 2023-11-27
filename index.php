@@ -121,7 +121,7 @@
             <option value="alat masak">Alat Masak</option>
             <?php 
               // $searchby = $_POST['filterBy'];
-              echo "<input type='text' name='submit' placeholder='Search...' id='search' onkeyup='pagination($searchby, $search)'>"; 
+              echo "<input type='text' name='submit' placeholder='Search...' id='search' onkeyup='searchBarang($searchby, $search)'>"; 
             ?>
           </select>
         </div>
