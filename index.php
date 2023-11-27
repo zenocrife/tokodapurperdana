@@ -15,7 +15,7 @@
 	}
 
 	//pagination, awalnya tentuin data per page, total data, dan total pagenya berapa
-	$result = ($barang)->pagination($search);
+	$result = ($barang)->pagination('id', $search);
   
 	// $perpage = 7;
 	// $totaldata = $result->num_rows; //untuk dapatkan jumlah data
@@ -119,7 +119,10 @@
             <option value="">Filter By</option>
             <option value="alat makan">Alat Makan</option>
             <option value="alat masak">Alat Masak</option>
-            <input type='text' name='submit' placeholder="Search..." id="search">
+            <?php 
+              // $searchby = $_POST['filterBy'];
+              echo "<input type='text' name='submit' placeholder='Search...' id='search' onkeyup='pagination($searchby, $search)'>"; 
+            ?>
           </select>
         </div>
       </div>

@@ -15,7 +15,7 @@
 	}
 
 	//pagination, awalnya tentuin data per page, total data, dan total pagenya berapa
-	$result = ($barang)->pagination($search);
+	$result = ($barang)->pagination('nama', $search);
     
 	// $perpage = 7;
 	// $totaldata = $result->num_rows; //untuk dapatkan jumlah data

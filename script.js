@@ -24,3 +24,7 @@ subMenuTitles.forEach((title) => {
     menu.classList.remove("submenu-active");
   });
 });
+
+function searchBarang(searchby, search) {
+  
+};
