@@ -131,17 +131,15 @@
                         <th>Nama</th>
                         <th>Alamat</th>
                         <th>Telepon</th>
-                        <th>Kontak Utama</th>
                         <th>Actions</th>
                     </tr>
                     <?php
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
-                            echo "<td>".$row['id_supplier']."</td>";
-                            echo "<td>".$row['nama_supplier']."</td>";
-                            echo "<td>".$row['alamat_supplier']."</td>";
-                            echo "<td>".$row['nomor_telepon_supplier']."</td>";
-                            echo '<td>kontak utama</td>';
+                            echo "<td>".$row['id']."</td>";
+                            echo "<td>".$row['nama']."</td>";
+                            echo "<td>".$row['alamat']."</td>";
+                            echo "<td>".$row['nomor_telepon']."</td>";
                             echo "<td><button class='edit-button'>Edit</button><button class='delete-button'>Delete</button></td>";
                             }
                     ?>

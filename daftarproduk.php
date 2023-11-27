@@ -16,21 +16,22 @@
 
 	//pagination, awalnya tentuin data per page, total data, dan total pagenya berapa
 	$result = ($barang)->pagination($search);
-	$perpage = 7;
-	$totaldata = $result->num_rows; //untuk dapatkan jumlah data
-	$totalpage = ceil($totaldata/$perpage); //untuk bulatkan ke atas
+    
+	// $perpage = 7;
+	// $totaldata = $result->num_rows; //untuk dapatkan jumlah data
+	// $totalpage = ceil($totaldata/$perpage); //untuk bulatkan ke atas
 
-	//DATA WITH LIMIT
-	if (isset($_GET['page'])) {
-		$page = $_GET['page'];
-	} else {
-		$page = 1;
-	}
+	// //DATA WITH LIMIT
+	// if (isset($_GET['page'])) {
+	// 	$page = $_GET['page'];
+	// } else {
+	// 	$page = 1;
+	// }
 	
-	$start = ($page-1) * $perpage;
+	// $start = ($page-1) * $perpage;
 
-	// $sql = "SELECT * FROM cerita WHERE judul LIKE ? LIMIT ?,?";
-	$result = ($barang)->paginationWithLimit($search, $start, $perpage);
+	// // $sql = "SELECT * FROM cerita WHERE judul LIKE ? LIMIT ?,?";
+	// $result = ($barang)->paginationWithLimit($search, $start, $perpage);
 
 	if (isset($_GET['key'])) {
 		$key = $_GET['key'];
@@ -132,18 +133,18 @@
                         <th>Harga Jual</th>
                         <th>Harga Beli</th>
                         <th>Stok Tersedia</th>
-                        <th>Kode Barang</th>
+                        <th>Kode Kategori</th>
                         <th>Actions</th>
                     </tr>
                     <?php
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
-                            echo "<td>".$row['id_barang']."</td>";
-                            echo "<td>".$row['nama_barang']."</td>";
+                            echo "<td>".$row['id']."</td>";
+                            echo "<td>".$row['nama']."</td>";
                             echo "<td>".$row['harga_jual']."</td>";
                             echo "<td>".$row['harga_beli']."</td>";
                             echo "<td>".$row['stok_tersedia']."</td>";
-                            echo "<td>".$row['kategori_barang_id_kategori']."</td>";
+                            echo "<td>".$row['id_kategori']."</td>";
                             echo "<td>  <button class='edit-button'>Edit</button>
                                         <button class='delete-button'>Delete</button>
                                     </td>";
