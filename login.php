@@ -62,7 +62,7 @@
                            header("location: index.php");
                      }
                      else
-                        echo "test.";
+                        echo "Password Salah.";
                   }
                   else{
                      echo "User Tidak Ditemukan.";	
