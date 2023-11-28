@@ -89,8 +89,8 @@
                             <th>No.</th>
                             <th>Tanggal</th>
                             <th>Nama Produk</th>
-                            <th>Total Bayar</th>
-                            <th>Jumlah Uang</th>
+                            <th>Harga Produk</th>
+                            <th>Total Pembayaran</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -101,13 +101,19 @@
                             <td>105000</td>
                             <td>110000</td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>10-10-2023</td>
-                            <td>Panci</td>
-                            <td>105000</td>
-                            <td>110000</td>
-                        </tr>
+
+                        <?php
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>".$row['id']."</td>";
+                                echo "<td><img width='70' height='70' src=".$row['url']."></td>";
+                                echo "<td>".$row['nama']."</td>";
+                                echo "<td>".$row['stok_tersedia']."</td>";
+                                echo "<td>".$row['harga_jual']."</td>";
+                                echo "<td>".$row['id_kategori']."</td>";
+                                echo "<td><button class='add-button'>+ Add</button></td>";
+                            }
+                        ?>
                     </tbody>
                 </table>
             </div>
