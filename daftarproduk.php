@@ -1,43 +1,43 @@
 <?php
-  session_start();
-  require 'class.php';
+session_start();
+require 'class.php';
 
-  if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
+if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
     header("location: login.php");
-  }
+}
 
-  $barang = new Barang();
+$barang = new Barang();
 
-  if (isset($_GET['key'])) {
-		$search = "%".$_GET['key']."%";
-	} else {
-		$search = "%";
-	}
+if (isset($_GET['key'])) {
+    $search = "%" . $_GET['key'] . "%";
+} else {
+    $search = "%";
+}
 
-	//pagination, awalnya tentuin data per page, total data, dan total pagenya berapa
-	$result = ($barang)->pagination('nama', $search);
-    
-	// $perpage = 7;
-	// $totaldata = $result->num_rows; //untuk dapatkan jumlah data
-	// $totalpage = ceil($totaldata/$perpage); //untuk bulatkan ke atas
+//pagination, awalnya tentuin data per page, total data, dan total pagenya berapa
+$result = ($barang)->pagination('nama', $search);
 
-	// //DATA WITH LIMIT
-	// if (isset($_GET['page'])) {
-	// 	$page = $_GET['page'];
-	// } else {
-	// 	$page = 1;
-	// }
-	
-	// $start = ($page-1) * $perpage;
+// $perpage = 7;
+// $totaldata = $result->num_rows; //untuk dapatkan jumlah data
+// $totalpage = ceil($totaldata/$perpage); //untuk bulatkan ke atas
 
-	// // $sql = "SELECT * FROM cerita WHERE judul LIKE ? LIMIT ?,?";
-	// $result = ($barang)->paginationWithLimit($search, $start, $perpage);
+// //DATA WITH LIMIT
+// if (isset($_GET['page'])) {
+// 	$page = $_GET['page'];
+// } else {
+// 	$page = 1;
+// }
 
-	if (isset($_GET['key'])) {
-		$key = $_GET['key'];
-	} else {
-		$key = "";
-	}
+// $start = ($page-1) * $perpage;
+
+// // $sql = "SELECT * FROM cerita WHERE judul LIKE ? LIMIT ?,?";
+// $result = ($barang)->paginationWithLimit($search, $start, $perpage);
+
+if (isset($_GET['key'])) {
+    $key = $_GET['key'];
+} else {
+    $key = "";
+}
 ?>
 
 <!DOCTYPE html>
@@ -102,6 +102,9 @@
                         </li>
                     </ul>
                 </li>
+                <li class="item">
+                    <a href="">LOGOUT</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -137,20 +140,20 @@
                         <th>Actions</th>
                     </tr>
                     <?php
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<tr>";
-                            echo "<td>".$row['id']."</td>";
-                            echo "<td>".$row['nama']."</td>";
-                            echo "<td>".$row['harga_jual']."</td>";
-                            echo "<td>".$row['harga_beli']."</td>";
-                            echo "<td>".$row['stok_tersedia']."</td>";
-                            echo "<td>".$row['id_kategori']."</td>";
-                            echo "<td>  <button class='edit-button'>Edit</button>
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row['id'] . "</td>";
+                        echo "<td>" . $row['nama'] . "</td>";
+                        echo "<td>" . $row['harga_jual'] . "</td>";
+                        echo "<td>" . $row['harga_beli'] . "</td>";
+                        echo "<td>" . $row['stok_tersedia'] . "</td>";
+                        echo "<td>" . $row['id_kategori'] . "</td>";
+                        echo "<td>  <button class='edit-button'>Edit</button>
                                         <button class='delete-button'>Delete</button>
                                     </td>";
-                        }
+                    }
                     ?>
-                    
+
                 </table>
             </div>
         </div>

@@ -60,6 +60,9 @@
                         </li>
                     </ul>
                 </li>
+                <li class="item">
+                    <a href="">LOGOUT</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -103,16 +106,16 @@
                         </tr>
 
                         <?php
-                            while ($row = $result->fetch_assoc()) {
-                                echo "<tr>";
-                                echo "<td>".$row['id']."</td>";
-                                echo "<td><img width='70' height='70' src=".$row['url']."></td>";
-                                echo "<td>".$row['nama']."</td>";
-                                echo "<td>".$row['stok_tersedia']."</td>";
-                                echo "<td>".$row['harga_jual']."</td>";
-                                echo "<td>".$row['id_kategori']."</td>";
-                                echo "<td><button class='add-button'>+ Add</button></td>";
-                            }
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . $row['id'] . "</td>";
+                            echo "<td><img width='70' height='70' src=" . $row['url'] . "></td>";
+                            echo "<td>" . $row['nama'] . "</td>";
+                            echo "<td>" . $row['stok_tersedia'] . "</td>";
+                            echo "<td>" . $row['harga_jual'] . "</td>";
+                            echo "<td>" . $row['id_kategori'] . "</td>";
+                            echo "<td><button class='add-button'>+ Add</button></td>";
+                        }
                         ?>
                     </tbody>
                 </table>

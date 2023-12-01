@@ -60,6 +60,9 @@
                         </li>
                     </ul>
                 </li>
+                <li class="item">
+                    <a href="">LOGOUT</a>
+                </li>
             </ul>
         </div>
     </nav>

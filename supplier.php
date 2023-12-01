@@ -1,42 +1,42 @@
 <?php
-  session_start();
-  require 'class.php';
+session_start();
+require 'class.php';
 
-  if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
+if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
     header("location: login.php");
-  }
+}
 
-  $supplier = new Supplier();
+$supplier = new Supplier();
 
-  if (isset($_GET['key'])) {
-		$search = "%".$_GET['key']."%";
-	} else {
-		$search = "%";
-	}
+if (isset($_GET['key'])) {
+    $search = "%" . $_GET['key'] . "%";
+} else {
+    $search = "%";
+}
 
-	//pagination, awalnya tentuin data per page, total data, dan total pagenya berapa
-	$result = ($supplier)->pagination($search);
-	$perpage = 7;
-	$totaldata = $result->num_rows; //untuk dapatkan jumlah data
-	$totalpage = ceil($totaldata/$perpage); //untuk bulatkan ke atas
+//pagination, awalnya tentuin data per page, total data, dan total pagenya berapa
+$result = ($supplier)->pagination($search);
+$perpage = 7;
+$totaldata = $result->num_rows; //untuk dapatkan jumlah data
+$totalpage = ceil($totaldata / $perpage); //untuk bulatkan ke atas
 
-	//DATA WITH LIMIT
-	if (isset($_GET['page'])) {
-		$page = $_GET['page'];
-	} else {
-		$page = 1;
-	}
-	
-	$start = ($page-1) * $perpage;
+//DATA WITH LIMIT
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+} else {
+    $page = 1;
+}
 
-	// $sql = "SELECT * FROM cerita WHERE judul LIKE ? LIMIT ?,?";
-	$result = ($supplier)->paginationWithLimit($search, $start, $perpage);
+$start = ($page - 1) * $perpage;
 
-	if (isset($_GET['key'])) {
-		$key = $_GET['key'];
-	} else {
-		$key = "";
-	}
+// $sql = "SELECT * FROM cerita WHERE judul LIKE ? LIMIT ?,?";
+$result = ($supplier)->paginationWithLimit($search, $start, $perpage);
+
+if (isset($_GET['key'])) {
+    $key = $_GET['key'];
+} else {
+    $key = "";
+}
 ?>
 
 <!DOCTYPE html>
@@ -53,6 +53,7 @@
 </head>
 
 <body>
+    <div class="overlay" id="overlay"></div>
     <nav class="sidebar">
         <a href="#" class="logo">Dapur Perdana</a>
         <span class="hamburger-icon"></span>
@@ -101,6 +102,9 @@
                         </li>
                     </ul>
                 </li>
+                <li class="item">
+                    <a href="">LOGOUT</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -112,7 +116,7 @@
         <div class="container">
             <div class="add-supplier">
                 <div class="action-buttons">
-                    <button class="add-button" id="add-supp">Add</button>
+                    <button class="add-button" id="add-supp" onclick="openAddForm()">Add</button>
                 </div>
                 <div class="line"></div>
             </div>
@@ -134,19 +138,84 @@
                         <th>Actions</th>
                     </tr>
                     <?php
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<tr>";
-                            echo "<td>".$row['id']."</td>";
-                            echo "<td>".$row['nama']."</td>";
-                            echo "<td>".$row['alamat']."</td>";
-                            echo "<td>".$row['nomor_telepon']."</td>";
-                            echo "<td><button class='edit-button'>Edit</button><button class='delete-button'>Delete</button></td>";
-                            }
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row['id'] . "</td>";
+                        echo "<td>" . $row['nama'] . "</td>";
+                        echo "<td>" . $row['alamat'] . "</td>";
+                        echo "<td>" . $row['nomor_telepon'] . "</td>";
+                        echo "<td><button class='edit-button' onclick='openEditForm()'>Edit</button><button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button></td>";
+                    }
                     ?>
                 </table>
             </div>
         </div>
     </main>
+
+    <div class="popup-form" id="addForm">
+        <div class="form-header">
+            <span class="form-title">Add Supplier</span>
+            <span class="close-icon" onclick="closeAddForm()">&#10006;</span>
+        </div>
+        <form class="form-container">
+            <input type="text" placeholder="Nama" required />
+            <input type="text" placeholder="Alamat" required />
+            <input type="text" placeholder="Nomor Telepon" required />
+            <div class="button-container">
+                <button type="button" class="cancel-button" onclick="closeAddForm()">Cancel</button>
+                <button type="submit" class="submit-button" id="submitAddForm">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="popup-form" id="editForm">
+        <div class="form-header">
+            <span class="form-title">Edit Supplier</span>
+            <span class="close-icon" onclick="closeEditForm()">&#10006;</span>
+        </div>
+        <form class="form-container">
+            <input type="text" placeholder="Nama" required />
+            <input type="text" placeholder="Alamat" required />
+            <input type="text" placeholder="Nomor Telepon" required />
+            <div class="button-container">
+                <button type="button" class="cancel-button" onclick="closeEditForm()">Cancel</button>
+                <button type="submit" class="submit-button" id="submitEditForm">Edit</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="popup-form" id="deleteConfirmation">
+        <div class="form-container">
+            <p>Apakah Anda yakin ingin menghapusnya?</p>
+            <div class="button-container">
+                <button type="submit" class="submit-button">Yes</button>
+                <button type="button" class="cancel-button" onclick="closeDeleteConfirmation()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup-form" id="addSuccessForm">
+        <div class="success-content">
+            <i class="fa-regular fa-circle-check success-icon"></i>
+            <div class="success-text">
+                <p>Sukses</p>
+                <div class="line"></div>
+                <p>Sukses menambah data</p>
+            </div>
+            <button class="close-button" onclick="closeAddSuccessForm()">OK</button>
+        </div>
+    </div>
+    <div class="popup-form" id="editSuccessForm">
+        <div class="success-content">
+            <i class="fa-regular fa-circle-check success-icon"></i>
+            <div class="success-text">
+                <p>Sukses</p>
+                <div class="line"></div>
+                <p>Sukses mengubah data</p>
+            </div>
+            <button class="close-button" onclick="closeEditSuccessForm()">OK</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
