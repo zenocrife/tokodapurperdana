@@ -95,6 +95,17 @@
 			$stmt->execute();
 		}
 
+		// UNTUK STOK
+		public function bacaStok($idbarang){
+			$stmt = $this->con->prepare("SELECT stok_tersedia FROM barang WHERE id LIKE ? ");
+			$stmt->bind_param("i", $idbarang);
+			$stmt->execute();
+
+			$result = $stmt->get_result();
+
+			return $result;
+		}
+
 		public function updateStok($idbarang, $stok){
 			$stmt = $this->con->prepare('UPDATE barang SET stok_tersedia=? WHERE id=?');
 			$stmt->bind_param("ii", $stok, $idbarang);
@@ -170,5 +181,69 @@
 		}
 	}
 
+	class DetailPenjualan extends Koneksi { //ini belom samsek
+		public function __construct(){
+			parent::__construct();
+		}
+
+		public function updateSupplier($idsupplier, $namasupplier, $alamat, $notelepon){
+			$stmt = $this->con->prepare('UPDATE supplier SET nama=?, alamat=?, nomor_telepon=? WHERE id=?');
+			$stmt->bind_param("sssi", $namasupplier, $alamat, $notelepon, $idsupplier);
+			$stmt->execute();
+		}
+
+		public function bacaData($search){
+			$stmt = $this->con->prepare("SELECT * FROM detail_transaksi_penjualan");
+			$stmt->bind_param("s", $search);
+			$stmt->execute();
+
+			$result = $stmt->get_result();
+
+			return $result;
+		}
+
+		public function tambahSupplier($namasupplier, $alamat, $notelepon){
+			$stmt = $this->con->prepare('INSERT INTO supplier(nama, alamat, nomor_telepon) VALUE(?, ?, ?)');
+			$stmt->bind_param("sss", $namasupplier, $alamat, $notelepon);
+			$stmt->execute();
+		}
+
+		public function hapusKSupplier($idsupplier) {
+			$stmt = $this->con->prepare('DELETE FROM supplier WHERE id=?');
+			$stmt->bind_param("i", $idsupplier);
+			$stmt->execute();
+		}
+	}
+
+	class Penyesuaian extends Koneksi {
+		public function __construct(){
+			parent::__construct();
+		}
+
+		public function bacaData($search){
+			$stmt = $this->con->prepare("SELECT * FROM penyesuaian WHERE nama LIKE ?");
+			$stmt->bind_param("s", $search);
+			$stmt->execute();
+
+			$result = $stmt->get_result();
+
+			return $result;
+		}
+
+		public function tambahPenyesuaian($tanggal, $keterangan, $stok, $idbarang){
+			$stmt = $this->con->prepare('INSERT INTO penyesuaian(tanggal, keterangan, stok_penyesuaian, id_barang) VALUE(?, ?, ?, ?)');
+			$stmt->bind_param("ssii", $tanggal, $keterangan, $stok, $idbarang);
+			$stmt->execute();
+
+			$barang = new Barang();
+
+			$result = ($barang)->bacaStok($idbarang);
+
+			if ($row = $result->fetch_assoc()) {
+				$stok_akhir = $row['stok_tersedia'] - $stok;
+				($barang)->updateStok($idbarang, $stok_akhir);
+			}
+		}
+	}
 
 ?>
