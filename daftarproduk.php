@@ -15,7 +15,7 @@ if (isset($_GET['key'])) {
 }
 
 //pagination, awalnya tentuin data per page, total data, dan total pagenya berapa
-$result = ($barang)->pagination('nama', $search);
+$result = ($barang)->bacaDataBarang('nama', $search);
 
 // $perpage = 7;
 // $totaldata = $result->num_rows; //untuk dapatkan jumlah data
@@ -159,7 +159,7 @@ if (isset($_GET['key'])) {
         </div>
     </main>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

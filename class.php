@@ -67,7 +67,9 @@
 			parent::__construct();
 		}
 
-		public function pagination($searchby, $search){
+
+
+		public function bacaDataBarang($searchby, $search){
 			// $stmt = $this->con->prepare("SELECT b.id_barang, b.nama_barang, b.stok_tersedia, b.harga_jual FROM barang b INNER JOIN kategori_barang k ON b.kategori_barang_id_kategori = k.id_kategori WHERE k.nama_kategori LIKE ?");
 			$stmt = $this->con->prepare("SELECT * FROM barang WHERE ? LIKE ? ");
 			$stmt->bind_param("ss", $searchby, $search);

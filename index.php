@@ -14,7 +14,7 @@
 		$search = "%";
 	}
 
-	$result = ($barang)->pagination('id', $search);
+	$result = ($barang)->bacaDataBarang('id', $search);
 
 	if (isset($_GET['key'])) {
 		$key = $_GET['key'];
@@ -107,7 +107,7 @@
             <option value="alat masak">Alat Masak</option>
             <?php 
               // $searchby = $_POST['filterBy'];
-              echo "<input type='text' name='submit' placeholder='Search...' id='search' onkeyup='searchBarang($searchby, $search)'>"; 
+              echo "<input type='text' name='submit' placeholder='Search...' id='search'>"; 
             ?>
           </select>
         </div>
@@ -143,6 +143,7 @@
     </div>
   </main>
 
-  <script src="script.js"></script>
+  <script type="text/javascript" src="js/code.jquery.com_jquery-3.7.0.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
