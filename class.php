@@ -67,23 +67,9 @@
 			parent::__construct();
 		}
 
-
-
-		public function bacaDataBarang($searchby, $search){
-			// $stmt = $this->con->prepare("SELECT b.id_barang, b.nama_barang, b.stok_tersedia, b.harga_jual FROM barang b INNER JOIN kategori_barang k ON b.kategori_barang_id_kategori = k.id_kategori WHERE k.nama_kategori LIKE ?");
+		public function bacaData($searchby, $search){
 			$stmt = $this->con->prepare("SELECT * FROM barang WHERE ? LIKE ? ");
 			$stmt->bind_param("ss", $searchby, $search);
-			$stmt->execute();
-
-			$result = $stmt->get_result();
-
-			return $result;
-		}
-
-		public function paginationWithLimit($search, $start, $item = 7){
-			// $stmt = $this->con->prepare('SELECT b.id_barang, b.nama_barang, b.stok_tersedia, b.harga_jual FROM barang b INNER JOIN kategori_barang k ON b.kategori_barang_id_kategori = k.id_kategori WHERE k.nama_kategori LIKE ? LIMIT ?,?');
-			$stmt = $this->con->prepare("SELECT * FROM barang WHERE id LIKE ? LIMIT ?,?");
-			$stmt->bind_param("sii", $search, $start, $item);
 			$stmt->execute();
 
 			$result = $stmt->get_result();
@@ -94,6 +80,58 @@
 		public function tambahBarang($idbarang, $nama, $hargajual, $hargabeli, $stok, $idkategori){
 			$stmt = $this->con->prepare('INSERT INTO barang VALUES(?, ?, ?, ?, ?, ?)');
 			$stmt->bind_param('isiiii', $idbarang, $nama, $hargabeli, $hargajual, $stok, $idkategori);
+			$stmt->execute();
+		}
+
+		public function updateBarang($idbarang, $nama, $hbeli, $hjual, $url, $stok, $idkategori){
+			$stmt = $this->con->prepare('UPDATE barang SET nama=?, harga_beli=?, harga_jual=?, url=?, stok_tersedia=?, id_kategori=? WHERE id=?');
+			$stmt->bind_param("ssiisiii", $nama, $hbeli, $hjual, $url, $stok, $idkategori, $idbarang);
+			$stmt->execute();
+		}
+
+		public function hapusBarang($idbarang) {
+			$stmt = $this->con->prepare('DELETE FROM barang WHERE id=?');
+			$stmt->bind_param("i", $idbarang);
+			$stmt->execute();
+		}
+
+		public function updateStok($idbarang, $stok){
+			$stmt = $this->con->prepare('UPDATE barang SET stok_tersedia=? WHERE id=?');
+			$stmt->bind_param("ii", $stok, $idbarang);
+			$stmt->execute();
+		}
+	}
+
+	class Kategori extends Koneksi{
+		public function __construct(){
+			parent::__construct();
+		}
+
+		public function bacaData($search){
+			$stmt = $this->con->prepare("SELECT * FROM kategori_barang WHERE nama LIKE ? ");
+			$stmt->bind_param("s", $search);
+			$stmt->execute();
+
+			$result = $stmt->get_result();
+
+			return $result;
+		}
+
+		public function tambahKategori($nama, $url){
+			$stmt = $this->con->prepare('INSERT INTO kategori_barang(nama, url) VALUES(?, ?)');
+			$stmt->bind_param('ss', $nama, $url);
+			$stmt->execute();
+		}
+
+		public function updateKategori($idkategori, $nama, $url){
+			$stmt = $this->con->prepare('UPDATE kategori_barang SET nama=?, url=? WHERE id=?');
+			$stmt->bind_param("ssi", $nama, $url, $idkategori);
+			$stmt->execute();
+		}
+
+		public function hapusKategori($idkategori) {
+			$stmt = $this->con->prepare('DELETE FROM kategori_barang WHERE id=?');
+			$stmt->bind_param("i", $idkategori);
 			$stmt->execute();
 		}
 	}
@@ -109,8 +147,8 @@
 			$stmt->execute();
 		}
 
-		public function pagination($search){
-			$stmt = $this->con->prepare("SELECT * FROM supplier WHERE id LIKE ?");
+		public function bacaData($search){
+			$stmt = $this->con->prepare("SELECT * FROM supplier WHERE nama LIKE ?");
 			$stmt->bind_param("s", $search);
 			$stmt->execute();
 
@@ -118,15 +156,19 @@
 
 			return $result;
 		}
-		
-		public function paginationWithLimit($search, $start, $item = 7){
-			$stmt = $this->con->prepare("SELECT * FROM supplier WHERE id LIKE ? LIMIT ?,?");
-			$stmt->bind_param("sii", $search, $start, $item);
+
+		public function tambahSupplier($namasupplier, $alamat, $notelepon){
+			$stmt = $this->con->prepare('INSERT INTO supplier(nama, alamat, nomor_telepon) VALUE(?, ?, ?)');
+			$stmt->bind_param("sss", $namasupplier, $alamat, $notelepon);
 			$stmt->execute();
+		}
 
-			$result = $stmt->get_result();
-
-			return $result;
+		public function hapusKSupplier($idsupplier) {
+			$stmt = $this->con->prepare('DELETE FROM supplier WHERE id=?');
+			$stmt->bind_param("i", $idsupplier);
+			$stmt->execute();
 		}
 	}
+
+
 ?>

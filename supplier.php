@@ -14,23 +14,7 @@ if (isset($_GET['key'])) {
     $search = "%";
 }
 
-//pagination, awalnya tentuin data per page, total data, dan total pagenya berapa
-$result = ($supplier)->pagination($search);
-$perpage = 7;
-$totaldata = $result->num_rows; //untuk dapatkan jumlah data
-$totalpage = ceil($totaldata / $perpage); //untuk bulatkan ke atas
-
-//DATA WITH LIMIT
-if (isset($_GET['page'])) {
-    $page = $_GET['page'];
-} else {
-    $page = 1;
-}
-
-$start = ($page - 1) * $perpage;
-
-// $sql = "SELECT * FROM cerita WHERE judul LIKE ? LIMIT ?,?";
-$result = ($supplier)->paginationWithLimit($search, $start, $perpage);
+$result = ($supplier)->bacaData($search);
 
 if (isset($_GET['key'])) {
     $key = $_GET['key'];
@@ -217,7 +201,7 @@ if (isset($_GET['key'])) {
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

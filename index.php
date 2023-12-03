@@ -14,7 +14,7 @@
 		$search = "%";
 	}
 
-	$result = ($barang)->bacaDataBarang('id', $search);
+	$result = ($barang)->bacaData('id', $search);
 
 	if (isset($_GET['key'])) {
 		$key = $_GET['key'];
