@@ -104,7 +104,7 @@ if (isset($_GET['key'])) {
         <div class="container">
             <div class="add-supplier">
                 <div class="action-buttons">
-                    <button class="add-button" id="add-supp" onclick="openAddForm()">Add</button>
+                    <button id="add-supp" onclick="openAddForm()">Add</button>
                 </div>
                 <div class="line"></div>
             </div>

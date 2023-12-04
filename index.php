@@ -134,11 +134,11 @@ if (isset($_GET['key'])) {
             echo "<tr>";
             echo "<td>" . $row['id'] . "</td>";
             echo "<td><img width='70' height='70' src=" . $row['url'] . "></td>";
-            echo "<td>" . $row['nama'] . "</td>";
+            echo "<td class='left-align'>" . $row['nama'] . "</td>";
             echo "<td>" . $row['stok_tersedia'] . "</td>";
-            echo "<td>" . $row['harga_jual'] . "</td>";
-            echo "<td>" . $row['id_kategori'] . "</td>";
-            echo "<td><button class='add-button'>+ Add</button></td>";
+            echo "<td class='right-align'>" . $row['harga_jual'] . "</td>";
+            echo "<td class='right-align'>" . $row['id_kategori'] . "</td>";
+            echo "<td><button class='add-button' id='add-butt'>+ Add</button></td>";
           }
           ?>
         </table>

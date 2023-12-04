@@ -163,10 +163,6 @@ if (isset($_GET['key'])) {
 
                 </table>
             </div>
-            <div class="user-profile">
-                <i class="fas fa-user-circle user-icon"></i>
-                <span class="user-name">Michael</span>
-            </div>
         </div>
     </main>
     <div class="popup-form" id="addForm">
