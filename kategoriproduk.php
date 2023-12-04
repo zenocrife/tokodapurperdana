@@ -103,7 +103,7 @@
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>Alat Masak</td>
+                            <td class='left-align'>Alat Masak</td>
                             <td>
                                 <button class='edit-button' onclick='openEditForm()'>Edit</button>
                                 <button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>
@@ -111,7 +111,7 @@
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td>Alat Makan</td>
+                            <td class='left-align'>Alat Makan</td>
                             <td>
                                 <button class='edit-button' onclick='openEditForm()'>Edit</button>
                                 <button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>

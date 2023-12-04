@@ -100,9 +100,9 @@
                         <tr>
                             <td>1</td>
                             <td>10-10-2023</td>
-                            <td>Panci</td>
-                            <td>105000</td>
-                            <td>110000</td>
+                            <td class='left-align'>Panci</td>
+                            <td class='right-align'>105000</td>
+                            <td class='right-align'>110000</td>
                         </tr>
 
                         <?php

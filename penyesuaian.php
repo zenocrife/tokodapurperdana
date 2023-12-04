@@ -105,16 +105,16 @@
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>Gelas</td>
+                            <td class='left-align'>Gelas</td>
                             <td>06-06-2023</td>
-                            <td>Rusak</td>
+                            <td class='left-align'>Rusak</td>
                             <td>5</td>
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td>Piring</td>
+                            <td class='left-align'>Piring</td>
                             <td>06-06-2023</td>
-                            <td>Bonus</td>
+                            <td class='left-align'>Bonus</td>
                             <td>5</td>
                         </tr>
                     </tbody>

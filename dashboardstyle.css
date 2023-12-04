@@ -252,7 +252,7 @@
 }
 
 .add-button {
-  padding: 5px 10px;
+  padding: 5px 5px;
   border: none;
   background-color: #2c9a04;
   color: #fff;
@@ -260,7 +260,7 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   width: 70px;
-  height: 40px;
+  height: 50px;
 }
 .table td .action-buttons {
   width: 100%;
@@ -329,7 +329,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5px 10px;
+  padding: 5px 5px;
   border: none;
   background-color: #2c9a04;
   color: #fff;
@@ -338,7 +338,10 @@
   transition: background-color 0.3s ease;
   margin-left: 5px;
   width: 70px;
-  height: 40px;
+  height: 50px;
+}
+#add-supp:hover {
+  background-color: #3456c8;
 }
 
 .popup-form {

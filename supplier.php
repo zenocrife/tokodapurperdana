@@ -104,7 +104,7 @@ if (isset($_GET['key'])) {
         <div class="container">
             <div class="add-supplier">
                 <div class="action-buttons">
-                    <button id="add-supp" onclick="openAddForm()">Add</button>
+                    <button class="add-button"id="add-supp" onclick="openAddForm()">Add</button>
                 </div>
                 <div class="line"></div>
             </div>
@@ -130,8 +130,8 @@ if (isset($_GET['key'])) {
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . $row['id'] . "</td>";
-                        echo "<td>" . $row['nama'] . "</td>";
-                        echo "<td>" . $row['alamat'] . "</td>";
+                        echo "<td class='left-align'>" . $row['nama'] . "</td>";
+                        echo "<td class='left-align'>" . $row['alamat'] . "</td>";
                         echo "<td>" . $row['nomor_telepon'] . "</td>";
                         echo "<td><button class='edit-button' onclick='openEditForm()'>Edit</button><button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button></td>";
                     }
