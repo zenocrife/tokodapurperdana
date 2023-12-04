@@ -80,6 +80,7 @@
                     <h2>Laporan Penjualan</h2>
                 </div>
                 <div class="filter-search">
+                    <button id='print-button'><i class='fa-solid fa-print'></i></button>
                     <input type="text" placeholder="Search..." id="search" />
                     <button id='search-button'><i class='fa-solid fa-search'></i></button>
                 </div>

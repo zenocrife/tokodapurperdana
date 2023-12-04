@@ -486,7 +486,8 @@
 .close-button:hover {
   background-color: #3456c8;
 }
-#search-button {
+#search-button,
+#print-button {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -502,7 +503,19 @@
 #search-button:hover i {
   color: #4e4d4d;
 }
+#print-button {
+  margin-right: 5px;
+}
 
+#print-button i {
+  color: #ffffff; 
+  font-size: 24px;
+  transition: color 0.3s ease;
+}
+
+#print-button:hover i {
+  color: #5c5a5a; 
+}
 .user-profile {
   display: flex;
   align-items: center;
