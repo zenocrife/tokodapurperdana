@@ -71,18 +71,13 @@
     </nav>
     <main class="main">
         <div class="container">
-            <div class="add-supplier">
-                <div class="action-buttons">
-                    <button class="add-button" id="add-supp">Add</button>
-                </div>
-                <div class="line"></div>
-            </div>
             <div class="title-filter-search">
                 <div class="title-wrapper">
                     <h2>Laporan Penjualan</h2>
                 </div>
                 <div class="filter-search">
                     <input type="text" placeholder="Search..." id="search" />
+                    <button id='search-button'><i class='fa-solid fa-search'></i></button>
                 </div>
             </div>
             <div class="table-wrapper">

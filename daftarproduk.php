@@ -54,6 +54,7 @@ if (isset($_GET['key'])) {
 </head>
 
 <body>
+    <div class="overlay" id="overlay"></div>
     <nav class="sidebar">
         <a href="#" class="logo">Dapur Perdana</a>
         <span class="hamburger-icon"></span>
@@ -113,10 +114,9 @@ if (isset($_GET['key'])) {
     </nav>
     <main class="main">
         <div class="container">
-            <br><br><br>
-            <div class="add-supplier">
+            <div class="add-produk">
                 <div class="action-buttons">
-                    <button class="add-button" id="add-supp">Add</button>
+                    <button class="add-button" id="add-supp" onclick="openAddForm()">Add</button>
                 </div>
                 <div class="line"></div>
             </div>
@@ -126,6 +126,7 @@ if (isset($_GET['key'])) {
                 </div>
                 <div class="filter-search">
                     <input type="text" placeholder="Search..." id="search" />
+                    <button id='search-button'><i class='fa-solid fa-search'></i></button>
                 </div>
             </div>
             <div class="table-wrapper">
@@ -143,14 +144,16 @@ if (isset($_GET['key'])) {
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . $row['id'] . "</td>";
-                        echo "<td>" . $row['nama'] . "</td>";
-                        echo "<td>" . $row['harga_jual'] . "</td>";
-                        echo "<td>" . $row['harga_beli'] . "</td>";
+                        echo "<td class='left-align'>" . $row['nama'] . "</td>";
+                        echo "<td class='right-align'>" . $row['harga_jual'] . "</td>"; 
+                        echo "<td class='right-align'>" . $row['harga_beli'] . "</td>";
                         echo "<td>" . $row['stok_tersedia'] . "</td>";
-                        echo "<td>" . $row['id_kategori'] . "</td>";
-                        echo "<td>  <button class='edit-button'>Edit</button>
-                                        <button class='delete-button'>Delete</button>
-                                    </td>";
+                        echo "<td class='right-align'>" . $row['id_kategori'] . "</td>";
+                        echo "<td>
+                                <button class='edit-button' onclick='openEditForm()'>Edit</button>
+                                <button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>
+                            </td>";
+                        echo "</tr>";
                     }
                     ?>
 
@@ -158,7 +161,81 @@ if (isset($_GET['key'])) {
             </div>
         </div>
     </main>
+    <div class="popup-form" id="addForm">
+        <div class="form-header">
+            <span class="form-title">Add Produk</span>
+            <span class="close-icon" onclick="closeAddForm()">&#10006;</span>
+        </div>
+        <form class="form-container">
+            <input type="text" placeholder="Nama Barang" required />
+            <input type="number" placeholder="Harga Jual" required />
+            <input type="number" placeholder="Harga Beli" required />
+            <input type="number" placeholder="Stok Tersedia" required />
+            <select name="kategori" required>
+                <option value="">Select kategori</option>
+                <option value="">1 (Alat Masak)</option>
+                <option value="">2 (Alat Makan)</option>
+            </select>
+            <div class="button-container">
+                <button type="button" class="cancel-button" onclick="closeAddForm()">Cancel</button>
+                <button type="submit" class="submit-button" id="submitAddForm">Add</button>
+            </div>
+        </form>
+    </div>
 
+    <div class="popup-form" id="editForm">
+        <div class="form-header">
+            <span class="form-title">Edit Produk</span>
+            <span class="close-icon" onclick="closeEditForm()">&#10006;</span>
+        </div>
+        <form class="form-container">
+            <input type="text" placeholder="Nama Barang" required />
+            <input type="number" placeholder="Harga Jual" required />
+            <input type="number" placeholder="Harga Beli" required />
+            <input type="number" placeholder="Stok Tersedia" required />
+            <select name="kategori" required>
+                <option value="">1 (Alat Masak)</option>
+                <option value="">2 (Alat Makan)</option>
+            </select>
+            <div class="button-container">
+                <button type="button" class="cancel-button" onclick="closeEditForm()">Cancel</button>
+                <button type="submit" class="submit-button" id="submitEditForm">Edit</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="popup-form" id="deleteConfirmation">
+        <div class="form-container">
+            <p>Apakah Anda yakin ingin menghapusnya?</p>
+            <div class="button-container">
+                <button type="submit" class="submit-button">Yes</button>
+                <button type="button" class="cancel-button" onclick="closeDeleteConfirmation()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup-form" id="addSuccessForm">
+        <div class="success-content">
+            <i class="fa-regular fa-circle-check success-icon"></i>
+            <div class="success-text">
+                <p>Sukses</p>
+                <div class="line"></div>
+                <p>Sukses menambah data</p>
+            </div>
+            <button class="close-button" onclick="closeAddSuccessForm()">OK</button>
+        </div>
+    </div>
+    <div class="popup-form" id="editSuccessForm">
+        <div class="success-content">
+            <i class="fa-regular fa-circle-check success-icon"></i>
+            <div class="success-text">
+                <p>Sukses</p>
+                <div class="line"></div>
+                <p>Sukses mengubah data</p>
+            </div>
+            <button class="close-button" onclick="closeEditSuccessForm()">OK</button>
+        </div>
+    </div>
     <script src="js/script.js"></script>
 </body>
 

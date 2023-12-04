@@ -110,6 +110,7 @@ if (isset($_GET['key'])) {
                 </div>
                 <div class="filter-search">
                     <input type="text" placeholder="Search..." id="search" />
+                    <button id='search-button'><i class='fa-solid fa-search'></i></button>
                 </div>
             </div>
             <div class="table-wrapper">

@@ -1,26 +1,26 @@
 <?php
-  session_start();
-  require 'class.php';
+session_start();
+require 'class.php';
 
-  if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
-    header("location: login.php");
-  }
+if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
+  header("location: login.php");
+}
 
-  $barang = new Barang();
+$barang = new Barang();
 
-  if (isset($_GET['key'])) {
-		$search = "%".$_GET['key']."%";
-	} else {
-		$search = "%";
-	}
+if (isset($_GET['key'])) {
+  $search = "%" . $_GET['key'] . "%";
+} else {
+  $search = "%";
+}
 
-	$result = ($barang)->bacaData('id', $search);
+$result = ($barang)->bacaData('id', $search);
 
-	if (isset($_GET['key'])) {
-		$key = $_GET['key'];
-	} else {
-		$key = "";
-	}
+if (isset($_GET['key'])) {
+  $key = $_GET['key'];
+} else {
+  $key = "";
+}
 ?>
 
 <!DOCTYPE html>
@@ -89,6 +89,10 @@
           <a href="">LOGOUT</a>
         </li>
       </ul>
+      <div class="user-profile">
+        <i class="fas fa-user-circle user-icon"></i>
+        <span class="user-name">Michael</span>
+      </div>
     </div>
   </nav>
   <nav class="navbar">
@@ -97,7 +101,6 @@
   </nav>
   <main class="main">
     <div class="container">
-      <br><br><br>
       <div class="title-filter-search">
         <h2>Produk</h2>
         <div class="filter-search">
@@ -105,9 +108,10 @@
             <option value="">Filter By</option>
             <option value="alat makan">Alat Makan</option>
             <option value="alat masak">Alat Masak</option>
-            <?php 
-              // $searchby = $_POST['filterBy'];
-              echo "<input type='text' name='submit' placeholder='Search...' id='search'>"; 
+            <?php
+            // $searchby = $_POST['filterBy'];
+            echo "<input type='text' name='submit' placeholder='Search...' id='search'>";
+            echo  "<button id='search-button'><i class='fa-solid fa-search'></i></button>";
             ?>
           </select>
         </div>
@@ -116,26 +120,26 @@
       <div class="table-wrapper">
         <table class="table">
           <tr>
-          <th>No.</th>
-          <th>Gambar</th>
-          <th>Nama Barang</th>
-          <th>Stok Tersedia</th>
-          <th>Harga</th>
-          <th>Kode Kategori</th>
-          <th colspan=2>Action</th>
+            <th>No.</th>
+            <th>Gambar</th>
+            <th>Nama Barang</th>
+            <th>Stok Tersedia</th>
+            <th>Harga</th>
+            <th>Kode Kategori</th>
+            <th colspan=2>Action</th>
           </tr>
-          
+
           <?php
-            while ($row = $result->fetch_assoc()) {
-                  echo "<tr>";
-                  echo "<td>".$row['id']."</td>";
-                  echo "<td><img width='70' height='70' src=".$row['url']."></td>";
-                  echo "<td>".$row['nama']."</td>";
-                  echo "<td>".$row['stok_tersedia']."</td>";
-                  echo "<td>".$row['harga_jual']."</td>";
-                  echo "<td>".$row['id_kategori']."</td>";
-                  echo "<td><button class='add-button'>+ Add</button></td>";
-                }
+          while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row['id'] . "</td>";
+            echo "<td><img width='70' height='70' src=" . $row['url'] . "></td>";
+            echo "<td>" . $row['nama'] . "</td>";
+            echo "<td>" . $row['stok_tersedia'] . "</td>";
+            echo "<td>" . $row['harga_jual'] . "</td>";
+            echo "<td>" . $row['id_kategori'] . "</td>";
+            echo "<td><button class='add-button'>+ Add</button></td>";
+          }
           ?>
         </table>
       </div>
@@ -146,4 +150,5 @@
   <script type="text/javascript" src="js/code.jquery.com_jquery-3.7.0.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
 </body>
+
 </html>

@@ -12,6 +12,7 @@
 </head>
 
 <body>
+    <div class="overlay" id="overlay"></div>
     <nav class="sidebar">
         <a href="#" class="logo">Dapur Perdana</a>
         <span class="hamburger-icon"></span>
@@ -71,18 +72,19 @@
     </nav>
     <main class="main">
         <div class="container">
-            <div class="add-supplier">
+            <div class="add-penyesuaian">
                 <div class="action-buttons">
-                    <button class="add-button" id="add-supp">Add</button>
+                    <button class="add-button" id="add-supp" onclick="openAddForm()">Add</button>
                 </div>
                 <div class="line"></div>
             </div>
             <div class="title-filter-search">
                 <div class="title-wrapper">
-                    <h2>Daftar Produk</h2>
+                    <h2>Penyesuaian</h2>
                 </div>
                 <div class="filter-search">
                     <input type="text" placeholder="Search..." id="search" />
+                    <button id='search-button'><i class='fa-solid fa-search'></i></button>
                 </div>
             </div>
             <div class="table-wrapper">
@@ -116,7 +118,72 @@
             </div>
         </div>
     </main>
+    <div class="popup-form" id="addForm">
+        <div class="form-header">
+            <span class="form-title">Add Penyesuaian</span>
+            <span class="close-icon" onclick="closeAddForm()">&#10006;</span>
+        </div>
+        <form class="form-container">
+            <input type="text" placeholder="Nama Barang" required />
+            <input type="date" class="tanggal" required>
+            <input type="text" placeholder="Ketereangan Penyesuaian" required />
+            <input type="number" placeholder="Stok Penyesuaian" required />
+            <div class="button-container">
+                <button type="button" class="cancel-button" onclick="closeAddForm()">Cancel</button>
+                <button type="submit" class="submit-button" id="submitAddForm">Add</button>
+            </div>
+        </form>
+    </div>
 
+    <div class="popup-form" id="editForm">
+        <div class="form-header">
+            <span class="form-title">Edit Penyesuaian</span>
+            <span class="close-icon" onclick="closeEditForm()">&#10006;</span>
+        </div>
+        <form class="form-container">
+        <input type="text" placeholder="Nama Barang" required />
+            <input type="date" class="tanggal" required>
+            <input type="text" placeholder="Ketereangan Penyesuaian" required />
+            <input type="number" placeholder="Stok Penyesuaian" required />
+            <div class="button-container">
+                <button type="button" class="cancel-button" onclick="closeEditForm()">Cancel</button>
+                <button type="submit" class="submit-button" id="submitEditForm">Edit</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="popup-form" id="deleteConfirmation">
+        <div class="form-container">
+            <p>Apakah Anda yakin ingin menghapusnya?</p>
+            <div class="button-container">
+                <button type="submit" class="submit-button">Yes</button>
+                <button type="button" class="cancel-button" onclick="closeDeleteConfirmation()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup-form" id="addSuccessForm">
+        <div class="success-content">
+            <i class="fa-regular fa-circle-check success-icon"></i>
+            <div class="success-text">
+                <p>Sukses</p>
+                <div class="line"></div>
+                <p>Sukses menambah data</p>
+            </div>
+            <button class="close-button" onclick="closeAddSuccessForm()">OK</button>
+        </div>
+    </div>
+    <div class="popup-form" id="editSuccessForm">
+        <div class="success-content">
+            <i class="fa-regular fa-circle-check success-icon"></i>
+            <div class="success-text">
+                <p>Sukses</p>
+                <div class="line"></div>
+                <p>Sukses mengubah data</p>
+            </div>
+            <button class="close-button" onclick="closeEditSuccessForm()">OK</button>
+        </div>
+    </div>
     <script src="js/script.js"></script>
 </body>
 
