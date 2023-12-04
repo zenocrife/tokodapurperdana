@@ -90,6 +90,10 @@ if (isset($_GET['key'])) {
                     <a href="">LOGOUT</a>
                 </li>
             </ul>
+            <div class="user-profile">
+                <i class="fas fa-user-circle user-icon"></i>
+                <span class="user-name">Michael</span>
+            </div>
         </div>
     </nav>
     <nav class="navbar">

@@ -107,6 +107,10 @@ if (isset($_GET['key'])) {
                     <a href="">LOGOUT</a>
                 </li>
             </ul>
+            <div class="user-profile">
+                <i class="fas fa-user-circle user-icon"></i>
+                <span class="user-name">Michael</span>
+            </div>
         </div>
     </nav>
     <nav class="navbar">
@@ -145,7 +149,7 @@ if (isset($_GET['key'])) {
                         echo "<tr>";
                         echo "<td>" . $row['id'] . "</td>";
                         echo "<td class='left-align'>" . $row['nama'] . "</td>";
-                        echo "<td class='right-align'>" . $row['harga_jual'] . "</td>"; 
+                        echo "<td class='right-align'>" . $row['harga_jual'] . "</td>";
                         echo "<td class='right-align'>" . $row['harga_beli'] . "</td>";
                         echo "<td>" . $row['stok_tersedia'] . "</td>";
                         echo "<td class='right-align'>" . $row['id_kategori'] . "</td>";
@@ -158,6 +162,10 @@ if (isset($_GET['key'])) {
                     ?>
 
                 </table>
+            </div>
+            <div class="user-profile">
+                <i class="fas fa-user-circle user-icon"></i>
+                <span class="user-name">Michael</span>
             </div>
         </div>
     </main>

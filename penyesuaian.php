@@ -65,6 +65,10 @@
                     <a href="">LOGOUT</a>
                 </li>
             </ul>
+            <div class="user-profile">
+                <i class="fas fa-user-circle user-icon"></i>
+                <span class="user-name">Michael</span>
+            </div>
         </div>
     </nav>
     <nav class="navbar">
@@ -141,7 +145,7 @@
             <span class="close-icon" onclick="closeEditForm()">&#10006;</span>
         </div>
         <form class="form-container">
-        <input type="text" placeholder="Nama Barang" required />
+            <input type="text" placeholder="Nama Barang" required />
             <input type="date" class="tanggal" required>
             <input type="text" placeholder="Ketereangan Penyesuaian" required />
             <input type="number" placeholder="Stok Penyesuaian" required />
