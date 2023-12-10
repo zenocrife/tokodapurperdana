@@ -14,7 +14,11 @@ if (isset($_GET['key'])) {
   $search = "%";
 }
 
-$result = ($barang)->bacaData('id', $search);
+//Ini diubah pake getTotalData
+//sebelumnya pake bacaData('id',$search)
+
+$result = ($barang)->getTotalData($search);
+
 
 if (isset($_GET['key'])) {
   $key = $_GET['key'];
@@ -95,27 +99,33 @@ if (isset($_GET['key'])) {
       </div>
     </div>
   </nav>
+
   <nav class="navbar">
     <i class="fa-solid fa-bars" id="sidebar-close"></i>
     <i class="fa-solid fa-shopping-cart" id="cart-icon"></i>
   </nav>
+
   <main class="main">
     <div class="container">
-      <div class="title-filter-search">
-        <h2>Produk</h2>
-        <div class="filter-search">
-          <select name="filterBy" id="filterBy">
-            <option value="">Filter By</option>
-            <option value="alat makan">Alat Makan</option>
-            <option value="alat masak">Alat Masak</option>
-            <?php
-            // $searchby = $_POST['filterBy'];
-            echo "<input type='text' name='submit' placeholder='Search...' id='search'>";
-            echo  "<button id='search-button'><i class='fa-solid fa-search'></i></button>";
-            ?>
-          </select>
+      <form action="" method="GET">
+        <div class="title-filter-search">
+          <h2>Produk</h2>
+          <div class="filter-search">
+            <select name="filterBy" id="filterBy">
+              <option value="">Filter By</option>
+              <option value="alat makan">Alat Makan</option>
+              <option value="alat masak">Alat Masak</option>
+
+              <form action="" method="GET">
+                  <input type="text" name="key" value="" placeholder="Search..." id="search">
+                  <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
+              </form>
+
+            </select>
+
+          </div>
         </div>
-      </div>
+      </form>
 
       <div class="table-wrapper">
         <table class="table">

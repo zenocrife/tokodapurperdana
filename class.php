@@ -67,6 +67,17 @@
 			parent::__construct();
 		}
 
+		//UNTUK SEARCH
+		public function getTotalData($search)
+        {
+            $stmt = $this->con->prepare("SELECT * FROM barang WHERE nama LIKE ?");
+            $stmt->bind_param("s", $search);
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+            return $result;
+        }
+
 		public function bacaData($searchby, $search){
 			$stmt = $this->con->prepare("SELECT * FROM barang WHERE ? LIKE ? ");
 			$stmt->bind_param("ss", $searchby, $search);
@@ -118,6 +129,17 @@
 			parent::__construct();
 		}
 
+		//UNTUK SEARCH
+		public function getTotalData($search)
+        {
+            $stmt = $this->con->prepare("SELECT * FROM kategori_barang WHERE nama LIKE ?");
+            $stmt->bind_param("s", $search);
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+            return $result;
+        }
+
 		public function bacaData($search){
 			$stmt = $this->con->prepare("SELECT * FROM kategori_barang WHERE nama LIKE ? ");
 			$stmt->bind_param("s", $search);
@@ -151,6 +173,17 @@
 		public function __construct(){
 			parent::__construct();
 		}
+
+		//UNTUK SEARCH
+		public function getTotalData($search)
+        {
+            $stmt = $this->con->prepare("SELECT * FROM supplier WHERE nama LIKE ?");
+            $stmt->bind_param("s", $search);
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+            return $result;
+        }
 
 		public function updateSupplier($idsupplier, $namasupplier, $alamat, $notelepon){
 			$stmt = $this->con->prepare('UPDATE supplier SET nama=?, alamat=?, nomor_telepon=? WHERE id=?');
@@ -219,6 +252,8 @@
 		public function __construct(){
 			parent::__construct();
 		}
+
+		
 
 		public function bacaData($search){
 			$stmt = $this->con->prepare("SELECT * FROM penyesuaian WHERE nama LIKE ?");

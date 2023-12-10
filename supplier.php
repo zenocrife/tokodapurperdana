@@ -14,7 +14,7 @@ if (isset($_GET['key'])) {
     $search = "%";
 }
 
-$result = ($supplier)->bacaData($search);
+$result = ($supplier)->getTotalData($search);
 
 if (isset($_GET['key'])) {
     $key = $_GET['key'];
@@ -113,8 +113,10 @@ if (isset($_GET['key'])) {
                     <h2>Supplier</h2>
                 </div>
                 <div class="filter-search">
-                    <input type="text" placeholder="Search..." id="search" />
-                    <button id='search-button'><i class='fa-solid fa-search'></i></button>
+                    <form action="" method="GET">
+                        <input type="text" name="key" value="" placeholder="Search..." id="search">
+                        <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
+                    </form>
                 </div>
             </div>
             <div class="table-wrapper">

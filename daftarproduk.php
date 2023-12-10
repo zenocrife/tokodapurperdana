@@ -15,7 +15,7 @@ if (isset($_GET['key'])) {
 }
 
 //pagination, awalnya tentuin data per page, total data, dan total pagenya berapa
-$result = ($barang)->bacaData('nama', $search);
+$result = ($barang)->getTotalData($search);
 
 // $perpage = 7;
 // $totaldata = $result->num_rows; //untuk dapatkan jumlah data
@@ -129,8 +129,10 @@ if (isset($_GET['key'])) {
                     <h2>Daftar Produk</h2>
                 </div>
                 <div class="filter-search">
-                    <input type="text" placeholder="Search..." id="search" />
-                    <button id='search-button'><i class='fa-solid fa-search'></i></button>
+                    <form action="" method="GET">
+                        <input type="text" name="key" value="" placeholder="Search..." id="search">
+                        <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
+                    </form>
                 </div>
             </div>
             <div class="table-wrapper">
