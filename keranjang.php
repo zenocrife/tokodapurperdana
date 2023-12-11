@@ -13,7 +13,7 @@ $username = $_SESSION['uname'];
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dapur Perdana</title>
-  <link rel="stylesheet" href="css/keranjangstyle.css" />
+  <link rel="stylesheet" href="keranjangstyle.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
 
