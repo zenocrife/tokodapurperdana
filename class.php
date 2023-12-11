@@ -186,7 +186,7 @@
 			$stmt->execute();
 		}
 
-		public function hapusKSupplier($idsupplier) {
+		public function hapusSupplier($idsupplier) {
 			$stmt = $this->con->prepare('DELETE FROM supplier WHERE id=?');
 			$stmt->bind_param("i", $idsupplier);
 			$stmt->execute();

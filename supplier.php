@@ -183,12 +183,19 @@ if (isset($_GET['key'])) {
     </div>
 
     <!-- HAPUS -->
+    <!-- MASIH ERROR 
+        http://localhost/WSE/tokodapurperdana/deleteSupplier.php?id=%3Cbr%20/%3E%3Cb%3EWarning%3C/
+        b%3E:%20%20Trying%20to%20access%20array%20offset%20on%20value%20of%20type%20null%20in%20%3Cb%3EC:
+        \xampp\htdocs\WSE\tokodapurperdana\supplier.php%3C/b%3E%20on%20line%20%3Cb%3E191%3C/b%3E%3Cbr%20/%3E
+    -->
     <div class="popup-form" id="deleteConfirmation">
         <div class="form-container">
             <p>Apakah Anda yakin ingin menghapusnya?</p>
             <div class="button-container">
-                <button type="submit" class="submit-button">Yes</button>
-                <button type="button" class="cancel-button" onclick="closeDeleteConfirmation()">No</button>
+                <form action="" method="GET">
+                    <button type="submit" class="submit-button"><a href='deleteSupplier.php?id=<?php echo $row['id']; ?>'>Yes</a></button>
+                    <button type="button" class="cancel-button" onclick="closeDeleteConfirmation()">No</button>
+                </form>
             </div>
         </div>
     </div>
