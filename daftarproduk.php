@@ -111,7 +111,7 @@ if (isset($_GET['key'])) {
             </ul>
             <div class="user-profile">
                 <i class="fas fa-user-circle user-icon"></i>
-                <?php echo '<span class="user-name">'.$username.'</span>'; ?>
+                <?php echo '<span class="user-name">' . $username . '</span>'; ?>
             </div>
         </div>
     </nav>
@@ -132,10 +132,19 @@ if (isset($_GET['key'])) {
                     <h2>Daftar Produk</h2>
                 </div>
                 <div class="filter-search">
-                    <form action="" method="GET">
-                        <input type="text" name="key" value="" placeholder="Search..." id="search">
-                        <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
-                    </form>
+                    <select name="filterBy" id="filterBy">
+                        <option value="">Filter By</option>
+                        <option value="1">Kompor</option>
+                        <option value="2">Wajan</option>
+                        <option value="3">Panci</option>
+                        <option value="4">Blender</option>
+                        <option value="5">Teflon</option>
+                        <option value="6">Magic Com</option>
+                        <form action="" method="GET">
+                            <input type="text" name="key" value="" placeholder="Search..." id="search">
+                            <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
+                        </form>
+                    </select>
                 </div>
             </div>
             <div class="table-wrapper">
