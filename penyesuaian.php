@@ -1,3 +1,45 @@
+<?php
+session_start();
+require 'class.php';
+
+if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
+    header("location: login.php");
+}
+
+$penyesuaian = new Penyesuaian();
+
+if (isset($_GET['key'])) {
+    $search = "%" . $_GET['key'] . "%";
+} else {
+    $search = "%";
+}
+
+//pagination, awalnya tentuin data per page, total data, dan total pagenya berapa
+$result = ($penyesuaian)->bacaData($search);
+
+// $perpage = 7;
+// $totaldata = $result->num_rows; //untuk dapatkan jumlah data
+// $totalpage = ceil($totaldata/$perpage); //untuk bulatkan ke atas
+
+// //DATA WITH LIMIT
+// if (isset($_GET['page'])) {
+// 	$page = $_GET['page'];
+// } else {
+// 	$page = 1;
+// }
+
+// $start = ($page-1) * $perpage;
+
+// // $sql = "SELECT * FROM cerita WHERE judul LIKE ? LIMIT ?,?";
+// $result = ($barang)->paginationWithLimit($search, $start, $perpage);
+
+if (isset($_GET['key'])) {
+    $key = $_GET['key'];
+} else {
+    $key = "";
+}
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -87,37 +129,32 @@
                     <h2>Penyesuaian</h2>
                 </div>
                 <div class="filter-search">
-                    <input type="text" placeholder="Search..." id="search" />
-                    <button id='search-button'><i class='fa-solid fa-search'></i></button>
+                    <form action="" method="GET">
+                        <input type="text" name="key" value="" placeholder="Search..." id="search">
+                        <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
+                    </form>
                 </div>
             </div>
             <div class="table-wrapper">
                 <table class="table">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Nama Barang</th>
-                            <th>Tanggal Penyesuaian</th>
-                            <th>Keterangan Penyesuaian</th>
-                            <th>Stok Penyesuaian</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td class='left-align'>Gelas</td>
-                            <td>06-06-2023</td>
-                            <td class='left-align'>Rusak</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td class='left-align'>Piring</td>
-                            <td>06-06-2023</td>
-                            <td class='left-align'>Bonus</td>
-                            <td>5</td>
-                        </tr>
-                    </tbody>
+                    <tr>
+                        <th>No.</th>
+                        <th>Tanggal Penyesuaian</th>
+                        <th>Keterangan Penyesuaian</th>
+                        <th>Stok Penyesuaian</th>
+                        <th>Id Barang</th>
+                    </tr>
+                    <?php
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row['id'] . "</td>";
+                        echo "<td class='left-align'>" . $row['tanggal'] . "</td>";
+                        echo "<td class='right-align'>" . $row['keterangan'] . "</td>";
+                        echo "<td class='right-align'>" . $row['stok_penyesuaian'] . "</td>";
+                        echo "<td class='right-align'>" . $row['id_barang'] . "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
                 </table>
             </div>
         </div>

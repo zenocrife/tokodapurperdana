@@ -14,7 +14,7 @@ if (isset($_GET['key'])) {
     $search = "%";
 }
 
-$result = ($supplier)->getTotalData($search);
+$result = ($supplier)->bacaData($search);
 
 if (isset($_GET['key'])) {
     $key = $_GET['key'];
@@ -143,6 +143,7 @@ if (isset($_GET['key'])) {
         </div>
     </main>
 
+    <!-- TAMBAH  -->
     <div class="popup-form" id="addForm">
         <div class="form-header">
             <span class="form-title">Add Supplier</span>
@@ -159,22 +160,29 @@ if (isset($_GET['key'])) {
         </form>
     </div>
 
+    <!-- EDIT -->
+    <!-- MASIH ERROR (YANG DIBAWAH INI ERROR NYA DARI LINE 170 - 172)
+        <br /><b>Warning</b>:  Trying to access array offset on value of type null in 
+        <b>C:\xampp\htdocs\WSE\tokodapurperdana\supplier.php</b> on line <b>170</b><br /> 
+    -->
     <div class="popup-form" id="editForm">
         <div class="form-header">
             <span class="form-title">Edit Supplier</span>
             <span class="close-icon" onclick="closeEditForm()">&#10006;</span>
         </div>
-        <form class="form-container">
-            <input type="text" placeholder="Nama" required />
-            <input type="text" placeholder="Alamat" required />
-            <input type="text" placeholder="Nomor Telepon" required />
+        <form class="form-container" method="POST" action="updateSupplier_proses.php">
+            <input type="text" placeholder="Nama" required  value="<?php echo $row['nama'];?>">
+            <input type="text" placeholder="Alamat" required value="<?php echo $row['alamat'];?>">
+            <input type="text" placeholder="Nomor Telepon" required value="<?php echo $row['nomor_telepon'];?>">
+            <input type="hidden" name="idSupplier" value="<?php echo $row['id'];?>">
             <div class="button-container">
                 <button type="button" class="cancel-button" onclick="closeEditForm()">Cancel</button>
-                <button type="submit" class="submit-button" id="submitEditForm">Edit</button>
+                <button type="submit" class="submit-button" id="submitEditForm" name="submit">Edit</button>
             </div>
         </form>
     </div>
 
+    <!-- HAPUS -->
     <div class="popup-form" id="deleteConfirmation">
         <div class="form-container">
             <p>Apakah Anda yakin ingin menghapusnya?</p>
