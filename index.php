@@ -115,8 +115,13 @@ if (isset($_GET['key'])) {
           <div class="filter-search">
             <select name="filterBy" id="filterBy">
               <option value="">Filter By</option>
-              <option value="alat makan">Alat Makan</option>
-              <option value="alat masak">Alat Masak</option>
+              <option value="1">Kompor</option>
+              <option value="2">Wajan</option>
+              <option value="3">Panci</option>
+              <option value="4">Blender</option>
+              <option value="5">Teflon</option>
+              <option value="6">Magic Com</option>
+
 
               <form action="" method="GET">
                   <input type="text" name="key" value="" placeholder="Search..." id="search">
