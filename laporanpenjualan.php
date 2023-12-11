@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+$username = $_SESSION['uname'];
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -66,7 +72,7 @@
             </ul>
             <div class="user-profile">
                 <i class="fas fa-user-circle user-icon"></i>
-                <span class="user-name">Michael</span>
+                <?php echo '<span class="user-name">'.$username.'</span>'; ?>
             </div>
         </div>
     </nav>

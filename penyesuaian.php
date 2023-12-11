@@ -6,6 +6,8 @@ if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
     header("location: login.php");
 }
 
+$username = $_SESSION['uname'];
+
 $penyesuaian = new Penyesuaian();
 
 if (isset($_GET['key'])) {
@@ -109,7 +111,7 @@ if (isset($_GET['key'])) {
             </ul>
             <div class="user-profile">
                 <i class="fas fa-user-circle user-icon"></i>
-                <span class="user-name">Michael</span>
+                <?php echo '<span class="user-name">'.$username.'</span>'; ?>
             </div>
         </div>
     </nav>
