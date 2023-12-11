@@ -19,7 +19,7 @@
         $alamat = $_POST['alamat'];
         $notelepon = $_POST['nomor_telepon'];
         $idsupplier = $_POST['id'];
-        require_once("class/supplier.php");
+        require_once("class.php");
         $supplier = new Supplier();
         $status = $supplier->updateSupplier( $namasupplier, $alamat, $notelepon,$idsupplier);
         if($status){
