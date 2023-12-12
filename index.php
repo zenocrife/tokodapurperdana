@@ -20,6 +20,7 @@ if (isset($_GET['key'])) {
 //sebelumnya pake bacaData('id',$search)
 
 $result = ($barang)->getTotalData($search);
+// $result = ($barang)->bacaData('nama',$search);
 
 
 if (isset($_GET['key'])) {
@@ -27,6 +28,8 @@ if (isset($_GET['key'])) {
 } else {
   $key = "";
 }
+
+$resultK = (new Kategori)->bacaData('%');
 ?>
 
 <!DOCTYPE html>
@@ -115,14 +118,11 @@ if (isset($_GET['key'])) {
           <div class="filter-search">
             <select name="filterBy" id="filterBy">
               <option value="">Filter By</option>
-              <option value="1">Kompor</option>
-              <option value="2">Wajan</option>
-              <option value="3">Panci</option>
-              <option value="4">Blender</option>
-              <option value="5">Teflon</option>
-              <option value="6">Magic Com</option>
-
-
+              <?php 
+                while ($rowK = $resultK->fetch_assoc()) {
+                  echo '<option value='.$rowK['id'].'>'.$rowK['nama'].'</option>';
+                }
+              ?>
               <form action="" method="GET">
                   <input type="text" name="key" value="" placeholder="Search..." id="search">
                   <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
@@ -142,19 +142,22 @@ if (isset($_GET['key'])) {
             <th>Nama Barang</th>
             <th>Stok Tersedia</th>
             <th>Harga</th>
-            <th>Kode Kategori</th>
+            <th>Kategori</th>
             <th colspan=2>Action</th>
           </tr>
 
           <?php
           while ($row = $result->fetch_assoc()) {
+            $resultK = (new Kategori)->bacaDataById($row['id_kategori']);
+            $namaK = $resultK->fetch_assoc();
+            
             echo "<tr>";
             echo "<td>" . $row['id'] . "</td>";
             echo "<td><img width='70' height='70' src=" . $row['url'] . "></td>";
             echo "<td class='left-align'>" . $row['nama'] . "</td>";
             echo "<td>" . $row['stok_tersedia'] . "</td>";
             echo "<td class='right-align'>" . $row['harga_jual'] . "</td>";
-            echo "<td class='right-align'>" . $row['id_kategori'] . "</td>";
+            echo "<td class='right-align'>" . $namaK['nama'] . "</td>";
             echo "<td><button class='add-button' id='add-butt'>+ Add</button></td>";
           }
           ?>

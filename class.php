@@ -89,6 +89,16 @@
 			return $result;
 		}
 
+		public function bacaDataWithKategori($searchby, $search){
+			$stmt = $this->con->prepare("SELECT b.*, kb.nama AS nama_kategori FROM barang b INNER JOIN kategori_barang kb ON b.idkategori = kb.id WHERE ? LIKE ? ");
+			$stmt->bind_param("ss", $searchby, $search);
+			$stmt->execute();
+
+			$result = $stmt->get_result();
+
+			return $result;
+		}
+
 		public function tambahBarang($idbarang, $nama, $hargajual, $hargabeli, $stok, $idkategori){
 			$stmt = $this->con->prepare('INSERT INTO barang VALUES(?, ?, ?, ?, ?, ?)');
 			$stmt->bind_param('isiiii', $idbarang, $nama, $hargabeli, $hargajual, $stok, $idkategori);
@@ -133,6 +143,16 @@
 		public function bacaData($search){
 			$stmt = $this->con->prepare("SELECT * FROM kategori_barang WHERE nama LIKE ? ");
 			$stmt->bind_param("s", $search);
+			$stmt->execute();
+
+			$result = $stmt->get_result();
+
+			return $result;
+		}
+		
+		public function bacaDataById($search){
+			$stmt = $this->con->prepare("SELECT * FROM kategori_barang WHERE id LIKE ? ");
+			$stmt->bind_param("i", $search);
 			$stmt->execute();
 
 			$result = $stmt->get_result();

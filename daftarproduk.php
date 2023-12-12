@@ -9,6 +9,7 @@ if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
 $username = $_SESSION['uname'];
 
 $barang = new Barang();
+$kategori = new Kategori();
 
 if (isset($_GET['key'])) {
     $search = "%" . $_GET['key'] . "%";
@@ -40,6 +41,9 @@ if (isset($_GET['key'])) {
 } else {
     $key = "";
 }
+
+$resultKAdd = ($kategori)->bacaData('%');
+$resultKEdit = ($kategori)->bacaData('%');
 ?>
 
 <!DOCTYPE html>
@@ -191,8 +195,11 @@ if (isset($_GET['key'])) {
             <input type="number" placeholder="Stok Tersedia" required />
             <select name="kategori" required>
                 <option value="">Select kategori</option>
-                <option value="">1 (Alat Masak)</option>
-                <option value="">2 (Alat Makan)</option>
+                <?php
+                    while ($rowK = $resultKAdd->fetch_assoc()) {
+                        echo '<option value='.$rowK['id'].'>'.$rowK['nama'].'</option>';
+                    }
+                ?>
             </select>
             <div class="button-container">
                 <button type="button" class="cancel-button" onclick="closeAddForm()">Cancel</button>
@@ -212,8 +219,11 @@ if (isset($_GET['key'])) {
             <input type="number" placeholder="Harga Beli" required />
             <input type="number" placeholder="Stok Tersedia" required />
             <select name="kategori" required>
-                <option value="">1 (Alat Masak)</option>
-                <option value="">2 (Alat Makan)</option>
+                <?php
+                    while ($rowK = $resultKEdit->fetch_assoc()) {
+                        echo '<option value='.$rowK['id'].'>'.$rowK['nama'].'</option>';
+                    }
+                ?>
             </select>
             <div class="button-container">
                 <button type="button" class="cancel-button" onclick="closeEditForm()">Cancel</button>
