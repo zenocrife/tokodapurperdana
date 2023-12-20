@@ -16,12 +16,13 @@ if (isset($_GET['key'])) {
   $search = "%";
 }
 
-//Ini diubah pake getTotalData
-//sebelumnya pake bacaData('id',$search)
+if (isset($_GET['kategori'])) {
+  $kategori = $_GET['kategori'];
+} else {
+  $kategori = "%";
+}
 
-$result = ($barang)->getTotalData($search);
-// $result = ($barang)->bacaData('nama',$search);
-
+$result = ($barang)->getTotalData($kategori, $search);
 
 if (isset($_GET['key'])) {
   $key = $_GET['key'];
@@ -100,7 +101,7 @@ $resultK = (new Kategori)->bacaData('%');
       </ul>
       <div class="user-profile">
         <i class="fas fa-user-circle user-icon"></i>
-        <?php echo '<span class="user-name">'.$username.'</span>'; ?>
+        <?php echo '<span class="user-name">' . $username . '</span>'; ?>
       </div>
     </div>
   </nav>
@@ -116,19 +117,17 @@ $resultK = (new Kategori)->bacaData('%');
         <div class="title-filter-search">
           <h2>Produk</h2>
           <div class="filter-search">
-            <select name="filterBy" id="filterBy">
+            <select name="kategori" id="filterBy">
               <option value="">Filter By</option>
-              <?php 
-                while ($rowK = $resultK->fetch_assoc()) {
-                  echo '<option value='.$rowK['id'].'>'.$rowK['nama'].'</option>';
-                }
+              <?php
+              while ($rowK = $resultK->fetch_assoc()) {
+                echo '<option value=' . $rowK['id'] . '>' . $rowK['nama'] . '</option>';
+              }
               ?>
-              <form action="" method="GET">
-                  <input type="text" name="key" value="" placeholder="Search..." id="search">
-                  <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
-              </form>
 
             </select>
+            <input type="text" name="key" value="" placeholder="Search..." id="search">
+            <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
 
           </div>
         </div>
@@ -150,7 +149,7 @@ $resultK = (new Kategori)->bacaData('%');
           while ($row = $result->fetch_assoc()) {
             $resultK = (new Kategori)->bacaDataById($row['id_kategori']);
             $namaK = $resultK->fetch_assoc();
-            
+
             echo "<tr>";
             echo "<td>" . $row['id'] . "</td>";
             echo "<td><img width='70' height='70' src=" . $row['url'] . "></td>";
