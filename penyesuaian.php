@@ -16,24 +16,7 @@ if (isset($_GET['key'])) {
     $search = "%";
 }
 
-//pagination, awalnya tentuin data per page, total data, dan total pagenya berapa
 $result = ($penyesuaian)->bacaData($search);
-
-// $perpage = 7;
-// $totaldata = $result->num_rows; //untuk dapatkan jumlah data
-// $totalpage = ceil($totaldata/$perpage); //untuk bulatkan ke atas
-
-// //DATA WITH LIMIT
-// if (isset($_GET['page'])) {
-// 	$page = $_GET['page'];
-// } else {
-// 	$page = 1;
-// }
-
-// $start = ($page-1) * $perpage;
-
-// // $sql = "SELECT * FROM cerita WHERE judul LIKE ? LIMIT ?,?";
-// $result = ($barang)->paginationWithLimit($search, $start, $perpage);
 
 if (isset($_GET['key'])) {
     $key = $_GET['key'];
@@ -111,7 +94,7 @@ if (isset($_GET['key'])) {
             </ul>
             <div class="user-profile">
                 <i class="fas fa-user-circle user-icon"></i>
-                <?php echo '<span class="user-name">'.$username.'</span>'; ?>
+                <?php echo '<span class="user-name">' . $username . '</span>'; ?>
             </div>
         </div>
     </nav>
@@ -144,7 +127,7 @@ if (isset($_GET['key'])) {
                         <th>Tanggal Penyesuaian</th>
                         <th>Keterangan Penyesuaian</th>
                         <th>Stok Penyesuaian</th>
-                        <th>Id Barang</th>
+                        <th>Kode Barang</th>
                     </tr>
                     <?php
                     while ($row = $result->fetch_assoc()) {

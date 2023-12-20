@@ -17,7 +17,7 @@ if (isset($_GET['key'])) {
 }
 
 if (isset($_GET['kategori'])) {
-  $kategori = $_GET['kategori'];
+  $kategori = "%" . $_GET['kategori'] . "%";
 } else {
   $kategori = "%";
 }
@@ -117,18 +117,9 @@ $resultK = (new Kategori)->bacaData('%');
         <div class="title-filter-search">
           <h2>Produk</h2>
           <div class="filter-search">
-            <select name="kategori" id="filterBy">
-              <option value="">Filter By</option>
-              <?php
-              while ($rowK = $resultK->fetch_assoc()) {
-                echo '<option value=' . $rowK['id'] . '>' . $rowK['nama'] . '</option>';
-              }
-              ?>
-
-            </select>
+            <input type="text" name="kategori" placeholder="Kategori...">
             <input type="text" name="key" value="" placeholder="Search..." id="search">
             <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
-
           </div>
         </div>
       </form>
@@ -136,9 +127,9 @@ $resultK = (new Kategori)->bacaData('%');
       <div class="table-wrapper">
         <table class="table">
           <tr>
-            <th>No.</th>
+            <th>Kode</th>
             <th>Gambar</th>
-            <th>Nama Barang</th>
+            <th>Nama</th>
             <th>Stok Tersedia</th>
             <th>Harga</th>
             <th>Kategori</th>
@@ -156,7 +147,7 @@ $resultK = (new Kategori)->bacaData('%');
             echo "<td class='left-align'>" . $row['nama'] . "</td>";
             echo "<td>" . $row['stok_tersedia'] . "</td>";
             echo "<td class='right-align'>" . $row['harga_jual'] . "</td>";
-            echo "<td class='right-align'>" . $namaK['nama'] . "</td>";
+            echo "<td class='center-align'>" . $namaK['nama'] . "</td>";
             echo "<td><button class='add-button' id='add-butt'>+ Add</button></td>";
           }
           ?>

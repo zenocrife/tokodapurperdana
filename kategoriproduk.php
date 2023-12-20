@@ -1,7 +1,26 @@
 <?php
 session_start();
+require 'class.php';
 
 $username = $_SESSION['uname'];
+
+$kategori = new Kategori();
+
+if (isset($_GET['key'])) {
+    $search = "%" . $_GET['key'] . "%";
+} else {
+    $search = "%";
+}
+
+$result = ($kategori)->bacaData($search);
+
+if (isset($_GET['key'])) {
+    $key = $_GET['key'];
+} else {
+    $key = "";
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -93,37 +112,35 @@ $username = $_SESSION['uname'];
                     <h2>Kategori Produk</h2>
                 </div>
                 <div class="filter-search">
-                    <input type="text" placeholder="Search..." id="search" />
-                    <button id='search-button'><i class='fa-solid fa-search'></i></button>
+                    <form action="" method="GET">
+                        <input type="text" placeholder="Search..." id="search" name="key" />
+                        <button id='search-button'><i class='fa-solid fa-search'></i></button>
+                    </form>
                 </div>
             </div>
             <div class="table-wrapper">
                 <table class="table">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Kategori</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td class='left-align'>Alat Masak</td>
-                            <td>
-                                <button class='edit-button' onclick='openEditForm()'>Edit</button>
-                                <button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td class='left-align'>Alat Makan</td>
-                            <td>
-                                <button class='edit-button' onclick='openEditForm()'>Edit</button>
-                                <button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <!-- <thead> -->
+                    <tr>
+                        <th>No.</th>
+                        <th>Kategori</th>
+                        <th>Actions</th>
+                    </tr>
+                    <!-- </thead>
+                    <tbody> -->
+                    <?php
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row['id'] . "</td>";
+                        echo "<td class='left-align'>" . $row['nama'] . "</td>";
+                        echo "<td>";
+                        echo "<button class='edit-button' onclick='openEditForm()'>Edit</button>";
+                        echo "<button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>";
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
+                    <!-- </tbody> -->
                 </table>
             </div>
         </div>

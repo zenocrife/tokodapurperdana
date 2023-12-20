@@ -1,5 +1,3 @@
-
-
 const sidebar = document.querySelector(".sidebar");
 const sidebarClose = document.querySelector("#sidebar-close");
 const menu = document.querySelector(".menu-content");
@@ -20,16 +18,11 @@ menuItems.forEach((item, index) => {
   });
 });
 
-
 subMenuTitles.forEach((title) => {
   title.addEventListener("click", () => {
     menu.classList.remove("submenu-active");
   });
 });
-
-function searchBarang(searchby, search) {
-  
-};
 
 function openAddForm() {
   document.getElementById("addForm").style.display = "block";
@@ -55,7 +48,6 @@ function closeEditForm() {
 function openDeleteConfirmation() {
   document.getElementById("deleteConfirmation").style.display = "flex";
   document.getElementById("overlay").style.display = "block";
-  
 }
 
 function closeDeleteConfirmation() {
@@ -80,10 +72,12 @@ function submitAddForm() {
   openAddSuccessForm();
 }
 
-document.getElementById("submitAddForm").addEventListener("click", function(event) {
-  event.preventDefault();
-  submitAddForm(); 
-});
+document
+  .getElementById("submitAddForm")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    submitAddForm();
+  });
 
 //script untuk Edit Success Pop Up
 function openEditSuccessForm() {
@@ -102,7 +96,9 @@ function submitEditForm() {
   openEditSuccessForm();
 }
 
-document.getElementById("submitEditForm").addEventListener("click", function(event) {
-  event.preventDefault();
-  submitEditForm(); 
-});
+document
+  .getElementById("submitEditForm")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    submitEditForm();
+  });

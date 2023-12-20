@@ -17,24 +17,13 @@ if (isset($_GET['key'])) {
     $search = "%";
 }
 
-//pagination, awalnya tentuin data per page, total data, dan total pagenya berapa
-$result = ($barang)->getTotalData($search);
+if (isset($_GET['kategori'])) {
+    $kate = "%" . $_GET['kategori'] . "%";
+} else {
+    $kate = "%";
+}
 
-// $perpage = 7;
-// $totaldata = $result->num_rows; //untuk dapatkan jumlah data
-// $totalpage = ceil($totaldata/$perpage); //untuk bulatkan ke atas
-
-// //DATA WITH LIMIT
-// if (isset($_GET['page'])) {
-// 	$page = $_GET['page'];
-// } else {
-// 	$page = 1;
-// }
-
-// $start = ($page-1) * $perpage;
-
-// // $sql = "SELECT * FROM cerita WHERE judul LIKE ? LIMIT ?,?";
-// $result = ($barang)->paginationWithLimit($search, $start, $perpage);
+$result = ($barang)->getTotalData($kate, $search);
 
 if (isset($_GET['key'])) {
     $key = $_GET['key'];
@@ -44,6 +33,8 @@ if (isset($_GET['key'])) {
 
 $resultKAdd = ($kategori)->bacaData('%');
 $resultKEdit = ($kategori)->bacaData('%');
+
+$resultK = ($kategori)->bacaData('%');
 ?>
 
 <!DOCTYPE html>
@@ -136,41 +127,36 @@ $resultKEdit = ($kategori)->bacaData('%');
                     <h2>Daftar Produk</h2>
                 </div>
                 <div class="filter-search">
-                    <select name="filterBy" id="filterBy">
-                        <option value="">Filter By</option>
-                        <option value="1">Kompor</option>
-                        <option value="2">Wajan</option>
-                        <option value="3">Panci</option>
-                        <option value="4">Blender</option>
-                        <option value="5">Teflon</option>
-                        <option value="6">Magic Com</option>
-                        <form action="" method="GET">
-                            <input type="text" name="key" value="" placeholder="Search..." id="search">
-                            <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
-                        </form>
-                    </select>
+                    <form action="" method="GET">
+                        <input type="text" name="kategori" placeholder="Kategori...">
+                        <input type="text" name="key" value="" placeholder="Search..." id="search">
+                        <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
+                    </form>
                 </div>
             </div>
             <div class="table-wrapper">
                 <table class="table">
                     <tr>
-                        <th>No.</th>
-                        <th>Nama Barang</th>
+                        <th>Kode</th>
+                        <th>Nama</th>
                         <th>Harga Jual</th>
                         <th>Harga Beli</th>
                         <th>Stok Tersedia</th>
-                        <th>Kode Kategori</th>
+                        <th>Kategori</th>
                         <th>Actions</th>
                     </tr>
                     <?php
                     while ($row = $result->fetch_assoc()) {
+                        $kategoribarang = (new Kategori)->bacaDataById($row['id_kategori']);
+                        $namaK = $kategoribarang->fetch_assoc();
+
                         echo "<tr>";
                         echo "<td>" . $row['id'] . "</td>";
                         echo "<td class='left-align'>" . $row['nama'] . "</td>";
                         echo "<td class='right-align'>" . $row['harga_jual'] . "</td>";
                         echo "<td class='right-align'>" . $row['harga_beli'] . "</td>";
                         echo "<td>" . $row['stok_tersedia'] . "</td>";
-                        echo "<td class='right-align'>" . $row['id_kategori'] . "</td>";
+                        echo "<td class='center-align'>" . $namaK['nama'] . "</td>";
                         echo "<td>
                                 <button class='edit-button' onclick='openEditForm()'>Edit</button>
                                 <button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>
@@ -196,9 +182,9 @@ $resultKEdit = ($kategori)->bacaData('%');
             <select name="kategori" required>
                 <option value="">Select kategori</option>
                 <?php
-                    while ($rowK = $resultKAdd->fetch_assoc()) {
-                        echo '<option value='.$rowK['id'].'>'.$rowK['nama'].'</option>';
-                    }
+                while ($rowK = $resultKAdd->fetch_assoc()) {
+                    echo '<option value=' . $rowK['id'] . '>' . $rowK['nama'] . '</option>';
+                }
                 ?>
             </select>
             <div class="button-container">
@@ -220,9 +206,9 @@ $resultKEdit = ($kategori)->bacaData('%');
             <input type="number" placeholder="Stok Tersedia" required />
             <select name="kategori" required>
                 <?php
-                    while ($rowK = $resultKEdit->fetch_assoc()) {
-                        echo '<option value='.$rowK['id'].'>'.$rowK['nama'].'</option>';
-                    }
+                while ($rowK = $resultKEdit->fetch_assoc()) {
+                    echo '<option value=' . $rowK['id'] . '>' . $rowK['nama'] . '</option>';
+                }
                 ?>
             </select>
             <div class="button-container">

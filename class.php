@@ -82,33 +82,12 @@ class Barang extends Koneksi
 	//UNTUK SEARCH
 	public function getTotalData($kategori, $search)
 	{
-		$stmt = $this->con->prepare("SELECT * FROM barang WHERE id_kategori LIKE ? AND nama LIKE ?");
+		// $stmt = $this->con->prepare("SELECT * FROM barang WHERE id_kategori LIKE ? AND nama LIKE ?");
+		$stmt = $this->con->prepare("SELECT b.* FROM barang b INNER JOIN kategori_barang kb ON b.id_kategori = kb.id WHERE kb.nama LIKE ? AND b.nama LIKE ?");
 		$stmt->bind_param("ss", $kategori, $search);
 		$stmt->execute();
 
 		$result = $stmt->get_result();
-		return $result;
-	}
-
-	public function bacaData($searchby, $search)
-	{
-		$stmt = $this->con->prepare("SELECT * FROM barang WHERE ? LIKE ? ");
-		$stmt->bind_param("ss", $searchby, $search);
-		$stmt->execute();
-
-		$result = $stmt->get_result();
-
-		return $result;
-	}
-
-	public function bacaDataWithKategori($searchby, $search)
-	{
-		$stmt = $this->con->prepare("SELECT b.*, kb.nama AS nama_kategori FROM barang b INNER JOIN kategori_barang kb ON b.idkategori = kb.id WHERE ? LIKE ? ");
-		$stmt->bind_param("ss", $searchby, $search);
-		$stmt->execute();
-
-		$result = $stmt->get_result();
-
 		return $result;
 	}
 
