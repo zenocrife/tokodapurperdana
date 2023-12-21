@@ -30,6 +30,12 @@ if (isset($_GET['key'])) {
   $key = "";
 }
 
+if (isset($_GET['kategori'])) {
+  $kate = $_GET['kategori'];
+} else {
+  $kate = "";
+}
+
 $resultK = (new Kategori)->bacaData('%');
 ?>
 
@@ -117,8 +123,10 @@ $resultK = (new Kategori)->bacaData('%');
         <div class="title-filter-search">
           <h2>Produk</h2>
           <div class="filter-search">
-            <input type="text" name="kategori" placeholder="Kategori...">
-            <input type="text" name="key" value="" placeholder="Search..." id="search">
+            <?php
+            echo '<input type="text" name="kategori" placeholder="Kategori..." value="' . $kate . '">';
+            echo '<input type="text" name="key" placeholder="Search..." id="search" value="' . $key . '">';
+            ?>
             <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
           </div>
         </div>

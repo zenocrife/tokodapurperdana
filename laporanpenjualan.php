@@ -1,7 +1,26 @@
 <?php
 session_start();
+require 'class.php';
+
+if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
+    header("location: login.php");
+}
 
 $username = $_SESSION['uname'];
+
+if (isset($_GET['key'])) {
+    $search = "%" . $_GET['key'] . "%";
+} else {
+    $search = "%";
+}
+
+$result = (new DetailPenjualan)->bacaData($search);
+
+if (isset($_GET['key'])) {
+    $key = $_GET['key'];
+} else {
+    $key = "";
+}
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +91,7 @@ $username = $_SESSION['uname'];
             </ul>
             <div class="user-profile">
                 <i class="fas fa-user-circle user-icon"></i>
-                <?php echo '<span class="user-name">'.$username.'</span>'; ?>
+                <?php echo '<span class="user-name">' . $username . '</span>'; ?>
             </div>
         </div>
     </nav>
@@ -86,44 +105,38 @@ $username = $_SESSION['uname'];
                     <h2>Laporan Penjualan</h2>
                 </div>
                 <div class="filter-search">
-                    <button id='print-button'><i class='fa-solid fa-print'></i></button>
-                    <input type="text" placeholder="Search..." id="search" />
-                    <button id='search-button'><i class='fa-solid fa-search'></i></button>
+                    <form action="" method="get">
+                        <button id='print-button' name="print"><i class='fa-solid fa-print'></i></button>
+                        <?php echo '<input type="date" id="search" name="key" value="' . $key . '"/>'; ?>
+                        <button type="submit" id='search-button' name="submit"><i class='fa-solid fa-search'></i></button>
+                    </form>
                 </div>
             </div>
             <div class="table-wrapper">
                 <table class="table">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Tanggal</th>
-                            <th>Nama Produk</th>
-                            <th>Harga Produk</th>
-                            <th>Total Pembayaran</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>10-10-2023</td>
-                            <td class='left-align'>Panci</td>
-                            <td class='right-align'>105000</td>
-                            <td class='right-align'>110000</td>
-                        </tr>
-
-                        <?php
-                        // while ($row = $result->fetch_assoc()) {
-                        //     echo "<tr>";
-                        //     echo "<td>" . $row['id'] . "</td>";
-                        //     echo "<td><img width='70' height='70' src=" . $row['url'] . "></td>";
-                        //     echo "<td>" . $row['nama'] . "</td>";
-                        //     echo "<td>" . $row['stok_tersedia'] . "</td>";
-                        //     echo "<td>" . $row['harga_jual'] . "</td>";
-                        //     echo "<td>" . $row['id_kategori'] . "</td>";
-                        //     echo "<td><button class='add-button'>+ Add</button></td>";
-                        // }
-                        ?>
-                    </tbody>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Waktu</th>
+                        <th>Barang</th>
+                        <th>Jumlah</th>
+                        <th>Harga Jual</th>
+                        <th>Metode</th>
+                        <th>HPP</th>
+                        <th>Untung</th>
+                    </tr>
+                    <?php
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row['Hari'] . "</td>";
+                        echo "<td>" . $row['Waktu'] . "</td>";
+                        echo "<td>" . $row['nama'] . "</td>";
+                        echo "<td>" . $row['jumlah_terjual'] . "</td>";
+                        echo "<td>" . $row['total'] . "</td>";
+                        echo "<td>" . $row['metode_pembayaran'] . "</td>";
+                        echo "<td>" . $row['harga_beli'] . "</td>";
+                        echo "<td>" . $row['untung'] . "</td>";
+                    }
+                    ?>
                 </table>
             </div>
         </div>

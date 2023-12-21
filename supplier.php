@@ -94,7 +94,7 @@ if (isset($_GET['key'])) {
             </ul>
             <div class="user-profile">
                 <i class="fas fa-user-circle user-icon"></i>
-                <?php echo '<span class="user-name">'.$username.'</span>'; ?>
+                <?php echo '<span class="user-name">' . $username . '</span>'; ?>
             </div>
         </div>
     </nav>
@@ -106,7 +106,7 @@ if (isset($_GET['key'])) {
         <div class="container">
             <div class="add-supplier">
                 <div class="action-buttons">
-                    <button class="add-button"id="add-supp" onclick="openAddForm()">Add</button>
+                    <button class="add-button" id="add-supp" onclick="openAddForm()">Add</button>
                 </div>
                 <div class="line"></div>
             </div>
@@ -116,7 +116,7 @@ if (isset($_GET['key'])) {
                 </div>
                 <div class="filter-search">
                     <form action="" method="GET">
-                        <input type="text" name="key" value="" placeholder="Search..." id="search">
+                        <?php echo '<input type="text" name="key" placeholder="Search..." id="search" value="' . $key . '">'; ?>
                         <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
                     </form>
                 </div>
@@ -173,10 +173,10 @@ if (isset($_GET['key'])) {
             <span class="close-icon" onclick="closeEditForm()">&#10006;</span>
         </div>
         <form class="form-container" method="POST" action="updateSupplier_proses.php">
-            <input type="text" placeholder="Nama" required  value="<?php echo $row['nama'];?>">
-            <input type="text" placeholder="Alamat" required value="<?php echo $row['alamat'];?>">
-            <input type="text" placeholder="Nomor Telepon" required value="<?php echo $row['nomor_telepon'];?>">
-            <input type="hidden" name="idSupplier" value="<?php echo $row['id'];?>">
+            <input type="text" placeholder="Nama" required value="<?php echo $row['nama']; ?>">
+            <input type="text" placeholder="Alamat" required value="<?php echo $row['alamat']; ?>">
+            <input type="text" placeholder="Nomor Telepon" required value="<?php echo $row['nomor_telepon']; ?>">
+            <input type="hidden" name="idSupplier" value="<?php echo $row['id']; ?>">
             <div class="button-container">
                 <button type="button" class="cancel-button" onclick="closeEditForm()">Cancel</button>
                 <button type="submit" class="submit-button" id="submitEditForm" name="submit">Edit</button>

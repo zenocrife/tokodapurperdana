@@ -115,7 +115,7 @@ if (isset($_GET['key'])) {
                 </div>
                 <div class="filter-search">
                     <form action="" method="GET">
-                        <input type="text" name="key" value="" placeholder="Search..." id="search">
+                        <?php echo '<input type="text" name="key" placeholder="Search..." id="search" value="' . $key . '">'; ?>
                         <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
                     </form>
                 </div>
