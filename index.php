@@ -54,8 +54,7 @@ $resultK = (new Kategori)->bacaData('%');
 
 <body>
   <nav class="sidebar">
-    <a href="#" class="logo">Dapur Perdana</a>
-    <span class="hamburger-icon"></span>
+    <a class="logo">Dapur Perdana</a>
     <div class="menu-content">
       <ul class="menu-items">
 
@@ -112,14 +111,15 @@ $resultK = (new Kategori)->bacaData('%');
     </div>
   </nav>
 
-  <nav class="navbar">
-    <i class="fa-solid fa-bars" id="sidebar-close"></i>
-    <i class="fa-solid fa-shopping-cart" id="cart-icon"></i>
-  </nav>
-
   <main class="main">
     <div class="container">
       <form action="" method="GET">
+        <div class="add-produk">
+          <div class="action-buttons">
+            <button class="add-button" id="add-supp" onclick="">Cart</button>
+          </div>
+          <div class="line"></div>
+        </div>
         <div class="title-filter-search">
           <h2>Produk</h2>
           <div class="filter-search">
@@ -154,7 +154,7 @@ $resultK = (new Kategori)->bacaData('%');
             echo "<td><img width='70' height='70' src=" . $row['url'] . "></td>";
             echo "<td class='left-align'>" . $row['nama'] . "</td>";
             echo "<td>" . $row['stok_tersedia'] . "</td>";
-            echo "<td class='right-align'>" . $row['harga_jual'] . "</td>";
+            echo "<td class='right-align'>" . number_format($row['harga_jual'], 0, ',', '.') . "</td>";
             echo "<td class='center-align'>" . $namaK['nama'] . "</td>";
             echo "<td><button class='add-button' id='add-butt'>+ Add</button></td>";
           }

@@ -42,7 +42,6 @@ if (isset($_GET['key'])) {
     <div class="overlay" id="overlay"></div>
     <nav class="sidebar">
         <a href="#" class="logo">Dapur Perdana</a>
-        <span class="hamburger-icon"></span>
         <div class="menu-content">
             <ul class="menu-items">
 
@@ -97,9 +96,6 @@ if (isset($_GET['key'])) {
                 <?php echo '<span class="user-name">' . $username . '</span>'; ?>
             </div>
         </div>
-    </nav>
-    <nav class="navbar">
-        <i class="fa-solid fa-bars" id="sidebar-close"></i>
     </nav>
 
     <main class="main">

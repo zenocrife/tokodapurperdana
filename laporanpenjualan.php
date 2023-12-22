@@ -39,7 +39,6 @@ if (isset($_GET['key'])) {
 <body>
     <nav class="sidebar">
         <a href="#" class="logo">Dapur Perdana</a>
-        <span class="hamburger-icon"></span>
         <div class="menu-content">
             <ul class="menu-items">
 
@@ -95,9 +94,6 @@ if (isset($_GET['key'])) {
             </div>
         </div>
     </nav>
-    <nav class="navbar">
-        <i class="fa-solid fa-bars" id="sidebar-close"></i>
-    </nav>
     <main class="main">
         <div class="container">
             <div class="title-filter-search">
@@ -131,10 +127,10 @@ if (isset($_GET['key'])) {
                         echo "<td>" . $row['Waktu'] . "</td>";
                         echo "<td>" . $row['nama'] . "</td>";
                         echo "<td>" . $row['jumlah_terjual'] . "</td>";
-                        echo "<td>" . $row['total'] . "</td>";
+                        echo "<td>" . number_format($row['total'], 0, ',', '.') . "</td>";
                         echo "<td>" . $row['metode_pembayaran'] . "</td>";
-                        echo "<td>" . $row['harga_beli'] . "</td>";
-                        echo "<td>" . $row['untung'] . "</td>";
+                        echo "<td>" . number_format($row['harga_beli'], 0, ',', '.') . "</td>";
+                        echo "<td>" . number_format($row['untung'], 0, ',', '.') . "</td>";
                     }
                     ?>
                 </table>

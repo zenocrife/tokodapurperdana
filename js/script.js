@@ -1,10 +1,7 @@
 const sidebar = document.querySelector(".sidebar");
-const sidebarClose = document.querySelector("#sidebar-close");
 const menu = document.querySelector(".menu-content");
 const menuItems = document.querySelectorAll(".submenu-item");
 const subMenuTitles = document.querySelectorAll(".submenu .menu-title");
-
-sidebarClose.addEventListener("click", () => sidebar.classList.toggle("close"));
 
 menuItems.forEach((item, index) => {
   item.addEventListener("click", () => {
@@ -35,13 +32,13 @@ function closeAddForm() {
 }
 
 function openEditForm() {
-  var popup = document.getElementById("editForm");
-  popup.style.display = "flex";
+  document.getElementById("editForm").style.display = "flex";
+  document.getElementById("overlay").style.display = "block";
 }
 
 function closeEditForm() {
-  var popup = document.getElementById("editForm");
-  popup.style.display = "none";
+  document.getElementById("editForm").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
 }
 
 //script untuk Delete Confirmation Pop Up

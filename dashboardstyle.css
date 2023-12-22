@@ -11,7 +11,7 @@
   position: fixed;
   height: 100%;
   width: 260px;
-  background: #040028;
+  background: #110c0c;
   padding: 15px;
   z-index: 99;
 }
@@ -39,14 +39,16 @@
 }
 
 .menu-items {
-  height: 89%;
+  height: auto;
   width: 100%;
   list-style: none;
   transition: all 0.4s ease;
+  padding-bottom: 485px;
 }
 
 .submenu-active .menu-items {
   transform: translateX(-56%);
+  height: 826px;
 }
 
 .menu-title {
@@ -61,7 +63,7 @@
   display: inline-block;
   width: 100%;
   border-radius: 12px;
-  background: #040028;
+  background: #110c0c;
 }
 
 .item i {
@@ -80,7 +82,7 @@
   align-items: center;
   color: #fff;
   cursor: pointer;
-  background: #040028;
+  background: #110c0c;
 }
 
 .submenu {
@@ -90,7 +92,7 @@
   top: 0;
   right: calc(-100% - 26px);
   height: calc(100% + 100vh);
-  background: #040028;
+  background: #110c0c;
   display: none;
 }
 
@@ -123,18 +125,14 @@
 
 .navbar {
   position: fixed;
+  height: 60px;
   color: #fff;
   padding: 15px 20px;
   font-size: 25px;
-  background: #4070f4;
-  cursor: pointer;
-}
-
-#cart-icon {
-  position: fixed;
-  top: 20px;
-  right: 0;
-  margin-right: 20px;
+  background: #2f86f8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .navbar #sidebar-close {
@@ -142,13 +140,15 @@
 }
 
 .container {
-  background-color: #4070f4dc;
+  background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 20px;
   margin: 0;
-  margin-top: 50px;
+  margin-top: 0px;
   width: 95%;
+  height: calc(100vh - 70px);
+  overflow-y: auto;
 }
 
 .main {
@@ -158,7 +158,7 @@
   justify-content: center;
   height: 100vh;
   z-index: 100;
-  background: #ffffff;
+  background: #999999;
   margin: 0px;
 }
 
@@ -208,7 +208,7 @@
 
 .table-wrapper {
   overflow-y: auto;
-  max-height: 500px;
+  max-height: 660px;
 }
 
 .table {
@@ -223,6 +223,7 @@
   padding: 10px;
   border: 2px solid #ccc;
   text-align: center;
+  font-size: 20px;
 }
 
 .table th.left-align,
@@ -403,6 +404,10 @@
   flex-grow: 1;
   outline: none;
   border: none;
+  
+}
+.popup-form#deleteConfirmation .button-container button {
+  margin-right: 10px;
 }
 
 .cancel-button:hover {
@@ -523,7 +528,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 10px;
   border-top: 1px solid #ccc;
   margin: auto;
 }

@@ -40,7 +40,6 @@ if (isset($_GET['key'])) {
     <div class="overlay" id="overlay"></div>
     <nav class="sidebar">
         <a href="#" class="logo">Dapur Perdana</a>
-        <span class="hamburger-icon"></span>
         <div class="menu-content">
             <ul class="menu-items">
 
@@ -96,14 +95,11 @@ if (isset($_GET['key'])) {
             </div>
         </div>
     </nav>
-    <nav class="navbar">
-        <i class="fa-solid fa-bars" id="sidebar-close"></i>
-    </nav>
     <main class="main">
         <div class="container">
-            <div class="add-kategori">
+            <div class="add-produk">
                 <div class="action-buttons">
-                    <button class="add-button" id="add-kategori" onclick="openAddForm()">Add</button>
+                    <button class="add-button" id="add-supp" onclick="openAddForm()">Add</button>
                 </div>
                 <div class="line"></div>
             </div>

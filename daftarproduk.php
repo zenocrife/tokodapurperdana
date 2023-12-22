@@ -60,7 +60,6 @@ $resultK = ($kategori)->bacaData('%');
     <div class="overlay" id="overlay"></div>
     <nav class="sidebar">
         <a href="#" class="logo">Dapur Perdana</a>
-        <span class="hamburger-icon"></span>
         <div class="menu-content">
             <ul class="menu-items">
 
@@ -116,12 +115,8 @@ $resultK = ($kategori)->bacaData('%');
             </div>
         </div>
     </nav>
-    <nav class="navbar">
-        <i class="fa-solid fa-bars" id="sidebar-close"></i>
-    </nav>
     <main class="main">
         <div class="container">
-            <br><br><br>
             <div class="add-produk">
                 <div class="action-buttons">
                     <button class="add-button" id="add-supp" onclick="openAddForm()">Add</button>
@@ -161,8 +156,8 @@ $resultK = ($kategori)->bacaData('%');
                         echo "<tr>";
                         echo "<td>" . $row['id'] . "</td>";
                         echo "<td class='left-align'>" . $row['nama'] . "</td>";
-                        echo "<td class='right-align'>" . $row['harga_jual'] . "</td>";
-                        echo "<td class='right-align'>" . $row['harga_beli'] . "</td>";
+                        echo "<td class='right-align'>" . number_format($row['harga_jual'], 0, ',', '.') . "</td>";
+                        echo "<td class='right-align'>" . number_format($row['harga_beli'], 0, ',', '.') . "</td>";
                         echo "<td>" . $row['stok_tersedia'] . "</td>";
                         echo "<td class='center-align'>" . $namaK['nama'] . "</td>";
                         echo "<td>
