@@ -133,7 +133,10 @@ if (isset($_GET['key'])) {
                         echo "<td class='left-align'>" . $row['nama'] . "</td>";
                         echo "<td class='left-align'>" . $row['alamat'] . "</td>";
                         echo "<td>" . $row['nomor_telepon'] . "</td>";
-                        echo "<td><button class='edit-button' onclick='openEditForm()'>Edit</button><button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button></td>";
+                        $idsupplier = $row['id'];
+                        //ini masuk ke script (?)
+                        echo "<td>  <button class='edit-button' onclick='openEditForm($idsupplier)'>Edit</button>
+                                    <button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button></td>";
                     }
                     ?>
                 </table>
@@ -147,6 +150,7 @@ if (isset($_GET['key'])) {
             <span class="form-title">Add Supplier</span>
             <span class="close-icon" onclick="closeAddForm()">&#10006;</span>
         </div>
+
         <form class="form-container">
             <input type="text" placeholder="Nama" required />
             <input type="text" placeholder="Alamat" required />
@@ -158,40 +162,55 @@ if (isset($_GET['key'])) {
         </form>
     </div>
 
-    <!-- EDIT -->
-    <!-- MASIH ERROR (YANG DIBAWAH INI ERROR NYA DARI LINE 170 - 172)
-        <br /><b>Warning</b>:  Trying to access array offset on value of type null in 
-        <b>C:\xampp\htdocs\WSE\tokodapurperdana\supplier.php</b> on line <b>170</b><br /> 
-    -->
+
+    <!-- EDIT (Masih Error)-->
+
     <div class="popup-form" id="editForm">
         <div class="form-header">
             <span class="form-title">Edit Supplier</span>
             <span class="close-icon" onclick="closeEditForm()">&#10006;</span>
         </div>
+
+        <!-- Tes php buat edit -->
+        <?php
+        $con = new mysqli("localhost", "root", "", "dbdapurperdana");
+
+        if ($con->connect_errno) {
+            die("Failed Connect: " . $con->connect_error);
+        } else {
+            echo "Connection Success. <br>";
+        }
+        
+        //ambil dari line 140 - 141
+        $id_edit = $_GET['idsupplier'];
+
+        $sql = "SELECT * FROM supplier WHERE id=?";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("i", $id_edit);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        ?>
+
         <form class="form-container" method="POST" action="updateSupplier_proses.php">
-            <input type="text" placeholder="Nama" required value="<?php echo $row['nama']; ?>">
-            <input type="text" placeholder="Alamat" required value="<?php echo $row['alamat']; ?>">
-            <input type="text" placeholder="Nomor Telepon" required value="<?php echo $row['nomor_telepon']; ?>">
-            <input type="hidden" name="idSupplier" value="<?php echo $row['id']; ?>">
-            <div class="button-container">
-                <button type="button" class="cancel-button" onclick="closeEditForm()">Cancel</button>
-                <button type="submit" class="submit-button" id="submitEditForm" name="submit">Edit</button>
+            <input type='text' placeholder='Nama' required name='edit_nama' value='<?php echo $row['nama']; ?>'>
+            <input type='text' placeholder='Alamat' required name='edit_alamat' value='<?php echo $row['alamat']; ?>'>
+            <input type='text' placeholder='Nomor Telepon' required name='edit_telp' value='<?php echo $row['nomor_telepon']; ?>'>
+            <input type='hidden' name='idSupplier' value='<?php echo $idSupplierToEdit; ?>'> <!-- Menggunakan variabel di sini -->
+            <div class='button-container'>
+                <button type='button' class='cancel-button' onclick='closeEditForm()'>Cancel</button>
+                <button type='submit' class='submit-button' id='submitEditForm' name='edit_btn'>Edit</button>
             </div>
         </form>
     </div>
 
-    <!-- HAPUS -->
-    <!-- MASIH ERROR 
-        http://localhost/WSE/tokodapurperdana/deleteSupplier.php?id=%3Cbr%20/%3E%3Cb%3EWarning%3C/
-        b%3E:%20%20Trying%20to%20access%20array%20offset%20on%20value%20of%20type%20null%20in%20%3Cb%3EC:
-        \xampp\htdocs\WSE\tokodapurperdana\supplier.php%3C/b%3E%20on%20line%20%3Cb%3E191%3C/b%3E%3Cbr%20/%3E
-    -->
+    <!-- HAPUS (Belum lanjut)-->
     <div class="popup-form" id="deleteConfirmation">
         <div class="form-container">
             <p>Apakah Anda yakin ingin menghapusnya?</p>
             <div class="button-container">
                 <form action="" method="GET">
-                    <button type="submit" class="submit-button"><a href='deleteSupplier.php?id=<?php echo $row['id']; ?>'>Yes</a></button>
+                    <button type="submit" class="submit-button"><a href='deleteSupplier.php?id=<?php echo isset($row['id']) ? $row['id'] : ''; ?>'>Yes</a></button>
                     <button type="button" class="cancel-button" onclick="closeDeleteConfirmation()">No</button>
                 </form>
             </div>

@@ -1,31 +1,11 @@
 <?php
-    // $namasupplier = $_POST['nama'];
-    // $alamat = $_POST['alamat'];
-    // $notelepon = $_POST['nomor_telepon'];
-    // $idsupplier = $_POST['id'];
+require 'class.php';
 
-    // require 'class.php';
+$edit_nama = $_POST['edi_nama'];
+$edit_alamat = $_POST['edit_alamat'];
+$edit_nomortelp = $_POST['edit_telp'];
+$id_sup_edit = $_POST['idSupplierToEdit'];
 
-    // $supplier = new Supplier();
-    // $status = $supplier->updateSupplier($idsupplier, $namasupplier, $alamat, $notelepon);
-    // if($status){
-    //     echo"berhasil";
-    // }else{
-    //     echo "error";
-    // }
-    
-    if(isset($_GET['submit'])){
-        $namasupplier = $_POST['nama'];
-        $alamat = $_POST['alamat'];
-        $notelepon = $_POST['nomor_telepon'];
-        $idsupplier = $_POST['id'];
-        require_once("class.php");
-        $supplier = new Supplier();
-        $status = $supplier->updateSupplier( $namasupplier, $alamat, $notelepon,$idsupplier);
-        if($status){
-            echo"berhasil";
-        }else{
-            echo "error";
-        }
-    }
+$supplier = new Supplier();
+$result = ($supplier)->updateSupplier($id_sup_edit,$edit_nama, $edit_alamat, $edit_nomortelp) ;
 ?>
