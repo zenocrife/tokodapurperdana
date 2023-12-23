@@ -46,49 +46,49 @@ if (isset($_GET['key'])) {
             <ul class="menu-items">
 
                 <li class="item">
-                    <a href="index.php">DASHBOARD</a>
+                    <a href="index.php"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
                 </li>
                 <li class="item">
-                    <a href="supplier.php">SUPPLIER</a>
+                    <a href="supplier.php"><i class="fa-solid fa-truck-field"></i> Supplier</a>
                 </li>
                 <li class="item">
                     <div class="submenu-item">
-                        <span>PRODUK</span>
+                        <span> <i class="fa-solid fa-box"></i>Produk</span>
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
                     <ul class="menu-items submenu">
                         <div class="menu-title">
                             <i class="fa-solid fa-chevron-left"></i>
-                            PRODUK
+                            Produk
                         </div>
                         <li class="item">
-                            <a href="kategoriproduk.php">KATEGORI PRODUK</a>
+                            <a href="kategoriproduk.php"> <i class="fa-solid fa-circle"></i></i>Kategori Produk</a>
                         </li>
                         <li class="item">
-                            <a href="daftarproduk.php">DAFTAR PRODUK</a>
+                            <a href="daftarproduk.php"><i class="fa-solid fa-circle"></i></i> Daftar Produk</a>
                         </li>
                     </ul>
                 </li>
                 <li class="item">
-                    <a href="penyesuaian.php">PENYESUAIAN</a>
+                    <a href="penyesuaian.php"> <i class="fa-solid fa-boxes-stacked"></i>Penyesuaian</a>
                 </li>
                 <li class="item">
                     <div class="submenu-item">
-                        <span>LAPORAN</span>
+                        <span> <i class="fa-solid fa-book"></i>Laporan</span>
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
                     <ul class="menu-items submenu">
                         <div class="menu-title">
                             <i class="fa-solid fa-chevron-left"></i>
-                            LAPORAN
+                            Laporan
                         </div>
                         <li class="item">
-                            <a href="laporanpenjualan.php">LAPORAN PENJUALAN</a>
+                            <a href="laporanpenjualan.php"> <i class="fa-solid fa-circle"></i></i>Laporan Penjualan</a>
                         </li>
                     </ul>
                 </li>
                 <li class="item">
-                    <a href="">LOGOUT</a>
+                    <a href=""> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>
             </ul>
             <div class="user-profile">
@@ -180,7 +180,7 @@ if (isset($_GET['key'])) {
         } else {
             echo "Connection Success. <br>";
         }
-        
+
         //ambil dari line 140 - 141
         $id_edit = $_GET['idsupplier'];
 

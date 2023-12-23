@@ -64,10 +64,12 @@
   width: 100%;
   border-radius: 12px;
   background: #110c0c;
+  font-size: 16px;
 }
 
 .item i {
-  font-size: 12px;
+  font-size: 20px;
+  padding-right: 10px;
 }
 
 .item a:hover,
