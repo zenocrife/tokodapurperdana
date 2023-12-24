@@ -1,3 +1,13 @@
+<?php
+session_start();
+require 'class.php';
+
+if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
+    header("location: login.php");
+}
+
+$username = $_SESSION['uname'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +42,7 @@
         if($row = $result->fetch_assoc()){
         }
         else{
-            header("location: Tes Koneksi.php");
+            header("location: index.php");
         }
     ?>
 
@@ -94,35 +104,16 @@
             </div>
         </div>
     </nav>
-
     <form class="form-container popup-form" method="POST" action="updateSupplier_proses.php">
+            <span class="form-title">Edit Supplier</span>
             <input type="text" placeholder="Nama" required name="edit_nama" value="<?php echo isset($row['nama']) ? $row['nama'] : ''; ?>">
             <input type="text" placeholder="Alamat" required name="edit_alamat" value="<?php echo isset($row['alamat']) ? $row['alamat'] : ''; ?>">
             <input type="text" placeholder="Nomor Telepon" required name="edit_telp" value="<?php echo isset($row['nomor_telepon']) ? $row['nomor_telepon'] : ''; ?>">
             <input type="hidden" name="id" value="<?=$row['id']?>">
             <div class="button-container">
-                <button type="button" class="cancel-button" onclick="closeEditForm()">Cancel</button>
+                <a type="button" class="cancel-button" href="supplier.php" style='text-decoration:none;text-align:center'>Cancel</a>
                 <button type="submit" class="submit-button" id="submitEditForm" name="submit">Edit</button>
             </div>
     </form>
-    <!-- <div class="popup-form" id="editForm">
-        <div class="form-header">
-            <span class="form-title">Edit Supplier</span>
-            <span class="close-icon" onclick="closeEditForm()">&#10006;</span>
-        </div>
-
-    </div>  -->
-
-    <div class="popup-form" id="editSuccessForm">
-        <div class="success-content">
-            <i class="fa-regular fa-circle-check success-icon"></i>
-            <div class="success-text">
-                <p>Sukses</p>
-                <div class="line"></div>
-                <p>Sukses mengubah data</p>
-            </div>
-            <button class="close-button" onclick="closeEditSuccessForm()">OK</button>
-        </div>
-    </div>
 </body>
 </html>

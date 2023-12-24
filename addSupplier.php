@@ -1,14 +1,13 @@
 <?php
+session_start();
+require 'class.php';
 
-    if(isset($_GET['id'])){
-        require_once("class.php");
-        $id=  $_GET['id'];
-        $supplier = new Supplier();
-        $result=$supplier->hapusSupplier($id);
-    }
+if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
+    header("location: login.php");
+}
+
+$username = $_SESSION['uname'];
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
 <body>
-    <div class="overlay" id="overlay"></div>
+<div class="overlay" id="overlay"></div>
     <nav class="sidebar">
         <a href="#" class="logo">Dapur Perdana</a>
         <div class="menu-content">
@@ -77,14 +76,15 @@
             </div>
         </div>
     </nav>
-    <div class="form-container popup-form">
-        <p>Apakah Anda yakin ingin menghapusnya?</p>
+    <form class="form-container popup-form" method="POST" action="addSupplier_proses.php" >
+        <span class="form-title">Add Supplier</span>
+        <input type="text" placeholder="Nama" required name="addNama_supplier"/>
+        <input type="text" placeholder="Alamat" required name="addAlamat_supplier"/>
+        <input type="text" placeholder="Nomor Telepon" required name="addTelp_supplier"/>
         <div class="button-container">
-            <form action="deleteSupplier.php" method="GET">
-                <a href="supplier.php" type="submit" class="submit-button" name="submitDelete" style='text-decoration:none;text-align:center'>Yes</a>
-                <a href="supplier.php" type="button" class="cancel-button" style='text-decoration:none;text-align:center'>No</a>
-            </form>
+            <a type="button" class="cancel-button" href="supplier.php" style='text-decoration:none;text-align:center'>Cancel</a>
+            <a type="submit" class="submit-button" id="submitAddForm" href="addSupplier_proses.php" style='text-decoration:none;text-align:center'>Add</a>
         </div>
-    </div>
+    </form>
 </body>
 </html>

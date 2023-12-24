@@ -1,14 +1,24 @@
 <?php
+	$addNama_supplier = $_POST['addNama_supplier'];
+	$addAlamat_supplier = $_POST['addAlamat_supplier'];
+	$addTelp_supplier = $_POST['addTelp_supplier'];
 
-    if(isset($_GET['id'])){
-        require_once("class.php");
-        $id=  $_GET['id'];
-        $supplier = new Supplier();
-        $result=$supplier->hapusSupplier($id);
-    }
+    $con = new mysqli("localhost","root","","dbdapurperdana");
+	if ($con->connect_errno)
+	{
+		die("Failed Connect: ".$con->connect_error);
+	}
+	else
+	{
+	}
+
+	$sql = "INSERT INTO supplier(nama,alamat,nomor_telepon) VALUE(?, ?, ?)";
+	$stmt = $con->prepare($sql);
+
+	$stmt->bind_param("sss",$addNama_supplier,$addAlamat_supplier,$addTelp_supplier);
+
+	$stmt->execute();
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +29,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
 <body>
-    <div class="overlay" id="overlay"></div>
+<div class="overlay" id="overlay"></div>
     <nav class="sidebar">
         <a href="#" class="logo">Dapur Perdana</a>
         <div class="menu-content">
@@ -77,14 +87,14 @@
             </div>
         </div>
     </nav>
-    <div class="form-container popup-form">
-        <p>Apakah Anda yakin ingin menghapusnya?</p>
-        <div class="button-container">
-            <form action="deleteSupplier.php" method="GET">
-                <a href="supplier.php" type="submit" class="submit-button" name="submitDelete" style='text-decoration:none;text-align:center'>Yes</a>
-                <a href="supplier.php" type="button" class="cancel-button" style='text-decoration:none;text-align:center'>No</a>
-            </form>
+        <div class="success-content popup-form">
+            <i class="fa-regular fa-circle-check success-icon"></i>
+            <div class="success-text">
+                <p>Sukses</p>
+                <div class="line"></div>
+                <p>Sukses menambah data</p>
+            </div>
+            <button class="close-button" onclick="closeAddSuccessForm()">OK</button>
         </div>
-    </div>
 </body>
 </html>

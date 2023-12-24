@@ -102,7 +102,7 @@ if (isset($_GET['key'])) {
         <div class="container">
             <div class="add-supplier">
                 <div class="action-buttons">
-                    <button class="add-button" id="add-supp" onclick="openAddForm()">Add</button>
+                    <a class="add-button" id="add-supp" href="addSupplier.php" style='text-decoration:none;text-align:center'>Add</a>
                 </div>
                 <div class="line"></div>
             </div>
@@ -139,7 +139,7 @@ if (isset($_GET['key'])) {
                         //<button class='edit-button' onclick='openEditForm()'>Edit</button>
                         echo "<td>
                                 <a href='updateSupplier.php?id=$idsupplier' class='edit-button'>Edit</a>
-                                <button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>
+                                <a href='deleteSupplier.php?id=$idsupplier' class='delete-button' >Delete</a>
                             </td>";
                     }
                     ?>
@@ -149,7 +149,7 @@ if (isset($_GET['key'])) {
     </main>
 
     <!-- TAMBAH  -->
-    <div class="popup-form" id="addForm">
+    <!-- <div class="popup-form" id="addForm">
         <div class="form-header">
             <span class="form-title">Add Supplier</span>
             <span class="close-icon" onclick="closeAddForm()">&#10006;</span>
@@ -164,61 +164,39 @@ if (isset($_GET['key'])) {
                 <button type="submit" class="submit-button" id="submitAddForm">Add</button>
             </div>
         </form>
-    </div>
+    </div> -->
 
 
     <!-- EDIT -->
-    <?php
-            $con = new mysqli("localhost","root","","dbdapurperdana");
-
-            if ($con->connect_errno)
-            {
-                // echo "Failed Connect : ".$con->connect_error;
-                die ("Failed Connect : ".$con->connect_error);
-            }
-            else
-            {
-                echo "Connection Success. <br>";
-            }
-            //Warning: Undefined array key "idsupplier" in C:\xampp\htdocs\WSE\tokodapurperdana\supplier.php on line 183
-            $id_edit = $_GET['idsupplier'];
-
-            $sql = "SELECT * FROM supplier WHERE id=?";
-            $stmt = $con->prepare($sql);
-
-            $stmt->bind_param("i",$id_edit);
-            $stmt->execute();
-            $result = $stmt->get_result();
-    ?>
-    <div class="popup-form" id="editForm">
+    <!-- <div class="popup-form" id="editForm">
         <div class="form-header">
             <span class="form-title">Edit Supplier</span>
             <span class="close-icon" onclick="closeEditForm()">&#10006;</span>
         </div>
         <form class="form-container" method="POST" action="updateSupplier_proses.php">
-            <input type="text" placeholder="Nama" required name="edit_nama" value="<?php echo isset($row['nama']) ? $row['nama'] : ''; ?>">
-            <input type="text" placeholder="Alamat" required name="edit_alamat" value="<?php echo isset($row['alamat']) ? $row['alamat'] : ''; ?>">
-            <input type="text" placeholder="Nomor Telepon" required name="edit_telp" value="<?php echo isset($row['nomor_telepon']) ? $row['nomor_telepon'] : ''; ?>">
-            <input type="hidden" name="idSupplier" value="<?php echo isset($row['id']) ? $row['id'] : ''; ?>">
+            <input type="text" placeholder="Nama" required name="edit_nama" value="">
+            <input type="text" placeholder="Alamat" required name="edit_alamat" value="">
+            <input type="text" placeholder="Nomor Telepon" required name="edit_telp" value="">
+            <input type="hidden" name="idSupplier" value="">
             <div class="button-container">
                 <button type="button" class="cancel-button" onclick="closeEditForm()">Cancel</button>
                 <button type="submit" class="submit-button" id="submitEditForm" name="submit">Edit</button>
             </div>
         </form>
-    </div> 
+    </div>  -->
 
     <!-- HAPUS (Belum lanjut)-->
-    <div class="popup-form" id="deleteConfirmation">
+    <!-- <div class="popup-form" id="deleteConfirmation">
         <div class="form-container">
             <p>Apakah Anda yakin ingin menghapusnya?</p>
             <div class="button-container">
                 <form action="" method="GET">
-                    <button type="submit" class="submit-button"><a href='deleteSupplier.php?id=<?php echo isset($row['id']) ? $row['id'] : ''; ?>'>Yes</a></button>
+                    <button type="submit" class="submit-button"><a href='deleteSupplier.php?id='>Yes</a></button>
                     <button type="button" class="cancel-button" onclick="closeDeleteConfirmation()">No</button>
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="popup-form" id="addSuccessForm">
         <div class="success-content">
