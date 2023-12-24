@@ -18,7 +18,6 @@
         }
         else
         {
-            echo "Connection Success. <br>";
         }
 
         $id = $_GET['id'];
@@ -31,14 +30,72 @@
         $result = $stmt->get_result();
 
         if($row = $result->fetch_assoc()){
-            echo "Tampilkan Data di Form. <br>";
         }
         else{
             header("location: Tes Koneksi.php");
         }
     ?>
 
-    <form class="form-container" method="POST" action="updateSupplier_proses.php">
+<div class="overlay" id="overlay"></div>
+    <nav class="sidebar">
+        <a href="#" class="logo">Dapur Perdana</a>
+        <div class="menu-content">
+            <ul class="menu-items">
+
+                <li class="item">
+                    <a href="index.php"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+                </li>
+                <li class="item">
+                    <a href="supplier.php"><i class="fa-solid fa-truck-field"></i> Supplier</a>
+                </li>
+                <li class="item">
+                    <div class="submenu-item">
+                        <span> <i class="fa-solid fa-box"></i>Produk</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                    <ul class="menu-items submenu">
+                        <div class="menu-title">
+                            <i class="fa-solid fa-chevron-left"></i>
+                            Produk
+                        </div>
+                        <li class="item">
+                            <a href="kategoriproduk.php"> <i class="fa-solid fa-circle"></i>Kategori Produk</a>
+                        </li>
+                        <li class="item">
+                            <a href="daftarproduk.php"><i class="fa-solid fa-circle"></i>Daftar Produk</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="item">
+                    <a href="penyesuaian.php"> <i class="fa-solid fa-boxes-stacked"></i>Penyesuaian</a>
+                </li>
+                <li class="item">
+                    <div class="submenu-item">
+                        <span> <i class="fa-solid fa-book"></i>Laporan</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                    <ul class="menu-items submenu">
+                        <div class="menu-title">
+                            <i class="fa-solid fa-chevron-left"></i>
+                            Laporan
+                        </div>
+                        <li class="item">
+                            <a href="laporanpenjualan.php"> <i class="fa-solid fa-circle"></i>Laporan Penjualan</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="item">
+                    <a href=""> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
+                </li>
+            </ul>
+            <div class="user-profile">
+                <i class="fas fa-user-circle user-icon"></i>
+                <?php echo '<span class="user-name">' . $username . '</span>'; ?>
+            </div>
+        </div>
+    </nav>
+
+    <form class="form-container popup-form" method="POST" action="updateSupplier_proses.php">
             <input type="text" placeholder="Nama" required name="edit_nama" value="<?php echo isset($row['nama']) ? $row['nama'] : ''; ?>">
             <input type="text" placeholder="Alamat" required name="edit_alamat" value="<?php echo isset($row['alamat']) ? $row['alamat'] : ''; ?>">
             <input type="text" placeholder="Nomor Telepon" required name="edit_telp" value="<?php echo isset($row['nomor_telepon']) ? $row['nomor_telepon'] : ''; ?>">
