@@ -135,7 +135,7 @@ if (isset($_GET['key'])) {
                         echo "<td>" . $row['nomor_telepon'] . "</td>";
                         $idsupplier = $row['id'];
                         //ini masuk ke script (?)
-                        echo "<td>  <button class='edit-button' onclick='openEditForm($idsupplier)'>Edit</button>
+                        echo "<td>  <button class='edit-button' onclick='openEditForm(".$idsupplier.")'>Edit</button>
                                     <button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button></td>";
                     }
                     ?>
@@ -171,7 +171,6 @@ if (isset($_GET['key'])) {
             <span class="close-icon" onclick="closeEditForm()">&#10006;</span>
         </div>
 
-        <!-- Tes php buat edit -->
         <?php
         $con = new mysqli("localhost", "root", "", "dbdapurperdana");
 
@@ -180,8 +179,8 @@ if (isset($_GET['key'])) {
         } else {
             echo "Connection Success. <br>";
         }
-
-        //ambil dari line 140 - 141
+        
+        //ambil dari line 136 - 138
         $id_edit = $_GET['idsupplier'];
 
         $sql = "SELECT * FROM supplier WHERE id=?";
