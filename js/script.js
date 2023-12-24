@@ -33,7 +33,7 @@ function closeAddForm() {
 
 //ini buat edit [idSupplierToEdit belum kepanggil]
 function openEditForm() {
-  var idSupplierToEdit = idsupplier;
+  // var idSupplierToEdit = idsupplier;
   document.getElementById("editForm").style.display = "flex";
   document.getElementById("overlay").style.display = "block";
 }

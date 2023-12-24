@@ -62,10 +62,10 @@ if (isset($_GET['key'])) {
                             Produk
                         </div>
                         <li class="item">
-                            <a href="kategoriproduk.php"> <i class="fa-solid fa-circle"></i></i>Kategori Produk</a>
+                            <a href="kategoriproduk.php"> <i class="fa-solid fa-circle"></i>Kategori Produk</a>
                         </li>
                         <li class="item">
-                            <a href="daftarproduk.php"><i class="fa-solid fa-circle"></i></i> Daftar Produk</a>
+                            <a href="daftarproduk.php"><i class="fa-solid fa-circle"></i>Daftar Produk</a>
                         </li>
                     </ul>
                 </li>
@@ -83,7 +83,7 @@ if (isset($_GET['key'])) {
                             Laporan
                         </div>
                         <li class="item">
-                            <a href="laporanpenjualan.php"> <i class="fa-solid fa-circle"></i></i>Laporan Penjualan</a>
+                            <a href="laporanpenjualan.php"> <i class="fa-solid fa-circle"></i>Laporan Penjualan</a>
                         </li>
                     </ul>
                 </li>
@@ -134,9 +134,12 @@ if (isset($_GET['key'])) {
                         echo "<td class='left-align'>" . $row['alamat'] . "</td>";
                         echo "<td>" . $row['nomor_telepon'] . "</td>";
                         $idsupplier = $row['id'];
-                        //ini masuk ke script (?)
-                        echo "<td>  <button class='edit-button' onclick='openEditForm(".$idsupplier.")'>Edit</button>
-                                    <button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button></td>";
+                        //masukin ke onclick='openEditForm($idsupplier) ??? 
+                        //pake href?? href='#editForm?id=$idsupplier' ??
+                        echo "<td>
+                                <button class='edit-button' onclick='openEditForm()'>Edit</button>
+                                <button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>
+                            </td>";
                     }
                     ?>
                 </table>
@@ -163,45 +166,45 @@ if (isset($_GET['key'])) {
     </div>
 
 
-    <!-- EDIT (Masih Error)-->
+    <!-- EDIT -->
+    <?php
+            $con = new mysqli("localhost","root","","dbdapurperdana");
 
+            if ($con->connect_errno)
+            {
+                // echo "Failed Connect : ".$con->connect_error;
+                die ("Failed Connect : ".$con->connect_error);
+            }
+            else
+            {
+                echo "Connection Success. <br>";
+            }
+            //Warning: Undefined array key "idsupplier" in C:\xampp\htdocs\WSE\tokodapurperdana\supplier.php on line 183
+            $id_edit = $_GET['idsupplier'];
+
+            $sql = "SELECT * FROM supplier WHERE id=?";
+            $stmt = $con->prepare($sql);
+
+            $stmt->bind_param("i",$id_edit);
+            $stmt->execute();
+            $result = $stmt->get_result();
+    ?>
     <div class="popup-form" id="editForm">
         <div class="form-header">
             <span class="form-title">Edit Supplier</span>
             <span class="close-icon" onclick="closeEditForm()">&#10006;</span>
         </div>
-
-        <?php
-        $con = new mysqli("localhost", "root", "", "dbdapurperdana");
-
-        if ($con->connect_errno) {
-            die("Failed Connect: " . $con->connect_error);
-        } else {
-            echo "Connection Success. <br>";
-        }
-        
-        //ambil dari line 136 - 138
-        $id_edit = $_GET['idsupplier'];
-
-        $sql = "SELECT * FROM supplier WHERE id=?";
-        $stmt = $con->prepare($sql);
-        $stmt->bind_param("i", $id_edit);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-        ?>
-
         <form class="form-container" method="POST" action="updateSupplier_proses.php">
-            <input type='text' placeholder='Nama' required name='edit_nama' value='<?php echo $row['nama']; ?>'>
-            <input type='text' placeholder='Alamat' required name='edit_alamat' value='<?php echo $row['alamat']; ?>'>
-            <input type='text' placeholder='Nomor Telepon' required name='edit_telp' value='<?php echo $row['nomor_telepon']; ?>'>
-            <input type='hidden' name='idSupplier' value='<?php echo $idSupplierToEdit; ?>'> <!-- Menggunakan variabel di sini -->
-            <div class='button-container'>
-                <button type='button' class='cancel-button' onclick='closeEditForm()'>Cancel</button>
-                <button type='submit' class='submit-button' id='submitEditForm' name='edit_btn'>Edit</button>
+            <input type="text" placeholder="Nama" required name="edit_nama" value="<?php echo isset($row['nama']) ? $row['nama'] : ''; ?>">
+            <input type="text" placeholder="Alamat" required name="edit_alamat" value="<?php echo isset($row['alamat']) ? $row['alamat'] : ''; ?>">
+            <input type="text" placeholder="Nomor Telepon" required name="edit_telp" value="<?php echo isset($row['nomor_telepon']) ? $row['nomor_telepon'] : ''; ?>">
+            <input type="hidden" name="idSupplier" value="<?php echo isset($row['id']) ? $row['id'] : ''; ?>">
+            <div class="button-container">
+                <button type="button" class="cancel-button" onclick="closeEditForm()">Cancel</button>
+                <button type="submit" class="submit-button" id="submitEditForm" name="submit">Edit</button>
             </div>
         </form>
-    </div>
+    </div> 
 
     <!-- HAPUS (Belum lanjut)-->
     <div class="popup-form" id="deleteConfirmation">
