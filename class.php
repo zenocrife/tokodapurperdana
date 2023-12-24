@@ -208,6 +208,17 @@ class Supplier extends Koneksi
 		return $result;
 	}
 
+	public function bacaDataById($id)
+	{
+		$stmt = $this->con->prepare("SELECT * FROM supplier WHERE id = ?");
+		$stmt->bind_param("i", $id);
+		$stmt->execute();
+
+		$result = $stmt->get_result();
+
+		return $result;
+	}
+
 	public function tambahSupplier($namasupplier, $alamat, $notelepon)
 	{
 		$stmt = $this->con->prepare('INSERT INTO supplier(nama, alamat, nomor_telepon) VALUE(?, ?, ?)');
@@ -224,7 +235,7 @@ class Supplier extends Koneksi
 }
 
 class DetailPenjualan extends Koneksi
-{ //ini belom samsek
+{
 	public function __construct()
 	{
 		parent::__construct();

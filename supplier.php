@@ -102,6 +102,7 @@ if (isset($_GET['key'])) {
         <div class="container">
             <div class="add-supplier">
                 <div class="action-buttons">
+                    <!-- ADD -->
                     <a class="add-button" id="add-supp" href="addSupplier.php" style='text-decoration:none;text-align:center'>Add</a>
                 </div>
                 <div class="line"></div>
@@ -136,7 +137,10 @@ if (isset($_GET['key'])) {
                         $idsupplier = $row['id'];
                         //masukin ke onclick='openEditForm($idsupplier) ??? 
                         //pake href?? href='#editForm?id=$idsupplier' ??
-                        //<button class='edit-button' onclick='openEditForm()'>Edit</button>
+                        // echo "<td>";
+                        // echo "<button class='edit-button' onclick='openEditForm()'>Edit</button>";
+                        // echo "<button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>";
+                        // echo "</td>";
                         echo "<td>
                                 <a href='updateSupplier.php?id=$idsupplier' class='edit-button'>Edit</a>
                                 <a href='deleteSupplier.php?id=$idsupplier' class='delete-button' >Delete</a>
@@ -183,7 +187,7 @@ if (isset($_GET['key'])) {
                 <button type="submit" class="submit-button" id="submitEditForm" name="submit">Edit</button>
             </div>
         </form>
-    </div>  -->
+    </div> -->
 
     <!-- HAPUS (Belum lanjut)-->
     <!-- <div class="popup-form" id="deleteConfirmation">

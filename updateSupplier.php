@@ -7,9 +7,14 @@ if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
 }
 
 $username = $_SESSION['uname'];
+
+$id = $_GET['id'];
+
+$row = (new Supplier)->bacaDataById($id)->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,36 +22,9 @@ $username = $_SESSION['uname'];
     <link rel="stylesheet" href="dashboardstyle.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
+
 <body>
-<?php
-        $con = new mysqli("localhost","root","","dbdapurperdana");
-
-        if ($con->connect_errno)
-        {
-            // echo "Failed Connect : ".$con->connect_error;
-            die ("Failed Connect : ".$con->connect_error);
-        }
-        else
-        {
-        }
-
-        $id = $_GET['id'];
-
-        $sql = "SELECT * FROM supplier WHERE id=?";
-        $stmt = $con->prepare($sql);
-
-        $stmt->bind_param("i",$id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if($row = $result->fetch_assoc()){
-        }
-        else{
-            header("location: index.php");
-        }
-    ?>
-
-<div class="overlay" id="overlay"></div>
+    <div class="overlay" id="overlay"></div>
     <nav class="sidebar">
         <a href="#" class="logo">Dapur Perdana</a>
         <div class="menu-content">
@@ -105,15 +83,16 @@ $username = $_SESSION['uname'];
         </div>
     </nav>
     <form class="form-container popup-form" method="POST" action="updateSupplier_proses.php">
-            <span class="form-title">Edit Supplier</span>
-            <input type="text" placeholder="Nama" required name="edit_nama" value="<?php echo isset($row['nama']) ? $row['nama'] : ''; ?>">
-            <input type="text" placeholder="Alamat" required name="edit_alamat" value="<?php echo isset($row['alamat']) ? $row['alamat'] : ''; ?>">
-            <input type="text" placeholder="Nomor Telepon" required name="edit_telp" value="<?php echo isset($row['nomor_telepon']) ? $row['nomor_telepon'] : ''; ?>">
-            <input type="hidden" name="id" value="<?=$row['id']?>">
-            <div class="button-container">
-                <a type="button" class="cancel-button" href="supplier.php" style='text-decoration:none;text-align:center'>Cancel</a>
-                <button type="submit" class="submit-button" id="submitEditForm" name="submit">Edit</button>
-            </div>
+        <span class="form-title">Edit Supplier</span>
+        <input type="text" placeholder="Nama" required name="edit_nama" value="<?php echo isset($row['nama']) ? $row['nama'] : ''; ?>">
+        <input type="text" placeholder="Alamat" required name="edit_alamat" value="<?php echo isset($row['alamat']) ? $row['alamat'] : ''; ?>">
+        <input type="text" placeholder="Nomor Telepon" required name="edit_telp" value="<?php echo isset($row['nomor_telepon']) ? $row['nomor_telepon'] : ''; ?>">
+        <input type="hidden" name="id" value="<?= $row['id'] ?>">
+        <div class="button-container">
+            <a type="button" class="cancel-button" href="supplier.php" style='text-decoration:none;text-align:center'>Cancel</a>
+            <button type="submit" class="submit-button" id="submitEditForm" name="submit">Edit</button>
+        </div>
     </form>
 </body>
+
 </html>

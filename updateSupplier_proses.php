@@ -14,10 +14,12 @@ $edit_nomortelp = $_POST['edit_telp'];
 $id_sup_edit = $_POST['id'];
 
 $supplier = new Supplier();
-$result = ($supplier)->updateSupplier($id_sup_edit,$edit_nama, $edit_alamat, $edit_nomortelp) ;
+$result = ($supplier)->updateSupplier($id_sup_edit, $edit_nama, $edit_alamat, $edit_nomortelp);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,8 +27,9 @@ $result = ($supplier)->updateSupplier($id_sup_edit,$edit_nama, $edit_alamat, $ed
     <link rel="stylesheet" href="dashboardstyle.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
+
 <body>
-<div class="overlay" id="overlay"></div>
+    <div class="overlay" id="overlay"></div>
     <nav class="sidebar">
         <a href="#" class="logo">Dapur Perdana</a>
         <div class="menu-content">
@@ -84,15 +87,16 @@ $result = ($supplier)->updateSupplier($id_sup_edit,$edit_nama, $edit_alamat, $ed
             </div>
         </div>
     </nav>
-        <div class="success-content popup-form">
-            <i class="fa-regular fa-circle-check success-icon"></i>
-            <div class="success-text">
-                <p>Sukses</p>
-                <div class="line"></div>
-                <p>Sukses mengubah data</p>
-            </div>
-            <a class="close-button" href="supplier.php" style="text-decoration:none">OK</a>
+    <div class="success-content popup-form">
+        <i class="fa-regular fa-circle-check success-icon"></i>
+        <div class="success-text">
+            <p>Sukses</p>
+            <div class="line"></div>
+            <p>Sukses mengubah data</p>
         </div>
-</div>
+        <a class="close-button" href="supplier.php" style="text-decoration:none">OK</a>
+    </div>
+    </div>
 </body>
+
 </html>

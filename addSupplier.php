@@ -8,8 +8,10 @@ if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
 
 $username = $_SESSION['uname'];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,8 +19,9 @@ $username = $_SESSION['uname'];
     <link rel="stylesheet" href="dashboardstyle.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
+
 <body>
-<div class="overlay" id="overlay"></div>
+    <div class="overlay" id="overlay"></div>
     <nav class="sidebar">
         <a href="#" class="logo">Dapur Perdana</a>
         <div class="menu-content">
@@ -76,15 +79,16 @@ $username = $_SESSION['uname'];
             </div>
         </div>
     </nav>
-    <form class="form-container popup-form" method="POST" action="addSupplier_proses.php" >
+    <form class="form-container popup-form" method="POST" action="addSupplier_proses.php">
         <span class="form-title">Add Supplier</span>
-        <input type="text" placeholder="Nama" required name="addNama_supplier"/>
-        <input type="text" placeholder="Alamat" required name="addAlamat_supplier"/>
-        <input type="text" placeholder="Nomor Telepon" required name="addTelp_supplier"/>
+        <input type="text" placeholder="Nama" required name="addNama_supplier" />
+        <input type="text" placeholder="Alamat" required name="addAlamat_supplier" />
+        <input type="text" placeholder="Nomor Telepon" required name="addTelp_supplier" />
         <div class="button-container">
             <a type="button" class="cancel-button" href="supplier.php" style='text-decoration:none;text-align:center'>Cancel</a>
-            <a type="submit" class="submit-button" id="submitAddForm" href="addSupplier_proses.php" style='text-decoration:none;text-align:center'>Add</a>
+            <button type="submit" class="submit-button" id="submitAddForm" style='text-decoration:none;text-align:center'>Add</button>
         </div>
     </form>
 </body>
+
 </html>

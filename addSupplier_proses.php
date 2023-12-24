@@ -1,26 +1,22 @@
 <?php
-	$addNama_supplier = $_POST['addNama_supplier'];
-	$addAlamat_supplier = $_POST['addAlamat_supplier'];
-	$addTelp_supplier = $_POST['addTelp_supplier'];
+session_start();
+require 'class.php';
 
-    $con = new mysqli("localhost","root","","dbdapurperdana");
-	if ($con->connect_errno)
-	{
-		die("Failed Connect: ".$con->connect_error);
-	}
-	else
-	{
-	}
+if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
+    header("location: login.php");
+}
 
-	$sql = "INSERT INTO supplier(nama,alamat,nomor_telepon) VALUE(?, ?, ?)";
-	$stmt = $con->prepare($sql);
+$addNama_supplier = $_POST['addNama_supplier'];
+$addAlamat_supplier = $_POST['addAlamat_supplier'];
+$addTelp_supplier = $_POST['addTelp_supplier'];
 
-	$stmt->bind_param("sss",$addNama_supplier,$addAlamat_supplier,$addTelp_supplier);
-
-	$stmt->execute();
+(new Supplier)->tambahSupplier($addNama_supplier, $addAlamat_supplier, $addTelp_supplier);
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,8 +24,9 @@
     <link rel="stylesheet" href="dashboardstyle.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
+
 <body>
-<div class="overlay" id="overlay"></div>
+    <div class="overlay" id="overlay"></div>
     <nav class="sidebar">
         <a href="#" class="logo">Dapur Perdana</a>
         <div class="menu-content">
@@ -87,6 +84,7 @@
             </div>
         </div>
     </nav>
+    <form action="supplier.php" method="post">
         <div class="success-content popup-form">
             <i class="fa-regular fa-circle-check success-icon"></i>
             <div class="success-text">
@@ -94,7 +92,9 @@
                 <div class="line"></div>
                 <p>Sukses menambah data</p>
             </div>
-            <button class="close-button" onclick="closeAddSuccessForm()">OK</button>
+            <button class="close-button">OK</button>
         </div>
+    </form>
 </body>
+
 </html>
