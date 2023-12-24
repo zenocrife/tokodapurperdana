@@ -136,8 +136,9 @@ if (isset($_GET['key'])) {
                         $idsupplier = $row['id'];
                         //masukin ke onclick='openEditForm($idsupplier) ??? 
                         //pake href?? href='#editForm?id=$idsupplier' ??
+                        //<button class='edit-button' onclick='openEditForm()'>Edit</button>
                         echo "<td>
-                                <button class='edit-button' onclick='openEditForm()'>Edit</button>
+                                <a href='updateSupplier.php?id=$idsupplier' class='edit-button'>Edit</a>
                                 <button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>
                             </td>";
                     }
