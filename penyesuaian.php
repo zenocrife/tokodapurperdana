@@ -101,7 +101,8 @@ if (isset($_GET['key'])) {
         <div class="container">
             <div class="add-penyesuaian">
                 <div class="action-buttons">
-                    <button class="add-button" id="add-supp" onclick="openAddForm()">Add</button>
+                    <!-- ADD -->
+                    <a class="add-button" id="add-supp" href="addPenyesuaian.php" style='text-decoration:none;text-align:center'>Add</a>
                 </div>
                 <div class="line"></div>
             </div>
@@ -157,7 +158,7 @@ if (isset($_GET['key'])) {
         </form>
     </div>
 
-    <div class="popup-form" id="editForm">
+    <!-- <div class="popup-form" id="editForm">
         <div class="form-header">
             <span class="form-title">Edit Penyesuaian</span>
             <span class="close-icon" onclick="closeEditForm()">&#10006;</span>
@@ -205,7 +206,7 @@ if (isset($_GET['key'])) {
             </div>
             <button class="close-button" onclick="closeEditSuccessForm()">OK</button>
         </div>
-    </div>
+    </div> -->
     <script src="js/script.js"></script>
 </body>
 
