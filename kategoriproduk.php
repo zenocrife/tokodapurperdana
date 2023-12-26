@@ -99,7 +99,8 @@ if (isset($_GET['key'])) {
         <div class="container">
             <div class="add-produk">
                 <div class="action-buttons">
-                    <button class="add-button" id="add-supp" onclick="openAddForm()">Add</button>
+                    <!-- ADD -->
+                    <a class="add-button" id="add-kategori" href="addKategori.php" style='text-decoration:none;text-align:center'>Add</a>
                 </div>
                 <div class="line"></div>
             </div>
@@ -130,8 +131,12 @@ if (isset($_GET['key'])) {
                         echo "<td>" . $row['id'] . "</td>";
                         echo "<td class='left-align'>" . $row['nama'] . "</td>";
                         echo "<td>";
-                        echo "<button class='edit-button' onclick='openEditForm()'>Edit</button>";
-                        echo "<button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>";
+                        $idKategoriProduk = $row['id'];
+                        // echo "<button class='edit-button' onclick='openEditForm()'>Edit</button>";
+                        // echo "<button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>";
+                        echo"
+                        <a href='updateKategori.php?id=$idKategoriProduk' class='edit-button'>Edit</a>
+                        <a href='deleteKategori.php?id=$idKategoriProduk' class='delete-button'>Delete</a>";
                         echo "</td>";
                         echo "</tr>";
                     }
@@ -142,7 +147,7 @@ if (isset($_GET['key'])) {
         </div>
     </main>
 
-    <div class="popup-form" id="addForm">
+    <!-- <div class="popup-form" id="addForm">
         <div class="form-header">
             <span class="form-title">Add Kategori</span>
             <span class="close-icon" onclick="closeAddForm()">&#10006;</span>
@@ -154,9 +159,9 @@ if (isset($_GET['key'])) {
                 <button type="submit" class="submit-button" id="submitAddForm">Add</button>
             </div>
         </form>
-    </div>
+    </div> -->
 
-    <div class="popup-form" id="editForm">
+    <!-- <div class="popup-form" id="editForm">
         <div class="form-header">
             <span class="form-title">Edit Kategori</span>
             <span class="close-icon" onclick="closeEditForm()">&#10006;</span>
@@ -168,9 +173,9 @@ if (isset($_GET['key'])) {
                 <button type="submit" class="submit-button" id="submitEditForm">Edit</button>
             </div>
         </form>
-    </div>
+    </div> -->
 
-    <div class="popup-form" id="deleteConfirmation">
+    <!-- <div class="popup-form" id="deleteConfirmation">
         <div class="form-container">
             <p>Apakah Anda yakin ingin menghapusnya?</p>
             <div class="button-container">
@@ -178,9 +183,9 @@ if (isset($_GET['key'])) {
                 <button type="button" class="cancel-button" onclick="closeDeleteConfirmation()">No</button>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <div class="popup-form" id="addSuccessForm">
+    <!-- <div class="popup-form" id="addSuccessForm">
         <div class="success-content">
             <i class="fa-regular fa-circle-check success-icon"></i>
             <div class="success-text">
@@ -201,7 +206,7 @@ if (isset($_GET['key'])) {
             </div>
             <button class="close-button" onclick="closeEditSuccessForm()">OK</button>
         </div>
-    </div>
+    </div> -->
     <script src="js/script.js"></script>
 </body>
 
