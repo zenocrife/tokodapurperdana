@@ -202,7 +202,7 @@ if (isset($_GET['key'])) {
         </div>
     </div> -->
 
-    <div class="popup-form" id="addSuccessForm">
+    <!-- <div class="popup-form" id="addSuccessForm">
         <div class="success-content">
             <i class="fa-regular fa-circle-check success-icon"></i>
             <div class="success-text">
@@ -223,7 +223,7 @@ if (isset($_GET['key'])) {
             </div>
             <button class="close-button" onclick="closeEditSuccessForm()">OK</button>
         </div>
-    </div>
+    </div> -->
 
     <script src="js/script.js"></script>
 </body>

@@ -37,8 +37,8 @@ if (isset($_GET['kategori'])) {
     $kate = "";
 }
 
-$resultKAdd = ($kategori)->bacaData('%');
-$resultKEdit = ($kategori)->bacaData('%');
+// $resultKAdd = ($kategori)->bacaData('%');
+// $resultKEdit = ($kategori)->bacaData('%');
 
 $resultK = ($kategori)->bacaData('%');
 ?>
@@ -119,7 +119,8 @@ $resultK = ($kategori)->bacaData('%');
         <div class="container">
             <div class="add-produk">
                 <div class="action-buttons">
-                    <button class="add-button" id="add-supp" onclick="openAddForm()">Add</button>
+                    <!-- ADD -->
+                    <a class="add-button" id="add-daftarProduk" href="addDaftarProduk.php" style='text-decoration:none;text-align:center'>Add</a>
                 </div>
                 <div class="line"></div>
             </div>
@@ -160,10 +161,15 @@ $resultK = ($kategori)->bacaData('%');
                         echo "<td class='right-align'>" . number_format($row['harga_beli'], 0, ',', '.') . "</td>";
                         echo "<td>" . $row['stok_tersedia'] . "</td>";
                         echo "<td class='center-align'>" . $namaK['nama'] . "</td>";
+                        // echo "<td>
+                        //         <button class='edit-button' onclick='openEditForm()'>Edit</button>
+                        //         <button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>
+                        //     </td>";
+                        $idDaftarProduk = $row['id'];
                         echo "<td>
-                                <button class='edit-button' onclick='openEditForm()'>Edit</button>
-                                <button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>
-                            </td>";
+                                <a href='updateDaftarProduk.php?id=$idDaftarProduk' class='edit-button'>Edit</a>
+                                <a href='deleteDaftarProduk.php?id=$idDaftarProduk' class='delete-button'>Delete</a>
+                                </td>";
                         echo "</tr>";
                     }
                     ?>
@@ -172,7 +178,9 @@ $resultK = ($kategori)->bacaData('%');
             </div>
         </div>
     </main>
-    <div class="popup-form" id="addForm">
+
+    <!-- TAMBAH PRODUK -->
+    <!-- <div class="popup-form" id="addForm">
         <div class="form-header">
             <span class="form-title">Add Produk</span>
             <span class="close-icon" onclick="closeAddForm()">&#10006;</span>
@@ -184,20 +192,19 @@ $resultK = ($kategori)->bacaData('%');
             <input type="number" placeholder="Stok Tersedia" required />
             <select name="kategori" required>
                 <option value="">Select kategori</option>
-                <?php
-                while ($rowK = $resultKAdd->fetch_assoc()) {
-                    echo '<option value=' . $rowK['id'] . '>' . $rowK['nama'] . '</option>';
-                }
-                ?>
+                // while ($rowK = $resultKAdd->fetch_assoc()) {
+                //     echo '<option value=' . $rowK['id'] . '>' . $rowK['nama'] . '</option>';
+                // }
             </select>
             <div class="button-container">
                 <button type="button" class="cancel-button" onclick="closeAddForm()">Cancel</button>
                 <button type="submit" class="submit-button" id="submitAddForm">Add</button>
             </div>
         </form>
-    </div>
+    </div> -->
 
-    <div class="popup-form" id="editForm">
+    <!-- EDIT PRODUK -->
+    <!-- <div class="popup-form" id="editForm">
         <div class="form-header">
             <span class="form-title">Edit Produk</span>
             <span class="close-icon" onclick="closeEditForm()">&#10006;</span>
@@ -209,9 +216,9 @@ $resultK = ($kategori)->bacaData('%');
             <input type="number" placeholder="Stok Tersedia" required />
             <select name="kategori" required>
                 <?php
-                while ($rowK = $resultKEdit->fetch_assoc()) {
-                    echo '<option value=' . $rowK['id'] . '>' . $rowK['nama'] . '</option>';
-                }
+                // while ($rowK = $resultKEdit->fetch_assoc()) {
+                //     echo '<option value=' . $rowK['id'] . '>' . $rowK['nama'] . '</option>';
+                // }
                 ?>
             </select>
             <div class="button-container">
@@ -219,9 +226,9 @@ $resultK = ($kategori)->bacaData('%');
                 <button type="submit" class="submit-button" id="submitEditForm">Edit</button>
             </div>
         </form>
-    </div>
+    </div> -->
 
-    <div class="popup-form" id="deleteConfirmation">
+    <!-- <div class="popup-form" id="deleteConfirmation">
         <div class="form-container">
             <p>Apakah Anda yakin ingin menghapusnya?</p>
             <div class="button-container">
@@ -229,9 +236,9 @@ $resultK = ($kategori)->bacaData('%');
                 <button type="button" class="cancel-button" onclick="closeDeleteConfirmation()">No</button>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <div class="popup-form" id="addSuccessForm">
+    <!-- <div class="popup-form" id="addSuccessForm">
         <div class="success-content">
             <i class="fa-regular fa-circle-check success-icon"></i>
             <div class="success-text">
@@ -252,7 +259,7 @@ $resultK = ($kategori)->bacaData('%');
             </div>
             <button class="close-button" onclick="closeEditSuccessForm()">OK</button>
         </div>
-    </div>
+    </div> -->
     <script src="js/script.js"></script>
 </body>
 

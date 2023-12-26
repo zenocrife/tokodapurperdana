@@ -78,6 +78,16 @@ class Barang extends Koneksi
 		parent::__construct();
 	}
 
+	public function bacaDataById($search)
+	{
+		$stmt = $this->con->prepare("SELECT * FROM barang WHERE id LIKE ? ");
+		$stmt->bind_param("i", $search);
+		$stmt->execute();
+
+		$result = $stmt->get_result();
+
+		return $result;
+	}
 
 	//UNTUK SEARCH
 	public function getTotalData($kategori, $search)
@@ -91,17 +101,18 @@ class Barang extends Koneksi
 		return $result;
 	}
 
-	public function tambahBarang($idbarang, $nama, $hargajual, $hargabeli, $stok, $idkategori)
+	public function tambahBarang($nama,$hargabeli, $hargajual, $url,$stok, $idkategori)
 	{
-		$stmt = $this->con->prepare('INSERT INTO barang VALUES(?, ?, ?, ?, ?, ?)');
-		$stmt->bind_param('isiiii', $idbarang, $nama, $hargabeli, $hargajual, $stok, $idkategori);
+		// $idbarang,
+		$stmt = $this->con->prepare('INSERT INTO barang(nama,harga_beli,harga_jual,url,stok_tersedia,id_kategori) VALUES(?, ?, ?, ?, ?, ?)');
+		$stmt->bind_param('siisii',$nama, $hargabeli, $hargajual, $url, $stok, $idkategori);
 		$stmt->execute();
 	}
 
 	public function updateBarang($idbarang, $nama, $hbeli, $hjual, $url, $stok, $idkategori)
 	{
 		$stmt = $this->con->prepare('UPDATE barang SET nama=?, harga_beli=?, harga_jual=?, url=?, stok_tersedia=?, id_kategori=? WHERE id=?');
-		$stmt->bind_param("ssiisiii", $nama, $hbeli, $hjual, $url, $stok, $idkategori, $idbarang);
+		$stmt->bind_param("siisiii", $nama, $hbeli, $hjual, $url, $stok, $idkategori, $idbarang);
 		$stmt->execute();
 	}
 
