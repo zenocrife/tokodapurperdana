@@ -37,6 +37,10 @@ if (isset($_GET['kategori'])) {
 }
 
 $resultK = (new Kategori)->bacaData('%');
+
+if (isset($_GET['cart'])) {
+  header("location: keranjang.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -116,7 +120,7 @@ $resultK = (new Kategori)->bacaData('%');
       <form action="" method="GET">
         <div class="add-produk">
           <div class="action-buttons">
-            <button class="add-button" id="add-supp" onclick="">Cart</button>
+            <button class="add-button" id="add-supp" name="cart" onclick="">Cart</button>
           </div>
           <div class="line"></div>
         </div>
