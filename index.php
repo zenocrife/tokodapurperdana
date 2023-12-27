@@ -131,12 +131,13 @@ if (isset($_GET['cart'])) {
             echo '<input type="text" name="kategori" placeholder="Kategori..." value="' . $kate . '">';
             echo '<input type="text" name="key" placeholder="Search..." id="search" value="' . $key . '">';
             ?>
-            <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
+            <button type="submit" id="search-button" name="search"><i class="fa-solid fa-search"></i></button>
           </div>
         </div>
       </form>
 
       <div class="table-wrapper">
+        <!-- <form action="" method="POST"> -->
         <table class="table">
           <tr>
             <th>Kode</th>
@@ -152,18 +153,20 @@ if (isset($_GET['cart'])) {
           while ($row = $result->fetch_assoc()) {
             $resultK = (new Kategori)->bacaDataById($row['id_kategori']);
             $namaK = $resultK->fetch_assoc();
+            $idproduk = $row['id'];
 
             echo "<tr>";
-            echo "<td>" . $row['id'] . "</td>";
+            echo "<td>" . $idproduk . "</td>";
             echo "<td><img width='70' height='70' src=" . $row['url'] . "></td>";
             echo "<td class='left-align'>" . $row['nama'] . "</td>";
             echo "<td>" . $row['stok_tersedia'] . "</td>";
             echo "<td class='right-align'>" . number_format($row['harga_jual'], 0, ',', '.') . "</td>";
             echo "<td class='center-align'>" . $namaK['nama'] . "</td>";
-            echo "<td><button class='add-button' id='add-butt'>+ Add</button></td>";
+            echo "<td><button class='add-button' id='add-butt' name='addbutton'>+ Add</button></td>";
           }
           ?>
         </table>
+        <!-- </form> -->
       </div>
 
     </div>
