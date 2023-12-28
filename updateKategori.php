@@ -73,7 +73,7 @@ $row = (new Kategori)->bacaDataById($id)->fetch_assoc();
                     </ul>
                 </li>
                 <li class="item">
-                    <a href=""> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
+                    <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>
             </ul>
             <div class="user-profile">
@@ -84,8 +84,8 @@ $row = (new Kategori)->bacaDataById($id)->fetch_assoc();
     </nav>
     <form class="form-container popup-form" method="POST" action="updateKategori_proses.php">
         <span class="form-title">Edit Kategori</span>
-        <input type="text" placeholder="Nama Kategori" name="edit_nama"required value="<?php echo isset($row['nama']) ? $row['nama'] : ''; ?>"/>
-        <input type="text" placeholder="Nama Kategori" name="edit_url"required value="<?php echo isset($row['url']) ? $row['url'] : ''; ?>"/>
+        <input type="text" placeholder="Nama Kategori" name="edit_nama" required value="<?php echo isset($row['nama']) ? $row['nama'] : ''; ?>" />
+        <input type="text" placeholder="Nama Kategori" name="edit_url" required value="<?php echo isset($row['url']) ? $row['url'] : ''; ?>" />
         <input type="hidden" name="id" value="<?= $row['id'] ?>">
         <div class="button-container">
             <a type="button" class="cancel-button" href="kategoriproduk.php" style='text-decoration:none;text-align:center'>Cancel</a>

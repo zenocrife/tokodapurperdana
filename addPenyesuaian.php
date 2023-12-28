@@ -10,7 +10,7 @@ $username = $_SESSION['uname'];
 
 $barang = new Barang();
 
-$resultKAdd = ($barang)->bacaDataById('%');
+$result = ($barang)->bacaDataById('%');
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +74,7 @@ $resultKAdd = ($barang)->bacaDataById('%');
                     </ul>
                 </li>
                 <li class="item">
-                    <a href=""> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
+                    <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>
             </ul>
             <div class="user-profile">
@@ -84,18 +84,18 @@ $resultKAdd = ($barang)->bacaDataById('%');
         </div>
     </nav>
     <form class="form-container popup-form" method="POST" action="addPenyesuaian_proses.php">
-        <span class="form-title">Add Kategori</span>
+        <span class="form-title">Add Penyesuaian</span>
         <select name="addNama_penyesuaian" required>
-                <option value="">Select Barang</option>
-                <?php
-                while ($rowK = $resultKAdd->fetch_assoc()) {
-                    echo '<option value=' . $rowK['id'] . '>' . $rowK['nama'] . '</option>';
-                }
-                ?>
+            <option value="">Select Barang</option>
+            <?php
+            while ($row = $result->fetch_assoc()) {
+                echo "<option value='" . $row['id'] . "'>" . $row['nama'] . "</option>";
+            }
+            ?>
         </select>
         <input type="date" class="tanggal" required name="addTanggal_penyesuaian">
-        <input type="text" placeholder="Keterangan Penyesuaian" required name="addKeterangan_penyesuaian"/>
-        <input type="number" placeholder="Stok Penyesuaian" required name="addStok_penyesuaian"/>
+        <input type="text" placeholder="Keterangan Penyesuaian" required name="addKeterangan_penyesuaian" />
+        <input type="number" placeholder="Stok Penyesuaian" required name="addStok_penyesuaian" />
         <div class="button-container">
             <a type="button" class="cancel-button" href="penyesuaian.php" style='text-decoration:none;text-align:center'>Cancel</a>
             <button type="submit" class="submit-button" id="submitAddForm" style='text-decoration:none;text-align:center'>Add</button>

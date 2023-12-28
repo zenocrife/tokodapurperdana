@@ -70,7 +70,7 @@ $username = $_SESSION['uname'];
                     </ul>
                 </li>
                 <li class="item">
-                    <a href=""> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
+                    <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>
             </ul>
             <div class="user-profile">
@@ -81,8 +81,8 @@ $username = $_SESSION['uname'];
     </nav>
     <form class="form-container popup-form" method="POST" action="addKategori_proses.php">
         <span class="form-title">Add Kategori</span>
-        <input type="text" placeholder="Nama Kategori" required name="addNama_kategori"/>
-        <input type="text" placeholder="URL" required name="addUrl_kategori"/>
+        <input type="text" placeholder="Nama Kategori" required name="addNama_kategori" />
+        <input type="text" placeholder="URL" required name="addUrl_kategori" />
         <div class="button-container">
             <a type="button" class="cancel-button" href="kategoriproduk.php" style='text-decoration:none;text-align:center'>Cancel</a>
             <button type="submit" class="submit-button" id="submitAddForm" style='text-decoration:none;text-align:center'>Add</button>

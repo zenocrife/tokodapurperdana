@@ -86,7 +86,7 @@ if (isset($_GET['key'])) {
                     </ul>
                 </li>
                 <li class="item">
-                    <a href=""> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
+                    <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>
             </ul>
             <div class="user-profile">
@@ -134,7 +134,7 @@ if (isset($_GET['key'])) {
                         $idKategoriProduk = $row['id'];
                         // echo "<button class='edit-button' onclick='openEditForm()'>Edit</button>";
                         // echo "<button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>";
-                        echo"
+                        echo "
                         <a href='updateKategori.php?id=$idKategoriProduk' class='edit-button'>Edit</a>
                         <a href='deleteKategori.php?id=$idKategoriProduk' class='delete-button'>Delete</a>";
                         echo "</td>";

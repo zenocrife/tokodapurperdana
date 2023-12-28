@@ -13,8 +13,14 @@ $addUrl_daftarproduk = $_POST['addUrl_daftarproduk'];
 $addStok_daftarproduk = $_POST['addStok_daftarproduk'];
 $addKategori_daftarproduk = $_POST['addKategori_daftarproduk'];
 
-(new Barang)->tambahBarang($addNama_daftarproduk,$addBeli_daftarproduk, $addJual_daftarproduk, 
-                            $addUrl_daftarproduk,$addStok_daftarproduk, $addKategori_daftarproduk);
+(new Barang)->tambahBarang(
+    $addNama_daftarproduk,
+    $addBeli_daftarproduk,
+    $addJual_daftarproduk,
+    $addUrl_daftarproduk,
+    $addStok_daftarproduk,
+    $addKategori_daftarproduk
+);
 ?>
 
 
@@ -79,7 +85,7 @@ $addKategori_daftarproduk = $_POST['addKategori_daftarproduk'];
                     </ul>
                 </li>
                 <li class="item">
-                    <a href=""> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
+                    <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>
             </ul>
             <div class="user-profile">

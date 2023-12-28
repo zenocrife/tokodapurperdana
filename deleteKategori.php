@@ -1,16 +1,17 @@
 <?php
 
-    if(isset($_GET['id'])){
-        require_once("class.php");
-        $id=  $_GET['id'];
-        $kategori = new Kategori();
-        $result=$kategori->hapusKategori($id);
-    }
+if (isset($_GET['id'])) {
+    require_once("class.php");
+    $id =  $_GET['id'];
+    $kategori = new Kategori();
+    $result = $kategori->hapusKategori($id);
+}
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +19,7 @@
     <link rel="stylesheet" href="dashboardstyle.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
+
 <body>
     <div class="overlay" id="overlay"></div>
     <nav class="sidebar">
@@ -68,7 +70,7 @@
                     </ul>
                 </li>
                 <li class="item">
-                    <a href=""> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
+                    <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>
             </ul>
             <div class="user-profile">
@@ -87,4 +89,5 @@
         </div>
     </div>
 </body>
+
 </html>

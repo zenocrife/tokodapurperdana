@@ -74,7 +74,7 @@ $resultKAdd = ($kategori)->bacaData('%');
                     </ul>
                 </li>
                 <li class="item">
-                    <a href=""> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
+                    <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>
             </ul>
             <div class="user-profile">
@@ -84,24 +84,24 @@ $resultKAdd = ($kategori)->bacaData('%');
         </div>
     </nav>
     <form class="form-container popup-form" method="POST" action="addDaftarProduk_proses.php">
-            <span class="form-title">Add Produk</span>
-            <input type="text" placeholder="Nama Barang" required name="addNama_daftarproduk"/>
-            <input type="number" placeholder="Harga Jual" required name="addJual_daftarproduk"/>
-            <input type="number" placeholder="Harga Beli" required name="addBeli_daftarproduk"/>
-            <input type="text" placeholder="URL" required name="addUrl_daftarproduk"/>
-            <input type="number" placeholder="Stok Tersedia" required name="addStok_daftarproduk"/>
-            <select name="addKategori_daftarproduk" required>
-                <option value="">Select kategori</option>
-                <?php
-                while ($rowK = $resultKAdd->fetch_assoc()) {
-                    echo '<option value=' . $rowK['id'] . '>' . $rowK['nama'] . '</option>';
-                }
-                ?>
-            </select>
-            <div class="button-container">
-                <button type="button" class="cancel-button" onclick="closeAddForm()">Cancel</button>
-                <button type="submit" class="submit-button" id="submitAddForm">Add</button>
-            </div>
+        <span class="form-title">Add Produk</span>
+        <input type="text" placeholder="Nama Barang" required name="addNama_daftarproduk" />
+        <input type="number" placeholder="Harga Jual" required name="addJual_daftarproduk" />
+        <input type="number" placeholder="Harga Beli" required name="addBeli_daftarproduk" />
+        <input type="text" placeholder="URL" required name="addUrl_daftarproduk" />
+        <input type="number" placeholder="Stok Tersedia" required name="addStok_daftarproduk" />
+        <select name="addKategori_daftarproduk" required>
+            <option value="">Select kategori</option>
+            <?php
+            while ($rowK = $resultKAdd->fetch_assoc()) {
+                echo '<option value=' . $rowK['id'] . '>' . $rowK['nama'] . '</option>';
+            }
+            ?>
+        </select>
+        <div class="button-container">
+            <button type="button" class="cancel-button" onclick="closeAddForm()">Cancel</button>
+            <button type="submit" class="submit-button" id="submitAddForm">Add</button>
+        </div>
     </form>
 </body>
 

@@ -41,6 +41,12 @@ $resultK = (new Kategori)->bacaData('%');
 if (isset($_GET['cart'])) {
   header("location: keranjang.php");
 }
+
+//ini ngetes
+if (isset($_POST['addbutton'])) {
+  $idproduk = $_POST['idproduk'];
+  header("location: keranjang.php?idproduk=$idproduk");
+}
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +67,6 @@ if (isset($_GET['cart'])) {
     <a class="logo">Dapur Perdana</a>
     <div class="menu-content">
       <ul class="menu-items">
-
         <li class="item">
           <a href="index.php"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
         </li>
@@ -105,7 +110,7 @@ if (isset($_GET['cart'])) {
           </ul>
         </li>
         <li class="item">
-          <a href=""> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
+          <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
         </li>
       </ul>
       <div class="user-profile">
@@ -137,36 +142,39 @@ if (isset($_GET['cart'])) {
       </form>
 
       <div class="table-wrapper">
-        <!-- <form action="" method="POST"> -->
-        <table class="table">
-          <tr>
-            <th>Kode</th>
-            <th>Gambar</th>
-            <th>Nama</th>
-            <th>Stok Tersedia</th>
-            <th>Harga</th>
-            <th>Kategori</th>
-            <th colspan=2>Action</th>
-          </tr>
+        <form action="" method="POST">
+          <table class="table">
+            <tr>
+              <th>Kode</th>
+              <th>Gambar</th>
+              <th>Nama</th>
+              <th>Stok Tersedia</th>
+              <th>Harga</th>
+              <th>Kategori</th>
+              <th colspan=2>Action</th>
+            </tr>
 
-          <?php
-          while ($row = $result->fetch_assoc()) {
-            $resultK = (new Kategori)->bacaDataById($row['id_kategori']);
-            $namaK = $resultK->fetch_assoc();
-            $idproduk = $row['id'];
+            <?php
+            while ($row = $result->fetch_assoc()) {
+              $resultK = (new Kategori)->bacaDataById($row['id_kategori']);
+              $namaK = $resultK->fetch_assoc();
+              $idproduk = $row['id'];
 
-            echo "<tr>";
-            echo "<td>" . $idproduk . "</td>";
-            echo "<td><img width='70' height='70' src=" . $row['url'] . "></td>";
-            echo "<td class='left-align'>" . $row['nama'] . "</td>";
-            echo "<td>" . $row['stok_tersedia'] . "</td>";
-            echo "<td class='right-align'>" . number_format($row['harga_jual'], 0, ',', '.') . "</td>";
-            echo "<td class='center-align'>" . $namaK['nama'] . "</td>";
-            echo "<td><button class='add-button' id='add-butt' name='addbutton'>+ Add</button></td>";
-          }
-          ?>
-        </table>
-        <!-- </form> -->
+              echo "<tr>";
+              echo "<td>" . $idproduk . "</td>";
+              echo "<td><img width='70' height='70' src=" . $row['url'] . "></td>";
+              echo "<td class='left-align'>" . $row['nama'] . "</td>";
+              echo "<td>" . $row['stok_tersedia'] . "</td>";
+              echo "<td class='right-align'>" . number_format($row['harga_jual'], 0, ',', '.') . "</td>";
+              echo "<td class='center-align'>" . $namaK['nama'] . "</td>";
+              echo "<td><button class='add-button' id='add-butt' name='addbutton'>+ Add</button></td>";
+
+              // ini cuman muncul id terakhir, butuh array
+              echo "<input type='hidden' name='idproduk' value='$idproduk'>";
+            }
+            ?>
+          </table>
+        </form>
       </div>
 
     </div>

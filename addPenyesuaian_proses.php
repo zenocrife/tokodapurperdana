@@ -11,8 +11,12 @@ $addTanggal_penyesuaian = $_POST['addTanggal_penyesuaian'];
 $addKeterangan_penyesuaian = $_POST['addKeterangan_penyesuaian'];
 $addStok_penyesuaian = $_POST['addStok_penyesuaian'];
 
-(new Penyesuaian)->tambahPenyesuaian($addTanggal_penyesuaian, $addKeterangan_penyesuaian, 
-                                        $addStok_penyesuaian, $addNama_penyesuaian)
+(new Penyesuaian)->tambahPenyesuaian(
+    $addTanggal_penyesuaian,
+    $addKeterangan_penyesuaian,
+    $addStok_penyesuaian,
+    $addNama_penyesuaian
+)
 ?>
 
 
@@ -77,7 +81,7 @@ $addStok_penyesuaian = $_POST['addStok_penyesuaian'];
                     </ul>
                 </li>
                 <li class="item">
-                    <a href=""> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
+                    <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>
             </ul>
             <div class="user-profile">

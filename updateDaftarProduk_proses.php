@@ -17,8 +17,15 @@ $edit_kategori = $_POST['edit_kategori'];
 $edit_id = $_POST['id'];
 
 $barang = new Barang();
-$result = ($barang)->updateBarang($edit_id, $edit_nama, $edit_beli, $edit_jual, 
-                                    $edit_url, $edit_stok, $edit_kategori);
+$result = ($barang)->updateBarang(
+    $edit_id,
+    $edit_nama,
+    $edit_beli,
+    $edit_jual,
+    $edit_url,
+    $edit_stok,
+    $edit_kategori
+);
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +89,7 @@ $result = ($barang)->updateBarang($edit_id, $edit_nama, $edit_beli, $edit_jual,
                     </ul>
                 </li>
                 <li class="item">
-                    <a href=""> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
+                    <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>
             </ul>
             <div class="user-profile">

@@ -76,7 +76,7 @@ $row = (new Barang)->bacaDataById($id)->fetch_assoc();
                     </ul>
                 </li>
                 <li class="item">
-                    <a href=""> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
+                    <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>
             </ul>
             <div class="user-profile">
@@ -87,16 +87,16 @@ $row = (new Barang)->bacaDataById($id)->fetch_assoc();
     </nav>
     <form class="form-container popup-form" method="POST" action="updateDaftarProduk_proses.php">
         <span class="form-title">Edit Daftar Produk</span>
-        <input type="text" placeholder="Nama Barang" required name="edit_nama" value="<?php echo isset($row['nama']) ? $row['nama'] : ''; ?>"/>
-        <input type="number" placeholder="Harga Jual" required name="edit_jual" value="<?php echo isset($row['harga_jual']) ? $row['harga_jual'] : ''; ?>"/>
-        <input type="number" placeholder="Harga Beli" required name="edit_beli" value="<?php echo isset($row['harga_beli']) ? $row['harga_beli'] : ''; ?>"/>
-        <input type="text" placeholder="URL" required name="edit_url" value="<?php echo isset($row['url']) ? $row['url'] : ''; ?>"/>
-        <input type="number" placeholder="Stok Tersedia" required name="edit_stok" value="<?php echo isset($row['stok_tersedia']) ? $row['stok_tersedia'] : ''; ?>"/>
+        <input type="text" placeholder="Nama Barang" required name="edit_nama" value="<?php echo isset($row['nama']) ? $row['nama'] : ''; ?>" />
+        <input type="number" placeholder="Harga Jual" required name="edit_jual" value="<?php echo isset($row['harga_jual']) ? $row['harga_jual'] : ''; ?>" />
+        <input type="number" placeholder="Harga Beli" required name="edit_beli" value="<?php echo isset($row['harga_beli']) ? $row['harga_beli'] : ''; ?>" />
+        <input type="text" placeholder="URL" required name="edit_url" value="<?php echo isset($row['url']) ? $row['url'] : ''; ?>" />
+        <input type="number" placeholder="Stok Tersedia" required name="edit_stok" value="<?php echo isset($row['stok_tersedia']) ? $row['stok_tersedia'] : ''; ?>" />
         <select name="edit_kategori" required>
             <?php
-                while ($rowK = $resultKEdit->fetch_assoc()) {
-                    echo '<option value=' . $rowK['id'] . '>' . $rowK['nama'] . '</option>';
-                }
+            while ($rowK = $resultKEdit->fetch_assoc()) {
+                echo '<option value=' . $rowK['id'] . '>' . $rowK['nama'] . '</option>';
+            }
             ?>
         </select>
         <input type="hidden" name="id" value="<?= $row['id'] ?>">
