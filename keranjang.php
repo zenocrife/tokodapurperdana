@@ -69,10 +69,6 @@ $username = $_SESSION['uname'];
       </ul>
     </div>
   </nav>
-  <nav class="navbar">
-    <i class="fa-solid fa-bars" id="sidebar-close"></i>
-    <i class="fa-solid fa-shopping-cart" id="cart-icon"></i>
-  </nav>
   <main class="main">
     <div class="container">
       <h2><span class="text_keranjang">Keranjang</span></h2>

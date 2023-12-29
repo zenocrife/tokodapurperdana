@@ -42,11 +42,6 @@ if (isset($_GET['cart'])) {
   header("location: keranjang.php");
 }
 
-//ini ngetes
-if (isset($_POST['addbutton'])) {
-  $idproduk = $_POST['idproduk'];
-  header("location: keranjang.php?idproduk=$idproduk");
-}
 ?>
 
 <!DOCTYPE html>
@@ -63,6 +58,7 @@ if (isset($_POST['addbutton'])) {
 </head>
 
 <body>
+  <div class="overlay" id="overlay"></div>
   <nav class="sidebar">
     <a class="logo">Dapur Perdana</a>
     <div class="menu-content">
@@ -167,7 +163,8 @@ if (isset($_POST['addbutton'])) {
               echo "<td>" . $row['stok_tersedia'] . "</td>";
               echo "<td class='right-align'>" . number_format($row['harga_jual'], 0, ',', '.') . "</td>";
               echo "<td class='center-align'>" . $namaK['nama'] . "</td>";
-              echo "<td><button class='add-button' id='add-butt' name='addbutton'>+ Add</button></td>";
+              echo "<td><a class='add-button' id='add-butt' href='addJumlahProduk.php?id=$idproduk' name='addbutton' style='text-decoration:none;text-align:center'>+ Add</a></td>";
+
 
               // ini cuman muncul id terakhir, butuh array
               echo "<input type='hidden' name='idproduk' value='$idproduk'>";

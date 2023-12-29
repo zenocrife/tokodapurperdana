@@ -102,7 +102,7 @@ if (isset($_GET['key'])) {
                 </div>
                 <div class="filter-search">
                     <form action="" method="get">
-                        <button id='print-button' name="print"><i class='fa-solid fa-print'></i></button>
+                        <button id='print-button' name="print"><i class="fa-solid fa-print"></i></button>
                         <?php echo '<input type="date" id="search" name="key" value="' . $key . '"/>'; ?>
                         <button type="submit" id='search-button' name="submit"><i class='fa-solid fa-search'></i></button>
                     </form>

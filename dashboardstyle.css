@@ -518,13 +518,13 @@
 }
 
 #print-button i {
-  color: #ffffff; 
+  color: #000000; 
   font-size: 24px;
   transition: color 0.3s ease;
 }
 
 #print-button:hover i {
-  color: #5c5a5a; 
+  color: #7e8283; 
 }
 .user-profile {
   display: flex;
@@ -542,5 +542,8 @@
   font-size: 20px;
   margin-right: 10px;
   color: #fff;
+}
+.form-group {
+  margin-top: 10px;
 }
 
