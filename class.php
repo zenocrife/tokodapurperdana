@@ -104,7 +104,7 @@ class Barang extends Koneksi
 	public function getTotalData($kategori, $search)
 	{
 		// $stmt = $this->con->prepare("SELECT * FROM barang WHERE id_kategori LIKE ? AND nama LIKE ?");
-		$stmt = $this->con->prepare("SELECT b.* FROM barang b INNER JOIN kategori_barang kb ON b.id_kategori = kb.id WHERE kb.nama LIKE ? AND b.nama LIKE ?");
+		$stmt = $this->con->prepare("SELECT b.* FROM barang b INNER JOIN kategori_barang kb ON b.id_kategori = kb.id WHERE kb.nama LIKE ? AND b.nama LIKE ? ORDER BY b.id");
 		$stmt->bind_param("ss", $kategori, $search);
 		$stmt->execute();
 
@@ -112,11 +112,11 @@ class Barang extends Koneksi
 		return $result;
 	}
 
-	public function tambahBarang($nama,$hargabeli, $hargajual, $url,$stok, $idkategori)
+	public function tambahBarang($nama, $hargabeli, $hargajual, $url, $stok, $idkategori)
 	{
 		// $idbarang,
 		$stmt = $this->con->prepare('INSERT INTO barang(nama,harga_beli,harga_jual,url,stok_tersedia,id_kategori) VALUES(?, ?, ?, ?, ?, ?)');
-		$stmt->bind_param('siisii',$nama, $hargabeli, $hargajual, $url, $stok, $idkategori);
+		$stmt->bind_param('siisii', $nama, $hargabeli, $hargajual, $url, $stok, $idkategori);
 		$stmt->execute();
 	}
 
@@ -316,19 +316,10 @@ class Penyesuaian extends Koneksi
 		return $result;
 	}
 
-	public function tambahPenyesuaian($tanggal, $keterangan, $stok, $idbarang)
+	public function tambahPenyesuaian($keterangan, $stok, $idbarang)
 	{
-		$stmt = $this->con->prepare('INSERT INTO penyesuaian(tanggal, keterangan, stok_penyesuaian, id_barang) VALUE(?, ?, ?, ?)');
-		$stmt->bind_param("ssii", $tanggal, $keterangan, $stok, $idbarang);
+		$stmt = $this->con->prepare('INSERT INTO penyesuaian(keterangan, stok_penyesuaian, id_barang) VALUE(?, ?, ?)');
+		$stmt->bind_param("sii", $keterangan, $stok, $idbarang);
 		$stmt->execute();
-
-		$barang = new Barang();
-
-		$result = ($barang)->bacaStok($idbarang);
-
-		if ($row = $result->fetch_assoc()) {
-			$stok_akhir = $row['stok_tersedia'] - $stok;
-			($barang)->updateStok($idbarang, $stok_akhir);
-		}
 	}
 }
