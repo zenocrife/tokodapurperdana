@@ -89,6 +89,17 @@ class Barang extends Koneksi
 		return $result;
 	}
 
+	public function bacaData($search)
+	{
+		$stmt = $this->con->prepare("SELECT * FROM barang WHERE nama LIKE ? ");
+		$stmt->bind_param("s", $search);
+		$stmt->execute();
+
+		$result = $stmt->get_result();
+
+		return $result;
+	}
+
 	//UNTUK SEARCH
 	public function getTotalData($kategori, $search)
 	{

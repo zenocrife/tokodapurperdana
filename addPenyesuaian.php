@@ -10,7 +10,7 @@ $username = $_SESSION['uname'];
 
 $barang = new Barang();
 
-$result = ($barang)->bacaDataById('%');
+$result = ($barang)->bacaData('%');
 ?>
 
 <!DOCTYPE html>
@@ -86,10 +86,10 @@ $result = ($barang)->bacaDataById('%');
     <form class="form-container popup-form" method="POST" action="addPenyesuaian_proses.php">
         <span class="form-title">Add Penyesuaian</span>
         <select name="addNama_penyesuaian" required>
-            <option value="">Select Barang</option>
+            <option value="">Select kategori</option>
             <?php
             while ($row = $result->fetch_assoc()) {
-                echo "<option value='" . $row['id'] . "'>" . $row['nama'] . "</option>";
+                echo '<option value=' . $row['id'] . '>' . $row['nama'] . '</option>';
             }
             ?>
         </select>
