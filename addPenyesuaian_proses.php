@@ -7,12 +7,12 @@ if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
 }
 
 $addNama_penyesuaian = $_POST['addNama_penyesuaian'];
-$addTanggal_penyesuaian = $_POST['addTanggal_penyesuaian'];
+// $addTanggal_penyesuaian = $_POST['addTanggal_penyesuaian'];
 $addKeterangan_penyesuaian = $_POST['addKeterangan_penyesuaian'];
 $addStok_penyesuaian = $_POST['addStok_penyesuaian'];
 
 (new Penyesuaian)->tambahPenyesuaian(
-    $addTanggal_penyesuaian,
+    // $addTanggal_penyesuaian,
     $addKeterangan_penyesuaian,
     $addStok_penyesuaian,
     $addNama_penyesuaian

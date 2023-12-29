@@ -86,14 +86,15 @@ $result = ($barang)->bacaData('%');
     <form class="form-container popup-form" method="POST" action="addPenyesuaian_proses.php">
         <span class="form-title">Add Penyesuaian</span>
         <select name="addNama_penyesuaian" required>
-            <option value="">Select kategori</option>
+            <option value="">Select Barang</option>
             <?php
             while ($row = $result->fetch_assoc()) {
                 echo '<option value=' . $row['id'] . '>' . $row['nama'] . '</option>';
             }
             ?>
         </select>
-        <input type="date" class="tanggal" required name="addTanggal_penyesuaian">
+        <!-- ini pake default timestamp di db, jadi gaperlu
+        <input type="date" class="tanggal" name="addTanggal_penyesuaian"> -->
         <input type="text" placeholder="Keterangan Penyesuaian" required name="addKeterangan_penyesuaian" />
         <input type="number" placeholder="Stok Penyesuaian" required name="addStok_penyesuaian" />
         <div class="button-container">
