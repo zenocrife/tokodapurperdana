@@ -21,6 +21,7 @@ if (isset($_GET['key'])) {
 } else {
     $key = "";
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +33,7 @@ if (isset($_GET['key'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dapur Perdana</title>
+    <script type="text/javascript" src="js/code.jquery.com_jquery-3.7.0.js"></script>
     <link rel="stylesheet" href="dashboardstyle.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
@@ -101,15 +103,15 @@ if (isset($_GET['key'])) {
                     <h2>Laporan Penjualan</h2>
                 </div>
                 <div class="filter-search">
+                    <button id='print-button' name="print" type="submit"><i class="fa-solid fa-print"></i></button>
                     <form action="" method="get">
-                        <button id='print-button' name="print"><i class="fa-solid fa-print"></i></button>
                         <?php echo '<input type="date" id="search" name="key" value="' . $key . '"/>'; ?>
                         <button type="submit" id='search-button' name="submit"><i class='fa-solid fa-search'></i></button>
                     </form>
                 </div>
             </div>
             <div class="table-wrapper">
-                <table class="table">
+                <table class="table" id="table-output">
                     <tr>
                         <th>Tanggal</th>
                         <th>Waktu</th>
@@ -139,6 +141,9 @@ if (isset($_GET['key'])) {
     </main>
 
     <script src="js/script.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script type="text/javascript" src="js/print.js"></script>
 </body>
 
 </html>
