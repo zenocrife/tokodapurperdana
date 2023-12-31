@@ -163,7 +163,7 @@ if (isset($_GET['cart'])) {
               echo "<td>" . $row['stok_tersedia'] . "</td>";
               echo "<td class='right-align'>" . number_format($row['harga_jual'], 0, ',', '.') . "</td>";
               echo "<td class='center-align'>" . $namaK['nama'] . "</td>";
-              echo "<td><a class='add-button' id='add-butt' href='addJumlahProduk.php?id=$idproduk' name='addbutton' style='text-decoration:none;text-align:center'>+ Add</a></td>";
+              echo "<td><a class='add-button' href='addJumlahProduk.php?id=$idproduk' name='addbutton' style='text-decoration:none'>+ Add</a></td>";
 
 
               // ini cuman muncul id terakhir, butuh array
