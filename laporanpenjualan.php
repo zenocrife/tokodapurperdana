@@ -129,10 +129,10 @@ if (isset($_GET['key'])) {
                         echo "<td>" . $row['Waktu'] . "</td>";
                         echo "<td>" . $row['nama'] . "</td>";
                         echo "<td>" . $row['jumlah_terjual'] . "</td>";
-                        echo "<td>" . number_format($row['total'], 0, ',', '.') . "</td>";
+                        echo "<td>Rp" . number_format($row['total'], 0, ',', '.') . "</td>";
                         echo "<td>" . $row['metode_pembayaran'] . "</td>";
-                        echo "<td>" . number_format($row['harga_beli'], 0, ',', '.') . "</td>";
-                        echo "<td>" . number_format($row['untung'], 0, ',', '.') . "</td>";
+                        echo "<td>Rp" . number_format($row['harga_beli'], 0, ',', '.') . "</td>";
+                        echo "<td>Rp" . number_format($row['untung'], 0, ',', '.') . "</td>";
                     }
                     ?>
                 </table>
@@ -141,6 +141,7 @@ if (isset($_GET['key'])) {
     </main>
 
     <script src="js/script.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
     <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
     <script type="text/javascript" src="js/print.js"></script>

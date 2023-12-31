@@ -157,8 +157,8 @@ $resultK = ($kategori)->bacaData('%');
                         echo "<tr>";
                         echo "<td>" . $row['id'] . "</td>";
                         echo "<td class='left-align'>" . $row['nama'] . "</td>";
-                        echo "<td class='right-align'>" . number_format($row['harga_jual'], 0, ',', '.') . "</td>";
-                        echo "<td class='right-align'>" . number_format($row['harga_beli'], 0, ',', '.') . "</td>";
+                        echo "<td class='right-align'>Rp" . number_format($row['harga_jual'], 0, ',', '.') . "</td>";
+                        echo "<td class='right-align'>Rp" . number_format($row['harga_beli'], 0, ',', '.') . "</td>";
                         echo "<td>" . $row['stok_tersedia'] . "</td>";
                         echo "<td class='center-align'>" . $namaK['nama'] . "</td>";
                         // echo "<td>

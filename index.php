@@ -161,7 +161,7 @@ if (isset($_GET['cart'])) {
               echo "<td><img width='70' height='70' src=" . $row['url'] . "></td>";
               echo "<td class='left-align'>" . $row['nama'] . "</td>";
               echo "<td>" . $row['stok_tersedia'] . "</td>";
-              echo "<td class='right-align'>" . number_format($row['harga_jual'], 0, ',', '.') . "</td>";
+              echo "<td class='right-align'>Rp" . number_format($row['harga_jual'], 0, ',', '.') . "</td>";
               echo "<td class='center-align'>" . $namaK['nama'] . "</td>";
               echo "<td><a class='add-button' href='addJumlahProduk.php?id=$idproduk' name='addbutton' style='text-decoration:none'>+ Add</a></td>";
 
