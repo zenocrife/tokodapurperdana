@@ -91,7 +91,7 @@ $row = (new Barang)->bacaDataById($id)->fetch_assoc();
         <input type="number" placeholder="Harga Jual" required name="edit_jual" value="<?php echo isset($row['harga_jual']) ? $row['harga_jual'] : ''; ?>" />
         <input type="number" placeholder="Harga Beli" required name="edit_beli" value="<?php echo isset($row['harga_beli']) ? $row['harga_beli'] : ''; ?>" />
         <input type="text" placeholder="URL" required name="edit_url" value="<?php echo isset($row['url']) ? $row['url'] : ''; ?>" />
-        <input type="number" placeholder="Stok Tersedia" required name="edit_stok" value="<?php echo isset($row['stok_tersedia']) ? $row['stok_tersedia'] : ''; ?>" />
+        <input type="number" placeholder="Stok Tersedia" readonly name="edit_stok" value="<?php echo isset($row['stok_tersedia']) ? $row['stok_tersedia'] : ''; ?>" />
         <select name="edit_kategori" required>
             <?php
             while ($rowK = $resultKEdit->fetch_assoc()) {
