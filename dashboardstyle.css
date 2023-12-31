@@ -511,13 +511,13 @@
 }
 
 #print-button i {
-  color: #ffffff; 
+  color: #ffffff;
   font-size: 24px;
   transition: color 0.3s ease;
 }
 
 #print-button:hover i {
-  color: #5c5a5a; 
+  color: #5c5a5a;
 }
 .user-profile {
   display: flex;
