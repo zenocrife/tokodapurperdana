@@ -263,13 +263,6 @@ class DetailPenjualan extends Koneksi
 		parent::__construct();
 	}
 
-	public function updateSupplier($idsupplier, $namasupplier, $alamat, $notelepon)
-	{
-		$stmt = $this->con->prepare('UPDATE supplier SET nama=?, alamat=?, nomor_telepon=? WHERE id=?');
-		$stmt->bind_param("sssi", $namasupplier, $alamat, $notelepon, $idsupplier);
-		$stmt->execute();
-	}
-
 	public function bacaData($search)
 	{
 		$stmt = $this->con->prepare("SELECT DATE_FORMAT(tp.tanggal,'%Y-%m-%d') Hari, DATE_FORMAT(tp.tanggal,'%H:%i:%s') Waktu, b.nama, dtp.jumlah_terjual, dtp.total, tp.metode_pembayaran, b.harga_beli, dtp.total-harga_beli untung
@@ -283,17 +276,17 @@ class DetailPenjualan extends Koneksi
 		return $result;
 	}
 
-	public function tambahSupplier($namasupplier, $alamat, $notelepon)
+	public function tambahDataTransaksiPenjualan($idkaryawan, $metodepembayaran, $jumlahtotal = 0)
 	{
-		$stmt = $this->con->prepare('INSERT INTO supplier(nama, alamat, nomor_telepon) VALUE(?, ?, ?)');
-		$stmt->bind_param("sss", $namasupplier, $alamat, $notelepon);
+		$stmt = $this->con->prepare('INSERT INTO transaksi_penjualan(metode_pembayaran, jumlah_total, id_user) VALUE(?, ?, ?)');
+		$stmt->bind_param("sii", $metodepembayaran, $jumlahtotal, $idkaryawan);
 		$stmt->execute();
 	}
 
-	public function hapusKSupplier($idsupplier)
+	public function tambahDataDetailTransaksiPenjualan($idtransaksi, $idbarang, $jumlah, $harga, $total, $diskon)
 	{
-		$stmt = $this->con->prepare('DELETE FROM supplier WHERE id=?');
-		$stmt->bind_param("i", $idsupplier);
+		$stmt = $this->con->prepare('INSERT INTO detail_transaksi_penjualan(jumlah_terjual, harga_satuan, total, diskon, id_transaksi_penjualan, id_barang) VALUE(?, ?, ?, ?, ?, ?)');
+		$stmt->bind_param("iiiiii", $jumlah, $harga, $total, $diskon, $idtransaksi, $idbarang);
 		$stmt->execute();
 	}
 }
