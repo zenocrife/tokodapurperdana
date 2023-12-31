@@ -42,71 +42,68 @@ if (isset($_GET['key'])) {
     <div class="overlay" id="overlay"></div>
     <nav class="sidebar">
         <a href="#" class="logo">Dapur Perdana</a>
-        <span class="hamburger-icon"></span>
         <div class="menu-content">
             <ul class="menu-items">
 
                 <li class="item">
-                    <a href="index.php">DASHBOARD</a>
+                    <a href="index.php"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
                 </li>
                 <li class="item">
-                    <a href="supplier.php">SUPPLIER</a>
+                    <a href="supplier.php"><i class="fa-solid fa-truck-field"></i> Supplier</a>
                 </li>
                 <li class="item">
                     <div class="submenu-item">
-                        <span>PRODUK</span>
+                        <span> <i class="fa-solid fa-box"></i>Produk</span>
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
                     <ul class="menu-items submenu">
                         <div class="menu-title">
                             <i class="fa-solid fa-chevron-left"></i>
-                            PRODUK
+                            Produk
                         </div>
                         <li class="item">
-                            <a href="kategoriproduk.php">KATEGORI PRODUK</a>
+                            <a href="kategoriproduk.php"> <i class="fa-solid fa-circle"></i>Kategori Produk</a>
                         </li>
                         <li class="item">
-                            <a href="daftarproduk.php">DAFTAR PRODUK</a>
+                            <a href="daftarproduk.php"><i class="fa-solid fa-circle"></i>Daftar Produk</a>
                         </li>
                     </ul>
                 </li>
                 <li class="item">
-                    <a href="penyesuaian.php">PENYESUAIAN</a>
+                    <a href="penyesuaian.php"> <i class="fa-solid fa-boxes-stacked"></i>Penyesuaian</a>
                 </li>
                 <li class="item">
                     <div class="submenu-item">
-                        <span>LAPORAN</span>
+                        <span> <i class="fa-solid fa-book"></i>Laporan</span>
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
                     <ul class="menu-items submenu">
                         <div class="menu-title">
                             <i class="fa-solid fa-chevron-left"></i>
-                            LAPORAN
+                            Laporan
                         </div>
                         <li class="item">
-                            <a href="laporanpenjualan.php">LAPORAN PENJUALAN</a>
+                            <a href="laporanpenjualan.php"> <i class="fa-solid fa-circle"></i>Laporan Penjualan</a>
                         </li>
                     </ul>
                 </li>
                 <li class="item">
-                    <a href="">LOGOUT</a>
+                    <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>
             </ul>
             <div class="user-profile">
                 <i class="fas fa-user-circle user-icon"></i>
-                <?php echo '<span class="user-name">'.$username.'</span>'; ?>
+                <?php echo '<span class="user-name">' . $username . '</span>'; ?>
             </div>
         </div>
-    </nav>
-    <nav class="navbar">
-        <i class="fa-solid fa-bars" id="sidebar-close"></i>
     </nav>
 
     <main class="main">
         <div class="container">
             <div class="add-supplier">
                 <div class="action-buttons">
-                    <button class="add-button"id="add-supp" onclick="openAddForm()">Add</button>
+                    <!-- ADD -->
+                    <a class="add-button" id="add-supp" href="addSupplier.php" style='text-decoration:none;text-align:center'>Add</a>
                 </div>
                 <div class="line"></div>
             </div>
@@ -116,7 +113,7 @@ if (isset($_GET['key'])) {
                 </div>
                 <div class="filter-search">
                     <form action="" method="GET">
-                        <input type="text" name="key" value="" placeholder="Search..." id="search">
+                        <?php echo '<input type="text" name="key" placeholder="Search..." id="search" value="' . $key . '">'; ?>
                         <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
                     </form>
                 </div>
@@ -137,7 +134,17 @@ if (isset($_GET['key'])) {
                         echo "<td class='left-align'>" . $row['nama'] . "</td>";
                         echo "<td class='left-align'>" . $row['alamat'] . "</td>";
                         echo "<td>" . $row['nomor_telepon'] . "</td>";
-                        echo "<td><button class='edit-button' onclick='openEditForm()'>Edit</button><button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button></td>";
+                        $idsupplier = $row['id'];
+                        //masukin ke onclick='openEditForm($idsupplier) ??? 
+                        //pake href?? href='#editForm?id=$idsupplier' ??
+                        // echo "<td>";
+                        // echo "<button class='edit-button' onclick='openEditForm()'>Edit</button>";
+                        // echo "<button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>";
+                        // echo "</td>";
+                        echo "<td>
+                                <a href='updateSupplier.php?id=$idsupplier' class='edit-button'>Edit</a>
+                                <a href='deleteSupplier.php?id=$idsupplier' class='delete-button' >Delete</a>
+                            </td>";
                     }
                     ?>
                 </table>
@@ -146,11 +153,12 @@ if (isset($_GET['key'])) {
     </main>
 
     <!-- TAMBAH  -->
-    <div class="popup-form" id="addForm">
+    <!-- <div class="popup-form" id="addForm">
         <div class="form-header">
             <span class="form-title">Add Supplier</span>
             <span class="close-icon" onclick="closeAddForm()">&#10006;</span>
         </div>
+
         <form class="form-container">
             <input type="text" placeholder="Nama" required />
             <input type="text" placeholder="Alamat" required />
@@ -160,49 +168,41 @@ if (isset($_GET['key'])) {
                 <button type="submit" class="submit-button" id="submitAddForm">Add</button>
             </div>
         </form>
-    </div>
+    </div> -->
+
 
     <!-- EDIT -->
-    <!-- MASIH ERROR (YANG DIBAWAH INI ERROR NYA DARI LINE 170 - 172)
-        <br /><b>Warning</b>:  Trying to access array offset on value of type null in 
-        <b>C:\xampp\htdocs\WSE\tokodapurperdana\supplier.php</b> on line <b>170</b><br /> 
-    -->
-    <div class="popup-form" id="editForm">
+    <!-- <div class="popup-form" id="editForm">
         <div class="form-header">
             <span class="form-title">Edit Supplier</span>
             <span class="close-icon" onclick="closeEditForm()">&#10006;</span>
         </div>
         <form class="form-container" method="POST" action="updateSupplier_proses.php">
-            <input type="text" placeholder="Nama" required  value="<?php echo $row['nama'];?>">
-            <input type="text" placeholder="Alamat" required value="<?php echo $row['alamat'];?>">
-            <input type="text" placeholder="Nomor Telepon" required value="<?php echo $row['nomor_telepon'];?>">
-            <input type="hidden" name="idSupplier" value="<?php echo $row['id'];?>">
+            <input type="text" placeholder="Nama" required name="edit_nama" value="">
+            <input type="text" placeholder="Alamat" required name="edit_alamat" value="">
+            <input type="text" placeholder="Nomor Telepon" required name="edit_telp" value="">
+            <input type="hidden" name="idSupplier" value="">
             <div class="button-container">
                 <button type="button" class="cancel-button" onclick="closeEditForm()">Cancel</button>
                 <button type="submit" class="submit-button" id="submitEditForm" name="submit">Edit</button>
             </div>
         </form>
-    </div>
+    </div> -->
 
-    <!-- HAPUS -->
-    <!-- MASIH ERROR 
-        http://localhost/WSE/tokodapurperdana/deleteSupplier.php?id=%3Cbr%20/%3E%3Cb%3EWarning%3C/
-        b%3E:%20%20Trying%20to%20access%20array%20offset%20on%20value%20of%20type%20null%20in%20%3Cb%3EC:
-        \xampp\htdocs\WSE\tokodapurperdana\supplier.php%3C/b%3E%20on%20line%20%3Cb%3E191%3C/b%3E%3Cbr%20/%3E
-    -->
-    <div class="popup-form" id="deleteConfirmation">
+    <!-- HAPUS (Belum lanjut)-->
+    <!-- <div class="popup-form" id="deleteConfirmation">
         <div class="form-container">
             <p>Apakah Anda yakin ingin menghapusnya?</p>
             <div class="button-container">
                 <form action="" method="GET">
-                    <button type="submit" class="submit-button"><a href='deleteSupplier.php?id=<?php echo $row['id']; ?>'>Yes</a></button>
+                    <button type="submit" class="submit-button"><a href='deleteSupplier.php?id='>Yes</a></button>
                     <button type="button" class="cancel-button" onclick="closeDeleteConfirmation()">No</button>
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <div class="popup-form" id="addSuccessForm">
+    <!-- <div class="popup-form" id="addSuccessForm">
         <div class="success-content">
             <i class="fa-regular fa-circle-check success-icon"></i>
             <div class="success-text">
@@ -223,7 +223,7 @@ if (isset($_GET['key'])) {
             </div>
             <button class="close-button" onclick="closeEditSuccessForm()">OK</button>
         </div>
-    </div>
+    </div> -->
 
     <script src="js/script.js"></script>
 </body>

@@ -9,6 +9,7 @@ if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
 $username = $_SESSION['uname'];
 
 $barang = new Barang();
+$kategori = new Kategori();
 
 if (isset($_GET['key'])) {
     $search = "%" . $_GET['key'] . "%";
@@ -16,30 +17,30 @@ if (isset($_GET['key'])) {
     $search = "%";
 }
 
-//pagination, awalnya tentuin data per page, total data, dan total pagenya berapa
-$result = ($barang)->getTotalData($search);
+if (isset($_GET['kategori'])) {
+    $kate = "%" . $_GET['kategori'] . "%";
+} else {
+    $kate = "%";
+}
 
-// $perpage = 7;
-// $totaldata = $result->num_rows; //untuk dapatkan jumlah data
-// $totalpage = ceil($totaldata/$perpage); //untuk bulatkan ke atas
-
-// //DATA WITH LIMIT
-// if (isset($_GET['page'])) {
-// 	$page = $_GET['page'];
-// } else {
-// 	$page = 1;
-// }
-
-// $start = ($page-1) * $perpage;
-
-// // $sql = "SELECT * FROM cerita WHERE judul LIKE ? LIMIT ?,?";
-// $result = ($barang)->paginationWithLimit($search, $start, $perpage);
+$result = ($barang)->getTotalData($kate, $search);
 
 if (isset($_GET['key'])) {
     $key = $_GET['key'];
 } else {
     $key = "";
 }
+
+if (isset($_GET['kategori'])) {
+    $kate = $_GET['kategori'];
+} else {
+    $kate = "";
+}
+
+// $resultKAdd = ($kategori)->bacaData('%');
+// $resultKEdit = ($kategori)->bacaData('%');
+
+$resultK = ($kategori)->bacaData('%');
 ?>
 
 <!DOCTYPE html>
@@ -59,54 +60,53 @@ if (isset($_GET['key'])) {
     <div class="overlay" id="overlay"></div>
     <nav class="sidebar">
         <a href="#" class="logo">Dapur Perdana</a>
-        <span class="hamburger-icon"></span>
         <div class="menu-content">
             <ul class="menu-items">
 
                 <li class="item">
-                    <a href="index.php">DASHBOARD</a>
+                    <a href="index.php"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
                 </li>
                 <li class="item">
-                    <a href="supplier.php">SUPPLIER</a>
+                    <a href="supplier.php"><i class="fa-solid fa-truck-field"></i> Supplier</a>
                 </li>
                 <li class="item">
                     <div class="submenu-item">
-                        <span>PRODUK</span>
+                        <span> <i class="fa-solid fa-box"></i>Produk</span>
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
                     <ul class="menu-items submenu">
                         <div class="menu-title">
                             <i class="fa-solid fa-chevron-left"></i>
-                            PRODUK
+                            Produk
                         </div>
                         <li class="item">
-                            <a href="kategoriproduk.php">KATEGORI PRODUK</a>
+                            <a href="kategoriproduk.php"> <i class="fa-solid fa-circle"></i></i>Kategori Produk</a>
                         </li>
                         <li class="item">
-                            <a href="daftarproduk.php">DAFTAR PRODUK</a>
+                            <a href="daftarproduk.php"><i class="fa-solid fa-circle"></i></i> Daftar Produk</a>
                         </li>
                     </ul>
                 </li>
                 <li class="item">
-                    <a href="penyesuaian.php">PENYESUAIAN</a>
+                    <a href="penyesuaian.php"> <i class="fa-solid fa-boxes-stacked"></i>Penyesuaian</a>
                 </li>
                 <li class="item">
                     <div class="submenu-item">
-                        <span>LAPORAN</span>
+                        <span> <i class="fa-solid fa-book"></i>Laporan</span>
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
                     <ul class="menu-items submenu">
                         <div class="menu-title">
                             <i class="fa-solid fa-chevron-left"></i>
-                            LAPORAN
+                            Laporan
                         </div>
                         <li class="item">
-                            <a href="laporanpenjualan.php">LAPORAN PENJUALAN</a>
+                            <a href="laporanpenjualan.php"> <i class="fa-solid fa-circle"></i></i>Laporan Penjualan</a>
                         </li>
                     </ul>
                 </li>
                 <li class="item">
-                    <a href="">LOGOUT</a>
+                    <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>
             </ul>
             <div class="user-profile">
@@ -115,15 +115,12 @@ if (isset($_GET['key'])) {
             </div>
         </div>
     </nav>
-    <nav class="navbar">
-        <i class="fa-solid fa-bars" id="sidebar-close"></i>
-    </nav>
     <main class="main">
         <div class="container">
-            <br><br><br>
             <div class="add-produk">
                 <div class="action-buttons">
-                    <button class="add-button" id="add-supp" onclick="openAddForm()">Add</button>
+                    <!-- ADD -->
+                    <a class="add-button" id="add-daftarProduk" href="addDaftarProduk.php" style='text-decoration:none;text-align:center'>Add</a>
                 </div>
                 <div class="line"></div>
             </div>
@@ -132,45 +129,47 @@ if (isset($_GET['key'])) {
                     <h2>Daftar Produk</h2>
                 </div>
                 <div class="filter-search">
-                    <select name="filterBy" id="filterBy">
-                        <option value="">Filter By</option>
-                        <option value="1">Kompor</option>
-                        <option value="2">Wajan</option>
-                        <option value="3">Panci</option>
-                        <option value="4">Blender</option>
-                        <option value="5">Teflon</option>
-                        <option value="6">Magic Com</option>
-                        <form action="" method="GET">
-                            <input type="text" name="key" value="" placeholder="Search..." id="search">
-                            <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
-                        </form>
-                    </select>
+                    <form action="" method="GET">
+                        <?php
+                        echo '<input type="text" name="kategori" placeholder="Kategori..." value="' . $kate . '">';
+                        echo '<input type="text" name="key" placeholder="Search..." id="search" value="' . $key . '">';
+                        ?>
+                        <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
+                    </form>
                 </div>
             </div>
             <div class="table-wrapper">
                 <table class="table">
                     <tr>
-                        <th>No.</th>
-                        <th>Nama Barang</th>
+                        <th>Kode</th>
+                        <th>Nama</th>
                         <th>Harga Jual</th>
                         <th>Harga Beli</th>
                         <th>Stok Tersedia</th>
-                        <th>Kode Kategori</th>
+                        <th>Kategori</th>
                         <th>Actions</th>
                     </tr>
                     <?php
                     while ($row = $result->fetch_assoc()) {
+                        $kategoribarang = (new Kategori)->bacaDataById($row['id_kategori']);
+                        $namaK = $kategoribarang->fetch_assoc();
+
                         echo "<tr>";
                         echo "<td>" . $row['id'] . "</td>";
                         echo "<td class='left-align'>" . $row['nama'] . "</td>";
-                        echo "<td class='right-align'>" . $row['harga_jual'] . "</td>";
-                        echo "<td class='right-align'>" . $row['harga_beli'] . "</td>";
+                        echo "<td class='right-align'>Rp" . number_format($row['harga_jual'], 0, ',', '.') . "</td>";
+                        echo "<td class='right-align'>Rp" . number_format($row['harga_beli'], 0, ',', '.') . "</td>";
                         echo "<td>" . $row['stok_tersedia'] . "</td>";
-                        echo "<td class='right-align'>" . $row['id_kategori'] . "</td>";
+                        echo "<td class='center-align'>" . $namaK['nama'] . "</td>";
+                        // echo "<td>
+                        //         <button class='edit-button' onclick='openEditForm()'>Edit</button>
+                        //         <button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>
+                        //     </td>";
+                        $idDaftarProduk = $row['id'];
                         echo "<td>
-                                <button class='edit-button' onclick='openEditForm()'>Edit</button>
-                                <button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>
-                            </td>";
+                                <a href='updateDaftarProduk.php?id=$idDaftarProduk' class='edit-button'>Edit</a>
+                                <a href='deleteDaftarProduk.php?id=$idDaftarProduk' class='delete-button'>Delete</a>
+                                </td>";
                         echo "</tr>";
                     }
                     ?>
@@ -179,7 +178,9 @@ if (isset($_GET['key'])) {
             </div>
         </div>
     </main>
-    <div class="popup-form" id="addForm">
+
+    <!-- TAMBAH PRODUK -->
+    <!-- <div class="popup-form" id="addForm">
         <div class="form-header">
             <span class="form-title">Add Produk</span>
             <span class="close-icon" onclick="closeAddForm()">&#10006;</span>
@@ -191,17 +192,19 @@ if (isset($_GET['key'])) {
             <input type="number" placeholder="Stok Tersedia" required />
             <select name="kategori" required>
                 <option value="">Select kategori</option>
-                <option value="">1 (Alat Masak)</option>
-                <option value="">2 (Alat Makan)</option>
+                // while ($rowK = $resultKAdd->fetch_assoc()) {
+                //     echo '<option value=' . $rowK['id'] . '>' . $rowK['nama'] . '</option>';
+                // }
             </select>
             <div class="button-container">
                 <button type="button" class="cancel-button" onclick="closeAddForm()">Cancel</button>
                 <button type="submit" class="submit-button" id="submitAddForm">Add</button>
             </div>
         </form>
-    </div>
+    </div> -->
 
-    <div class="popup-form" id="editForm">
+    <!-- EDIT PRODUK -->
+    <!-- <div class="popup-form" id="editForm">
         <div class="form-header">
             <span class="form-title">Edit Produk</span>
             <span class="close-icon" onclick="closeEditForm()">&#10006;</span>
@@ -212,17 +215,20 @@ if (isset($_GET['key'])) {
             <input type="number" placeholder="Harga Beli" required />
             <input type="number" placeholder="Stok Tersedia" required />
             <select name="kategori" required>
-                <option value="">1 (Alat Masak)</option>
-                <option value="">2 (Alat Makan)</option>
+                <?php
+                // while ($rowK = $resultKEdit->fetch_assoc()) {
+                //     echo '<option value=' . $rowK['id'] . '>' . $rowK['nama'] . '</option>';
+                // }
+                ?>
             </select>
             <div class="button-container">
                 <button type="button" class="cancel-button" onclick="closeEditForm()">Cancel</button>
                 <button type="submit" class="submit-button" id="submitEditForm">Edit</button>
             </div>
         </form>
-    </div>
+    </div> -->
 
-    <div class="popup-form" id="deleteConfirmation">
+    <!-- <div class="popup-form" id="deleteConfirmation">
         <div class="form-container">
             <p>Apakah Anda yakin ingin menghapusnya?</p>
             <div class="button-container">
@@ -230,9 +236,9 @@ if (isset($_GET['key'])) {
                 <button type="button" class="cancel-button" onclick="closeDeleteConfirmation()">No</button>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <div class="popup-form" id="addSuccessForm">
+    <!-- <div class="popup-form" id="addSuccessForm">
         <div class="success-content">
             <i class="fa-regular fa-circle-check success-icon"></i>
             <div class="success-text">
@@ -253,7 +259,7 @@ if (isset($_GET['key'])) {
             </div>
             <button class="close-button" onclick="closeEditSuccessForm()">OK</button>
         </div>
-    </div>
+    </div> -->
     <script src="js/script.js"></script>
 </body>
 

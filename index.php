@@ -16,17 +16,32 @@ if (isset($_GET['key'])) {
   $search = "%";
 }
 
-//Ini diubah pake getTotalData
-//sebelumnya pake bacaData('id',$search)
+if (isset($_GET['kategori'])) {
+  $kategori = "%" . $_GET['kategori'] . "%";
+} else {
+  $kategori = "%";
+}
 
-$result = ($barang)->getTotalData($search);
-
+$result = ($barang)->getTotalData($kategori, $search);
 
 if (isset($_GET['key'])) {
   $key = $_GET['key'];
 } else {
   $key = "";
 }
+
+if (isset($_GET['kategori'])) {
+  $kate = $_GET['kategori'];
+} else {
+  $kate = "";
+}
+
+$resultK = (new Kategori)->bacaData('%');
+
+if (isset($_GET['cart'])) {
+  header("location: keranjang.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -43,122 +58,120 @@ if (isset($_GET['key'])) {
 </head>
 
 <body>
+  <div class="overlay" id="overlay"></div>
   <nav class="sidebar">
-    <a href="#" class="logo">Dapur Perdana</a>
-    <span class="hamburger-icon"></span>
+    <a class="logo">Dapur Perdana</a>
     <div class="menu-content">
       <ul class="menu-items">
-
         <li class="item">
-          <a href="index.php">DASHBOARD</a>
+          <a href="index.php"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
         </li>
         <li class="item">
-          <a href="supplier.php">SUPPLIER</a>
+          <a href="supplier.php"><i class="fa-solid fa-truck-field"></i> Supplier</a>
         </li>
         <li class="item">
           <div class="submenu-item">
-            <span>PRODUK</span>
+            <span> <i class="fa-solid fa-box"></i>Produk</span>
             <i class="fa-solid fa-chevron-right"></i>
           </div>
           <ul class="menu-items submenu">
             <div class="menu-title">
               <i class="fa-solid fa-chevron-left"></i>
-              PRODUK
+              Produk
             </div>
             <li class="item">
-              <a href="kategoriproduk.php">KATEGORI PRODUK</a>
+              <a href="kategoriproduk.php"> <i class="fa-solid fa-circle"></i></i>Kategori Produk</a>
             </li>
             <li class="item">
-              <a href="daftarproduk.php">DAFTAR PRODUK</a>
+              <a href="daftarproduk.php"><i class="fa-solid fa-circle"></i></i> Daftar Produk</a>
             </li>
           </ul>
         </li>
         <li class="item">
-          <a href="penyesuaian.php">PENYESUAIAN</a>
+          <a href="penyesuaian.php"> <i class="fa-solid fa-boxes-stacked"></i>Penyesuaian</a>
         </li>
         <li class="item">
           <div class="submenu-item">
-            <span>LAPORAN</span>
+            <span> <i class="fa-solid fa-book"></i>Laporan</span>
             <i class="fa-solid fa-chevron-right"></i>
           </div>
           <ul class="menu-items submenu">
             <div class="menu-title">
               <i class="fa-solid fa-chevron-left"></i>
-              LAPORAN
+              Laporan
             </div>
             <li class="item">
-              <a href="laporanpenjualan.php">LAPORAN PENJUALAN</a>
+              <a href="laporanpenjualan.php"> <i class="fa-solid fa-circle"></i></i>Laporan Penjualan</a>
             </li>
           </ul>
         </li>
         <li class="item">
-          <a href="">LOGOUT</a>
+          <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
         </li>
       </ul>
       <div class="user-profile">
         <i class="fas fa-user-circle user-icon"></i>
-        <?php echo '<span class="user-name">'.$username.'</span>'; ?>
+        <?php echo '<span class="user-name">' . $username . '</span>'; ?>
       </div>
     </div>
-  </nav>
-
-  <nav class="navbar">
-    <i class="fa-solid fa-bars" id="sidebar-close"></i>
-    <i class="fa-solid fa-shopping-cart" id="cart-icon"></i>
   </nav>
 
   <main class="main">
     <div class="container">
       <form action="" method="GET">
+        <div class="add-produk">
+          <div class="action-buttons">
+            <button class="add-button" id="add-supp" name="cart" onclick="">Cart</button>
+          </div>
+          <div class="line"></div>
+        </div>
         <div class="title-filter-search">
           <h2>Produk</h2>
           <div class="filter-search">
-            <select name="filterBy" id="filterBy">
-              <option value="">Filter By</option>
-              <option value="1">Kompor</option>
-              <option value="2">Wajan</option>
-              <option value="3">Panci</option>
-              <option value="4">Blender</option>
-              <option value="5">Teflon</option>
-              <option value="6">Magic Com</option>
-
-
-              <form action="" method="GET">
-                  <input type="text" name="key" value="" placeholder="Search..." id="search">
-                  <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
-              </form>
-
-            </select>
-
+            <?php
+            echo '<input type="text" name="kategori" placeholder="Kategori..." value="' . $kate . '">';
+            echo '<input type="text" name="key" placeholder="Search..." id="search" value="' . $key . '">';
+            ?>
+            <button type="submit" id="search-button" name="search"><i class="fa-solid fa-search"></i></button>
           </div>
         </div>
       </form>
 
       <div class="table-wrapper">
-        <table class="table">
-          <tr>
-            <th>No.</th>
-            <th>Gambar</th>
-            <th>Nama Barang</th>
-            <th>Stok Tersedia</th>
-            <th>Harga</th>
-            <th>Kode Kategori</th>
-            <th colspan=2>Action</th>
-          </tr>
+        <form action="" method="POST">
+          <table class="table">
+            <tr>
+              <th>Kode</th>
+              <th>Gambar</th>
+              <th>Nama</th>
+              <th>Stok Tersedia</th>
+              <th>Harga</th>
+              <th>Kategori</th>
+              <th colspan=2>Action</th>
+            </tr>
 
-          <?php
-          while ($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            echo "<td>" . $row['id'] . "</td>";
-            echo "<td><img width='70' height='70' src=" . $row['url'] . "></td>";
-            echo "<td class='left-align'>" . $row['nama'] . "</td>";
-            echo "<td>" . $row['stok_tersedia'] . "</td>";
-            echo "<td class='right-align'>" . $row['harga_jual'] . "</td>";
-            echo "<td class='right-align'>" . $row['id_kategori'] . "</td>";
-            echo "<td><button class='add-button' id='add-butt'>+ Add</button></td>";
-          }
-          ?>
-        </table>
+            <?php
+            while ($row = $result->fetch_assoc()) {
+              $resultK = (new Kategori)->bacaDataById($row['id_kategori']);
+              $namaK = $resultK->fetch_assoc();
+              $idproduk = $row['id'];
+
+              echo "<tr>";
+              echo "<td>" . $idproduk . "</td>";
+              echo "<td><img width='70' height='70' src=" . $row['url'] . "></td>";
+              echo "<td class='left-align'>" . $row['nama'] . "</td>";
+              echo "<td>" . $row['stok_tersedia'] . "</td>";
+              echo "<td class='right-align'>Rp" . number_format($row['harga_jual'], 0, ',', '.') . "</td>";
+              echo "<td class='center-align'>" . $namaK['nama'] . "</td>";
+              echo "<td><a class='add-button' href='addJumlahProduk.php?id=$idproduk' name='addbutton' style='text-decoration:none'>+ Add</a></td>";
+
+
+              // ini cuman muncul id terakhir, butuh array
+              echo "<input type='hidden' name='idproduk' value='$idproduk'>";
+            }
+            ?>
+          </table>
+        </form>
       </div>
 
     </div>

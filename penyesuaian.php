@@ -16,24 +16,7 @@ if (isset($_GET['key'])) {
     $search = "%";
 }
 
-//pagination, awalnya tentuin data per page, total data, dan total pagenya berapa
 $result = ($penyesuaian)->bacaData($search);
-
-// $perpage = 7;
-// $totaldata = $result->num_rows; //untuk dapatkan jumlah data
-// $totalpage = ceil($totaldata/$perpage); //untuk bulatkan ke atas
-
-// //DATA WITH LIMIT
-// if (isset($_GET['page'])) {
-// 	$page = $_GET['page'];
-// } else {
-// 	$page = 1;
-// }
-
-// $start = ($page-1) * $perpage;
-
-// // $sql = "SELECT * FROM cerita WHERE judul LIKE ? LIMIT ?,?";
-// $result = ($barang)->paginationWithLimit($search, $start, $perpage);
 
 if (isset($_GET['key'])) {
     $key = $_GET['key'];
@@ -59,70 +42,67 @@ if (isset($_GET['key'])) {
     <div class="overlay" id="overlay"></div>
     <nav class="sidebar">
         <a href="#" class="logo">Dapur Perdana</a>
-        <span class="hamburger-icon"></span>
         <div class="menu-content">
             <ul class="menu-items">
 
                 <li class="item">
-                    <a href="index.php">DASHBOARD</a>
+                    <a href="index.php"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
                 </li>
                 <li class="item">
-                    <a href="supplier.php">SUPPLIER</a>
+                    <a href="supplier.php"><i class="fa-solid fa-truck-field"></i> Supplier</a>
                 </li>
                 <li class="item">
                     <div class="submenu-item">
-                        <span>PRODUK</span>
+                        <span> <i class="fa-solid fa-box"></i>Produk</span>
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
                     <ul class="menu-items submenu">
                         <div class="menu-title">
                             <i class="fa-solid fa-chevron-left"></i>
-                            PRODUK
+                            Produk
                         </div>
                         <li class="item">
-                            <a href="kategoriproduk.php">KATEGORI PRODUK</a>
+                            <a href="kategoriproduk.php"> <i class="fa-solid fa-circle"></i></i>Kategori Produk</a>
                         </li>
                         <li class="item">
-                            <a href="daftarproduk.php">DAFTAR PRODUK</a>
+                            <a href="daftarproduk.php"><i class="fa-solid fa-circle"></i></i> Daftar Produk</a>
                         </li>
                     </ul>
                 </li>
                 <li class="item">
-                    <a href="penyesuaian.php">PENYESUAIAN</a>
+                    <a href="penyesuaian.php"> <i class="fa-solid fa-boxes-stacked"></i>Penyesuaian</a>
                 </li>
                 <li class="item">
                     <div class="submenu-item">
-                        <span>LAPORAN</span>
+                        <span> <i class="fa-solid fa-book"></i>Laporan</span>
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
                     <ul class="menu-items submenu">
                         <div class="menu-title">
                             <i class="fa-solid fa-chevron-left"></i>
-                            LAPORAN
+                            Laporan
                         </div>
                         <li class="item">
-                            <a href="laporanpenjualan.php">LAPORAN PENJUALAN</a>
+                            <a href="laporanpenjualan.php"> <i class="fa-solid fa-circle"></i></i>Laporan Penjualan</a>
                         </li>
                     </ul>
                 </li>
                 <li class="item">
-                    <a href="">LOGOUT</a>
+                    <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>
             </ul>
             <div class="user-profile">
                 <i class="fas fa-user-circle user-icon"></i>
-                <?php echo '<span class="user-name">'.$username.'</span>'; ?>
+                <?php echo '<span class="user-name">' . $username . '</span>'; ?>
             </div>
         </div>
-    </nav>
-    <nav class="navbar">
-        <i class="fa-solid fa-bars" id="sidebar-close"></i>
     </nav>
     <main class="main">
         <div class="container">
             <div class="add-penyesuaian">
                 <div class="action-buttons">
-                    <button class="add-button" id="add-supp" onclick="openAddForm()">Add</button>
+                    <!-- ADD -->
+                    <a class="add-button" id="add-supp" href="addPenyesuaian.php" style='text-decoration:none;text-align:center'>Add</a>
                 </div>
                 <div class="line"></div>
             </div>
@@ -132,7 +112,7 @@ if (isset($_GET['key'])) {
                 </div>
                 <div class="filter-search">
                     <form action="" method="GET">
-                        <input type="text" name="key" value="" placeholder="Search..." id="search">
+                        <?php echo '<input type="text" name="key" placeholder="Search..." id="search" value="' . $key . '">'; ?>
                         <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
                     </form>
                 </div>
@@ -144,7 +124,7 @@ if (isset($_GET['key'])) {
                         <th>Tanggal Penyesuaian</th>
                         <th>Keterangan Penyesuaian</th>
                         <th>Stok Penyesuaian</th>
-                        <th>Id Barang</th>
+                        <th>Kode Barang</th>
                     </tr>
                     <?php
                     while ($row = $result->fetch_assoc()) {
@@ -178,7 +158,7 @@ if (isset($_GET['key'])) {
         </form>
     </div>
 
-    <div class="popup-form" id="editForm">
+    <!-- <div class="popup-form" id="editForm">
         <div class="form-header">
             <span class="form-title">Edit Penyesuaian</span>
             <span class="close-icon" onclick="closeEditForm()">&#10006;</span>
@@ -226,7 +206,7 @@ if (isset($_GET['key'])) {
             </div>
             <button class="close-button" onclick="closeEditSuccessForm()">OK</button>
         </div>
-    </div>
+    </div> -->
     <script src="js/script.js"></script>
 </body>
 

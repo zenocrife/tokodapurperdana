@@ -1,12 +1,7 @@
-
-
 const sidebar = document.querySelector(".sidebar");
-const sidebarClose = document.querySelector("#sidebar-close");
 const menu = document.querySelector(".menu-content");
 const menuItems = document.querySelectorAll(".submenu-item");
 const subMenuTitles = document.querySelectorAll(".submenu .menu-title");
-
-sidebarClose.addEventListener("click", () => sidebar.classList.toggle("close"));
 
 menuItems.forEach((item, index) => {
   item.addEventListener("click", () => {
@@ -20,16 +15,11 @@ menuItems.forEach((item, index) => {
   });
 });
 
-
 subMenuTitles.forEach((title) => {
   title.addEventListener("click", () => {
     menu.classList.remove("submenu-active");
   });
 });
-
-function searchBarang(searchby, search) {
-  
-};
 
 function openAddForm() {
   document.getElementById("addForm").style.display = "block";
@@ -41,21 +31,22 @@ function closeAddForm() {
   document.getElementById("overlay").style.display = "none";
 }
 
+//ini buat edit [idSupplierToEdit belum kepanggil]
 function openEditForm() {
-  var popup = document.getElementById("editForm");
-  popup.style.display = "flex";
+  // var idSupplierToEdit = idsupplier;
+  document.getElementById("editForm").style.display = "flex";
+  document.getElementById("overlay").style.display = "block";
 }
 
 function closeEditForm() {
-  var popup = document.getElementById("editForm");
-  popup.style.display = "none";
+  document.getElementById("editForm").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
 }
 
 //script untuk Delete Confirmation Pop Up
 function openDeleteConfirmation() {
   document.getElementById("deleteConfirmation").style.display = "flex";
   document.getElementById("overlay").style.display = "block";
-  
 }
 
 function closeDeleteConfirmation() {
@@ -80,10 +71,12 @@ function submitAddForm() {
   openAddSuccessForm();
 }
 
-document.getElementById("submitAddForm").addEventListener("click", function(event) {
-  event.preventDefault();
-  submitAddForm(); 
-});
+document
+  .getElementById("submitAddForm")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    submitAddForm();
+  });
 
 //script untuk Edit Success Pop Up
 function openEditSuccessForm() {
@@ -102,7 +95,10 @@ function submitEditForm() {
   openEditSuccessForm();
 }
 
-document.getElementById("submitEditForm").addEventListener("click", function(event) {
-  event.preventDefault();
-  submitEditForm(); 
-});
+document
+  .getElementById("submitEditForm")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    submitEditForm();
+  });
+
