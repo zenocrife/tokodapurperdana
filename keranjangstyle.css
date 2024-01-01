@@ -377,7 +377,6 @@
   grid-column-gap: 70px;
 }
 .grid_container * {
-  border: 1px solid red;
   position: relative;
 }
 .item-keranjang{
