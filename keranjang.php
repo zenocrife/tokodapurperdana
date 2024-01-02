@@ -14,7 +14,7 @@ if (isset($_SESSION['keranjang'])) {
 
 $getIdUser = (new User)->cekLogin($username)->fetch_assoc();
 
-// pindah ke pencet button 
+// pindah ke pencet button
 // ($transaksi)->tambahDataTransaksiPenjualan($getIdUser['id']);
 ?>
 
@@ -176,7 +176,8 @@ $getIdUser = (new User)->cekLogin($username)->fetch_assoc();
                     echo '<td>Rp' . $value['price'] . '</td>';
                     echo '<td>Rp' . $totalperbarang . '</td>';
                     echo '<td>';
-                    echo '<button class="edit-button">Edit</button>';
+                    echo '<a href="updateKeranjang.php" class="edit-button">Edit</a>'; //tambah id item
+                    echo '<a href="deleteKeranjang.php" class="delete-button">Delete</a>'; //tambah id item
                     echo '<button class="delete-button">X</button>';
                     echo '</td>';
                     echo '</tr>';
