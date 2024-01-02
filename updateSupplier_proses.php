@@ -31,15 +31,14 @@ $result = ($supplier)->updateSupplier($id_sup_edit, $edit_nama, $edit_alamat, $e
 <body>
     <div class="overlay" id="overlay"></div>
     <nav class="sidebar">
-        <a href="#" class="logo">Dapur Perdana</a>
+        <a class="logo">Dapur Perdana</a>
         <div class="menu-content">
             <ul class="menu-items">
-
                 <li class="item">
-                    <a href="index.php"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+                    <a href="index.php"><i class="fa-solid fa-gauge-high"></i>Dashboard</a>
                 </li>
                 <li class="item">
-                    <a href="supplier.php"><i class="fa-solid fa-truck-field"></i> Supplier</a>
+                    <a href="supplier.php"><i class="fa-solid fa-truck-field"></i>Supplier</a>
                 </li>
                 <li class="item">
                     <div class="submenu-item">

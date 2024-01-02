@@ -40,15 +40,14 @@ if (isset($_GET['key'])) {
 
 <body>
     <nav class="sidebar">
-        <a href="#" class="logo">Dapur Perdana</a>
+        <a class="logo">Dapur Perdana</a>
         <div class="menu-content">
             <ul class="menu-items">
-
                 <li class="item">
-                    <a href="index.php"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+                    <a href="index.php"><i class="fa-solid fa-gauge-high"></i>Dashboard</a>
                 </li>
                 <li class="item">
-                    <a href="supplier.php"><i class="fa-solid fa-truck-field"></i> Supplier</a>
+                    <a href="supplier.php"><i class="fa-solid fa-truck-field"></i>Supplier</a>
                 </li>
                 <li class="item">
                     <div class="submenu-item">
@@ -61,10 +60,10 @@ if (isset($_GET['key'])) {
                             Produk
                         </div>
                         <li class="item">
-                            <a href="kategoriproduk.php"> <i class="fa-solid fa-circle"></i></i>Kategori Produk</a>
+                            <a href="kategoriproduk.php"> <i class="fa-solid fa-circle"></i>Kategori Produk</a>
                         </li>
                         <li class="item">
-                            <a href="daftarproduk.php"><i class="fa-solid fa-circle"></i></i> Daftar Produk</a>
+                            <a href="daftarproduk.php"><i class="fa-solid fa-circle"></i>Daftar Produk</a>
                         </li>
                     </ul>
                 </li>
@@ -82,7 +81,7 @@ if (isset($_GET['key'])) {
                             Laporan
                         </div>
                         <li class="item">
-                            <a href="laporanpenjualan.php"> <i class="fa-solid fa-circle"></i></i>Laporan Penjualan</a>
+                            <a href="laporanpenjualan.php"> <i class="fa-solid fa-circle"></i>Laporan Penjualan</a>
                         </li>
                     </ul>
                 </li>

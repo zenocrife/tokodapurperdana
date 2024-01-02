@@ -64,10 +64,10 @@ if (isset($_GET['cart'])) {
     <div class="menu-content">
       <ul class="menu-items">
         <li class="item">
-          <a href="index.php"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+          <a href="index.php"><i class="fa-solid fa-gauge-high"></i>Dashboard</a>
         </li>
         <li class="item">
-          <a href="supplier.php"><i class="fa-solid fa-truck-field"></i> Supplier</a>
+          <a href="supplier.php"><i class="fa-solid fa-truck-field"></i>Supplier</a>
         </li>
         <li class="item">
           <div class="submenu-item">
@@ -80,10 +80,10 @@ if (isset($_GET['cart'])) {
               Produk
             </div>
             <li class="item">
-              <a href="kategoriproduk.php"> <i class="fa-solid fa-circle"></i></i>Kategori Produk</a>
+              <a href="kategoriproduk.php"> <i class="fa-solid fa-circle"></i>Kategori Produk</a>
             </li>
             <li class="item">
-              <a href="daftarproduk.php"><i class="fa-solid fa-circle"></i></i> Daftar Produk</a>
+              <a href="daftarproduk.php"><i class="fa-solid fa-circle"></i>Daftar Produk</a>
             </li>
           </ul>
         </li>
@@ -101,7 +101,7 @@ if (isset($_GET['cart'])) {
               Laporan
             </div>
             <li class="item">
-              <a href="laporanpenjualan.php"> <i class="fa-solid fa-circle"></i></i>Laporan Penjualan</a>
+              <a href="laporanpenjualan.php"> <i class="fa-solid fa-circle"></i>Laporan Penjualan</a>
             </li>
           </ul>
         </li>
@@ -164,6 +164,10 @@ if (isset($_GET['cart'])) {
               echo "<td class='right-align'>Rp" . number_format($row['harga_jual'], 0, ',', '.') . "</td>";
               echo "<td class='center-align'>" . $namaK['nama'] . "</td>";
               echo "<td><a class='add-button' href='addJumlahProduk.php?id=$idproduk' name='addbutton' style='text-decoration:none'>+ Add</a></td>";
+
+
+              // ini cuman muncul id terakhir, butuh array
+              echo "<input type='hidden' name='idproduk' value='$idproduk'>";
             }
             ?>
           </table>
