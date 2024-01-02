@@ -1,31 +1,33 @@
 <?php
+session_start();
 require 'class.php';
 
-session_start();
 if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
     header("location: login.php");
 }
 
-$username = $_SESSION['uname'];
+$idbarang = $_POST['idbrng'];
+$qty = $_POST['quantity'];
+$harga = $_POST['harga'];
 
-$edit_nama = $_POST['edit_nama'];
-$edit_jual = $_POST['edit_jual'];
-$edit_beli = $_POST['edit_beli'];
-$edit_url = $_POST['edit_url'];
-$edit_stok = $_POST['edit_stok'];
-$edit_kategori = $_POST['edit_kategori'];
-$edit_id = $_POST['id'];
+if (isset($_SESSION['keranjang'])) {
+    $arrKeranjang = $_SESSION['keranjang'];
 
-$barang = new Barang();
-$result = ($barang)->updateBarang(
-    $edit_id,
-    $edit_nama,
-    $edit_beli,
-    $edit_jual,
-    $edit_url,
-    $edit_stok,
-    $edit_kategori
-);
+    // foreach ($arrKeranjang as $key => $value) {
+    //     if ($idbarang != $value['idbarang']) {
+    //         $arrKeranjang[] = array("idbarang" => $idbarang, "qty" => $qty, "price" => $harga);
+    //     } else {
+    //         $qty = $qty + $value['qty'];
+    //         $arrKeranjang[$key] = array("idbarang" => $idbarang, "qty" => $qty, "price" => $harga);
+    //     }
+    // }
+} else {
+    $arrKeranjang = array();
+    // $arrKeranjang[] = array("idbarang" => $idbarang, "qty" => $qty, "price" => $harga);
+}
+$arrKeranjang[] = array("idbarang" => $idbarang, "qty" => $qty, "price" => $harga);
+
+$_SESSION['keranjang'] = $arrKeranjang;
 ?>
 
 <!DOCTYPE html>
@@ -98,16 +100,17 @@ $result = ($barang)->updateBarang(
             </div>
         </div>
     </nav>
-    <div class="success-content popup-form">
-        <i class="fa-regular fa-circle-check success-icon"></i>
-        <div class="success-text">
-            <p>Sukses</p>
-            <div class="line"></div>
-            <p>Sukses mengubah produk</p>
+    <form action="index.php" method="post">
+        <div class="success-content popup-form">
+            <i class="fa-regular fa-circle-check success-icon"></i>
+            <div class="success-text">
+                <p>Sukses</p>
+                <div class="line"></div>
+                <p>Sukses menambah produk ke dalam keranjang</p>
+            </div>
+            <button class="close-button">OK</button>
         </div>
-        <a class="close-button" href="daftarproduk.php" style="text-decoration:none">OK</a>
-    </div>
-    </div>
+    </form>
 </body>
 
 </html>

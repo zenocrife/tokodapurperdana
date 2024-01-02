@@ -137,7 +137,7 @@ class Barang extends Koneksi
 	// UNTUK STOK
 	public function bacaStok($idbarang)
 	{
-		$stmt = $this->con->prepare("SELECT stok_tersedia FROM barang WHERE id LIKE ? ");
+		$stmt = $this->con->prepare("SELECT nama, stok_tersedia, harga_jual FROM barang WHERE id LIKE ? ");
 		$stmt->bind_param("i", $idbarang);
 		$stmt->execute();
 
@@ -276,7 +276,7 @@ class DetailPenjualan extends Koneksi
 		return $result;
 	}
 
-	public function tambahDataTransaksiPenjualan($idkaryawan, $metodepembayaran, $jumlahtotal = 0)
+	public function tambahDataTransaksiPenjualan($idkaryawan, $metodepembayaran = 'Tunai', $jumlahtotal = 0)
 	{
 		$stmt = $this->con->prepare('INSERT INTO transaksi_penjualan(metode_pembayaran, jumlah_total, id_user) VALUE(?, ?, ?)');
 		$stmt->bind_param("sii", $metodepembayaran, $jumlahtotal, $idkaryawan);

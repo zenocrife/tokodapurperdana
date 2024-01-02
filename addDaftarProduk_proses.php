@@ -100,7 +100,7 @@ $addKategori_daftarproduk = $_POST['addKategori_daftarproduk'];
             <div class="success-text">
                 <p>Sukses</p>
                 <div class="line"></div>
-                <p>Sukses menambah data</p>
+                <p>Sukses menambah produk baru</p>
             </div>
             <button class="close-button">OK</button>
         </div>

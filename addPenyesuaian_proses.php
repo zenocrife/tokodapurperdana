@@ -96,7 +96,7 @@ $addStok_penyesuaian = $_POST['addStok_penyesuaian'];
             <div class="success-text">
                 <p>Sukses</p>
                 <div class="line"></div>
-                <p>Sukses menambah data</p>
+                <p>Sukses menambah penyesuaian</p>
             </div>
             <button class="close-button">OK</button>
         </div>

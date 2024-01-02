@@ -90,7 +90,7 @@ $addTelp_supplier = $_POST['addTelp_supplier'];
             <div class="success-text">
                 <p>Sukses</p>
                 <div class="line"></div>
-                <p>Sukses menambah data</p>
+                <p>Sukses menambah supplier baru</p>
             </div>
             <button class="close-button">OK</button>
         </div>

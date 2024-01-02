@@ -91,7 +91,7 @@ $result = ($kategori)->updateKategori($id_kategori_edit, $edit_nama, $edit_url)
         <div class="success-text">
             <p>Sukses</p>
             <div class="line"></div>
-            <p>Sukses mengubah data</p>
+            <p>Sukses mengubah kategori</p>
         </div>
         <a class="close-button" href="kategoriproduk.php" style="text-decoration:none">OK</a>
     </div>

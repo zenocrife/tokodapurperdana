@@ -1,12 +1,17 @@
 <?php
 session_start();
 require 'class.php';
+$barang = new Barang();
+
+$idbarang = $_GET['id'];
 
 if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
     header("location: login.php");
 }
 
 $username = $_SESSION['uname'];
+
+$result = ($barang)->bacaStok($idbarang);
 ?>
 
 <!DOCTYPE html>
@@ -79,20 +84,26 @@ $username = $_SESSION['uname'];
             </div>
         </div>
     </nav>
-    <form class="form-container popup-form" method="POST" action="">
-    <span class="form-title">Tambah Produk</span>
-        <div class="form-group">
-            <label for="productName">Nama Produk</label>
-            <input type="text" id="productName" name="productName" placeholder="Nama Produk" readonly />
-        </div>
-        <div class="form-group">
-            <label for="availableStock">Stok Tersedia</label>
-            <input type="text" id="availableStock" name="availableStock" value="10" readonly />
-        </div>
-        <div class="form-group">
-            <label for="quantity">Jumlah Produk</label>
-            <input type="number" id="quantity" name="quantity" placeholder="Jumlah Produk" required />
-        </div>
+    <form class="form-container popup-form" method="POST" action="addJumlahProduk_proses.php">
+        <span class="form-title">Tambah Produk</span>
+        <?php
+        $row = $result->fetch_assoc();
+        $stok = $row['stok_tersedia'];
+        echo '<div class="form-group">';
+        echo '<label for="productName">Nama Produk</label>';
+        echo '<input type="text" id="productName" name="productName" placeholder="Nama Produk" value="' . $row['nama'] . '" readonly />';
+        echo '</div>';
+        echo '<div class="form-group">';
+        echo '<label for="availableStock">Stok Tersedia</label>';
+        echo '<input type="text" id="availableStock" name="availableStock" value="' . $stok . '"  readonly />';
+        echo '</div>';
+        echo '<div class="form-group">';
+        echo '<label for="quantity">Jumlah Produk</label>';
+        echo '<input type="number" id="quantity" name="quantity" placeholder="Jumlah Produk" required value="1" min="1" max="' . $stok . '"/>';
+        echo '</div>';
+        echo '<input type="hidden" name="idbrng" value="' . $idbarang . '">';
+        echo '<input type="hidden" name="harga" value="' . $row['harga_jual'] . '">';
+        ?>
         <div class="button-container">
             <a type="button" class="cancel-button" href="index.php" style='text-decoration:none;text-align:center'>Cancel</a>
             <button type="submit" class="submit-button" id="submitAddForm">Tambah</button>

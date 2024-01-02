@@ -89,7 +89,7 @@ $addUrl_kategori = $_POST['addUrl_kategori'];
             <div class="success-text">
                 <p>Sukses</p>
                 <div class="line"></div>
-                <p>Sukses menambah data</p>
+                <p>Sukses menambah kategori baru</p>
             </div>
             <button class="close-button">OK</button>
         </div>
