@@ -16,6 +16,15 @@ $getIdUser = (new User)->cekLogin($username)->fetch_assoc();
 
 // pindah ke pencet button
 // ($transaksi)->tambahDataTransaksiPenjualan($getIdUser['id']);
+
+if (isset($_POST['submitDelete'])) {
+  $idbrng = $_POST['id'];
+  foreach ($arrKeranjang as $key => $value) {
+    if ($idbrng == $value['idbarang']) {
+      unset($_SESSION['keranjang'][$key]);
+    }
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -169,15 +178,16 @@ $getIdUser = (new User)->cekLogin($username)->fetch_assoc();
                 if (isset($_SESSION['keranjang'])) {
                   foreach ($arrKeranjang as $key => $value) {
                     $totalperbarang = $value['qty'] * $value['price'];
+                    $idbarang = $value['idbarang'];
                     echo '<tr>';
-                    echo '<td>' . $value['idbarang'] . '</td>';
+                    echo '<td>' . $idbarang . '</td>';
                     echo '<td>Pisau Dapur</td>';
                     echo '<td>' . $value['qty'] . ' unit</td>';
                     echo '<td>Rp' . $value['price'] . '</td>';
                     echo '<td>Rp' . $totalperbarang . '</td>';
                     echo '<td>';
-                    echo '<a href="updateKeranjang.php" class="edit-button">Edit</a>'; //tambah id item
-                    echo '<a href="deleteKeranjang.php" class="delete-button">Delete</a>'; //tambah id item
+                    echo '<a href="updateKeranjang.php?idbarang=' . $idbarang . '" class="edit-button">Edit</a>'; //tambah id item
+                    echo '<a href="deleteKeranjang.php?idbarang=' . $idbarang . '" class="delete-button">Delete</a>'; //tambah id item
                     echo '<button class="delete-button">X</button>';
                     echo '</td>';
                     echo '</tr>';

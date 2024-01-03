@@ -81,8 +81,9 @@ if (isset($_GET['id'])) {
     <div class="form-container popup-form">
         <p>Apakah Anda yakin ingin menghapusnya?</p>
         <div class="button-container">
-            <form action="deleteKeranjang.php" method="GET">
-                <a href="keranjang.php" type="submit" class="submit-button" name="submitDelete" style='text-decoration:none;text-align:center'>Yes</a>
+            <form action="keranjang.php" method="POST">
+                <?php echo '<input type="hidden" value="' . $_GET['idbarang'] . '" name="id">'; ?>
+                <input type="submit" class="submit-button" name="submitDelete" value="Yes" style='text-decoration:none;text-align:center'>
                 <a href="keranjang.php" type="button" class="cancel-button" style='text-decoration:none;text-align:center'>No</a>
             </form>
         </div>
