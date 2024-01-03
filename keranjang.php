@@ -186,9 +186,8 @@ if (isset($_POST['submitDelete'])) {
                     echo '<td>Rp' . $value['price'] . '</td>';
                     echo '<td>Rp' . $totalperbarang . '</td>';
                     echo '<td>';
-                    echo '<a href="updateKeranjang.php?idbarang=' . $idbarang . '" class="edit-button">Edit</a>'; //tambah id item
-                    echo '<a href="deleteKeranjang.php?idbarang=' . $idbarang . '" class="delete-button">Delete</a>'; //tambah id item
-                    echo '<button class="delete-button">X</button>';
+                    echo '<a href="updateKeranjang.php?idbarang=' . $idbarang . '" class="edit-button">Edit</a>
+                          <a href="deleteKeranjang.php?idbarang=' . $idbarang . '" class="delete-button">X</a>'; //tambah id item
                     echo '</td>';
                     echo '</tr>';
                   }
