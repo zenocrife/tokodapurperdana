@@ -83,8 +83,7 @@ $row = (new Kategori)->bacaDataById($id)->fetch_assoc();
     </nav>
     <form class="form-container popup-form" method="POST" action="updateKeranjang_Proses.php">
         <span class="form-title">Edit Keranjang</span>
-        //yang ini tolong di ubah karena ambil dari yang sudah ada
-        <input type="text" placeholder="Nama Alat" name="edit_nama" required value="<?php echo isset($row['nama']) ? $row['nama'] : ''; ?>" />
+        <input type="text" placeholder="Nama Alat" name="edit_nama" disabled value="<?php echo isset($row['nama']) ? $row['nama'] : ''; ?>" />
         <input type="text" placeholder="Quantity" name="edit_qty" required value="<?php echo isset($row['url']) ? $row['url'] : ''; ?>" />
         <input type="text" placeholder="Discount" name="edit_disc" required value="<?php echo isset($row['url']) ? $row['url'] : ''; ?>" />
         <input type="hidden" name="id" value="<?= $row['id'] ?>">

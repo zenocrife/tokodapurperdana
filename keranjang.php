@@ -2,6 +2,7 @@
 session_start();
 require 'class.php';
 $transaksi = new DetailPenjualan();
+$barang = new Barang();
 
 if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
   header("location: login.php");
@@ -179,9 +180,12 @@ if (isset($_POST['submitDelete'])) {
                   foreach ($arrKeranjang as $key => $value) {
                     $totalperbarang = $value['qty'] * $value['price'];
                     $idbarang = $value['idbarang'];
+
+                    $resBarang = ($barang)->bacaDataById($idbarang)->fetch_assoc();
+
                     echo '<tr>';
                     echo '<td>' . $idbarang . '</td>';
-                    echo '<td>Pisau Dapur</td>';
+                    echo '<td>' . $resBarang['nama'] . '</td>';
                     echo '<td>' . $value['qty'] . ' unit</td>';
                     echo '<td>Rp' . $value['price'] . '</td>';
                     echo '<td>Rp' . $totalperbarang . '</td>';
