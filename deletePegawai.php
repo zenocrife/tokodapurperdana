@@ -1,4 +1,14 @@
 <?php
+session_start();
+require 'class.php';
+
+if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
+    header("location: login.php");
+}
+
+$username = $_SESSION['uname'];
+$role = $_SESSION['role'];
+
 // Check if the deletion button is clicked and the ID is set
 if (isset($_GET['id']) && isset($_GET['submitDelete'])) {
     require_once("class.php");
@@ -69,9 +79,13 @@ if (isset($_GET['id']) && isset($_GET['submitDelete'])) {
                         </li>
                     </ul>
                 </li>
-                <li class="item">
-                    <a href="pegawai.php"> <i class="fa-solid fa-user-plus"></i>Pegawai</a>
-                </li>
+                <?php
+                if ($role == 'pemilik') {
+                    echo '<li class="item">';
+                    echo '<a href="pegawai.php"> <i class="fa-solid fa-user-plus"></i>Pegawai</a>';
+                    echo '</li>';
+                }
+                ?>
                 <li class="item">
                     <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>

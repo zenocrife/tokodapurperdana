@@ -163,6 +163,7 @@
   background: #999999;
   margin: 0px;
 }
+
 .table-wrapper {
   overflow-y: auto;
   max-height: 400px;
@@ -199,7 +200,7 @@
 
 .table thead {
   position: sticky;
-  top : -1px;
+  top: -1px;
   background-color: #a19f9f;
   z-index: 1;
 }
@@ -221,13 +222,16 @@
   height: 40px;
   text-align: center;
 }
+
 .table td .action-buttons {
   width: 50%;
 }
+
 .table td .add-button {
   margin: 0 auto;
   display: block;
 }
+
 .add-button:hover {
   background-color: #3456c8;
 }
@@ -258,6 +262,7 @@ a.delete-button:hover {
   display: flex;
   padding-bottom: 10px;
 }
+
 #add-supp {
   display: flex;
   justify-content: center;
@@ -273,6 +278,7 @@ a.delete-button:hover {
   width: 70px;
   height: 50px;
 }
+
 #add-supp:hover {
   background-color: #3456c8;
 }
@@ -338,6 +344,7 @@ a.delete-button:hover {
   border: none;
 
 }
+
 .popup-form#deleteConfirmation .button-container button {
   margin-right: 10px;
 }
@@ -447,16 +454,18 @@ a.delete-button:hover {
   color: #fff;
   font-size: 20px;
 }
+
 .user-icon {
   font-size: 20px;
   margin-right: 10px;
   color: #fff;
 }
+
 .form-group {
   margin-top: 10px;
 }
 
-.delete-button{
+.delete-button {
   border: none;
   background-color: #ff1b1bdc;
   color: #fff;
@@ -464,7 +473,8 @@ a.delete-button:hover {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-.batal-button{
+
+.batal-button {
   border: none;
   background-color: #ff1b1bdc;
   color: #fff;
@@ -474,6 +484,7 @@ a.delete-button:hover {
   padding: 10px 15px;
   font-size: 25px;
 }
+
 a.edit-button {
   width: 100px;
   background-color: #1ba4ff;
@@ -492,7 +503,7 @@ a.edit-button {
   margin-right: 20px;
 }
 
-.selesai-button{
+.selesai-button {
   border: none;
   background-color: #188905;
   color: #fff;
@@ -505,30 +516,33 @@ a.edit-button {
 }
 
 a.delete-button,
-a.edit-button{
-    padding: 10px 20px;
+a.edit-button {
+  padding: 10px 20px;
 }
 
-a.delete-button-hover{
+a.delete-button-hover {
   background-color: #f02b2ba2;
 }
+
 a.edit-button:hover {
   background-color: #2b59f0;
 }
-.batal-button:hover{
+
+.batal-button:hover {
   background-color: #f02b2ba2;
 }
-.selesai-button:hover{
+
+.selesai-button:hover {
   background-color: #92fa84a2;
 }
 
-.teksTipePembayaran{
+.teksTipePembayaran {
   font-family: "Inter-Bold", sans-serif;
   font-size: 26px;
   position: relative;
   left: 5.66%;
-  top:20px;
-  bottom:50px;
+  top: 20px;
+  bottom: 50px;
 }
 
 .radio-container {
@@ -542,6 +556,7 @@ a.edit-button:hover {
   -ms-user-select: none;
   user-select: none;
 }
+
 .radio-container input {
   position: relative;
   opacity: 0;
@@ -558,11 +573,11 @@ a.edit-button:hover {
   border-radius: 5px;
 }
 
-.radio-container:hover input ~ .checkmark {
+.radio-container:hover input~.checkmark {
   background-color: #ccc;
 }
 
-.radio-container input:checked ~ .checkmark {
+.radio-container input:checked~.checkmark {
   background-color: #2196F3;
 }
 
@@ -572,7 +587,7 @@ a.edit-button:hover {
   display: none;
 }
 
-.radio-container input:checked ~ .checkmark:after {
+.radio-container input:checked~.checkmark:after {
   display: block;
 }
 
@@ -590,19 +605,32 @@ a.edit-button:hover {
 
 .radio-column {
   float: left;
-  width: 50%;
+  width: 47%;
   padding: 10px;
-  top :40px;
+  top: 40px;
 }
+
 .row::after {
   content: "";
   clear: both;
   display: table;
 }
-.item-kasir, .item-pembayaran, .item-cash, .item-table, .item-total, .item-button,
-.item-kasir *, .item-pembayaran *, .item-cash *, .item-table *,.item-total *, .item-button *{
+
+.item-kasir,
+.item-pembayaran,
+.item-cash,
+.item-table,
+.item-total,
+.item-button,
+.item-kasir *,
+.item-pembayaran *,
+.item-cash *,
+.item-table *,
+.item-total *,
+.item-button * {
   box-sizing: border-box;
 }
+
 .teks_Kasir {
   color: #000000;
   text-align: left;
@@ -615,6 +643,7 @@ a.edit-button:hover {
   width: 10.15%;
   top: 27px;
 }
+
 .teks_tgl_transaksi {
   color: #000000;
   text-align: left;
@@ -624,9 +653,10 @@ a.edit-button:hover {
   position: absolute;
   right: 58.74%;
   left: 5.66%;
-  width:35.61%;
+  width: 14.14%;
   top: 60px;
 }
+
 .teks_Invoice {
   color: #000000;
   text-align: left;
@@ -636,9 +666,10 @@ a.edit-button:hover {
   position: absolute;
   right: 80.2%;
   left: 5.66%;
-  width: 14.14%;
+  width: 35.61%;
   top: 92px;
 }
+
 .teks_edit_Nama {
   color: #000000;
   text-align: left;
@@ -649,8 +680,9 @@ a.edit-button:hover {
   right: 15%;
   left: 62.73%;
   width: 21.63%;
-  top : -65px;
+  top: -65px;
 }
+
 .teks_edit_Invoice {
   color: #000000;
   text-align: left;
@@ -663,6 +695,7 @@ a.edit-button:hover {
   width: 26.79%;
   top: -30px;
 }
+
 .teks_edit_tgl {
   color: #000000;
   text-align: left;
@@ -673,22 +706,24 @@ a.edit-button:hover {
   right: 16.14%;
   left: 61.73%;
   width: 22.13%;
-  top:0px;
+  top: 0px;
 }
 
-.grid_container{
+.grid_container {
   display: grid;
   position: relative;
   grid-template-columns: 0.8fr 0.9fr 0.8fr;
   grid-template-rows: 0.5fr 0.6fr 1.8fr 0.6fr;
   gap: 5px 50px;
-  top:10px
+  top: 10px
 }
+
 .grid_container * {
   position: relative;
 }
-.item-keranjang{
-  grid-area:1 / 1 / 2 / 4;
+
+.item-keranjang {
+  grid-area: 1 / 1 / 2 / 4;
   color: #000000;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
@@ -696,7 +731,8 @@ a.edit-button:hover {
   font-weight: 500;
   position: relative;
 }
-.item-kasir{
+
+.item-kasir {
   grid-area: 2 / 1 / 3 / 2;
   background: rgba(217, 217, 217, 0.2);
   width: 620px;
@@ -705,8 +741,9 @@ a.edit-button:hover {
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   overflow: hidden;
 }
-.item-pembayaran{
-  grid-area:2 / 2 / 3 / 3;
+
+.item-pembayaran {
+  grid-area: 2 / 2 / 3 / 3;
   background: rgba(217, 217, 217, 0.2);
   width: 400px;
   height: 200px;
@@ -714,7 +751,8 @@ a.edit-button:hover {
   box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.25);
   overflow: hidden;
 }
-.item-cash{
+
+.item-cash {
   grid-area: 2 / 3 / 3 / 4;
   background: rgba(217, 217, 217, 0.2);
   width: 340px;
@@ -723,22 +761,26 @@ a.edit-button:hover {
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   overflow: hidden;
 }
-.item-total{
+
+.item-total {
   grid-area: 4 / 1 / 5 / 4;
-  top:20px;
+  top: 20px;
 }
-.item-button{
+
+.item-button {
   grid-area: 4 / 3 / 5 / 4;
-  top:20px;
-  right:120px;
+  top: 20px;
+  right: 120px;
   align-items: right;
 }
-.item-table{
+
+.item-table {
   grid-area: 3 / 1 / 4 / 4;
   margin-top: 20px;
   align-items: center;
 }
-.teksCashTitle{
+
+.teksCashTitle {
   color: #000000;
   text-align: left;
   font-family: "Inter-Regular", sans-serif;
@@ -750,7 +792,8 @@ a.edit-button:hover {
   width: 17.52%;
   top: 70px;
 }
-.teksChange{
+
+.teksChange {
   color: #000000;
   text-align: left;
   font-family: "Inter-Regular", sans-serif;
@@ -762,7 +805,8 @@ a.edit-button:hover {
   width: 26.59%;
   top: 120px;
 }
-.teks_edit_change{
+
+.teks_edit_change {
   color: #000000;
   text-align: left;
   font-family: "Inter-Regular", sans-serif;
@@ -770,15 +814,16 @@ a.edit-button:hover {
   font-weight: 400;
   position: absolute;
   right: 33.84%;
-  left: 34.44%;
+  left: 40.44%;
   width: 31.72%;
   top: 120px;
 }
-.teksCash{
+
+.teksCash {
   color: #000000;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
   position: relative;
   right: 78.55%;
@@ -786,7 +831,8 @@ a.edit-button:hover {
   width: 18.43%;
   top: 20px;
 }
-.teksInputCash{
+
+.teksInputCash {
   background: #ffffff;
   border-style: solid;
   border-color: #000000;
@@ -798,11 +844,13 @@ a.edit-button:hover {
   top: 70px;
 
 }
+
 .item-total {
   width: 478px;
   height: 40px;
   position: relative;
 }
+
 .total {
   color: #000000;
   text-align: left;
@@ -814,8 +862,9 @@ a.edit-button:hover {
   bottom: 0px;
   width: 285.76px;
   height: 40px;
-  top:25px;
+  top: 25px;
 }
+
 .teksTotal {
   color: #000000;
   text-align: center;
@@ -827,12 +876,13 @@ a.edit-button:hover {
   bottom: 0px;
   width: 102.61px;
   height: 40px;
-  top:25px;
+  top: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.selesai-button{
+
+.selesai-button {
   width: 200px;
   height: 80px;
   left: 247px;
@@ -841,6 +891,7 @@ a.edit-button:hover {
   top: 0;
   border-radius: 1px;
 }
+
 .batal-button {
   width: 202px;
   height: 80px;

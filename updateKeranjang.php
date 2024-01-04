@@ -1,16 +1,28 @@
 <?php
 session_start();
 require 'class.php';
+$barang = new Barang();
 
 if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
     header("location: login.php");
 }
 
 $username = $_SESSION['uname'];
+$role = $_SESSION['role'];
 
-$id = $_GET['id'];
+if (isset($_SESSION['keranjang'])) {
+    $arrKeranjang = $_SESSION['keranjang'];
+}
 
-$row = (new Kategori)->bacaDataById($id)->fetch_assoc();
+$id = $_GET['idbarang'];
+foreach ($arrKeranjang as $key => $value) {
+    if ($id == $value['idbarang']) {
+        $qty = $_SESSION['keranjang'][$key]['qty'];
+        $disc = $_SESSION['keranjang'][$key]['diskon'];
+    }
+}
+
+$row = ($barang)->bacaDataById($id)->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,9 +83,13 @@ $row = (new Kategori)->bacaDataById($id)->fetch_assoc();
                         </li>
                     </ul>
                 </li>
-                <li class="item">
-                    <a href="pegawai.php"> <i class="fa-solid fa-user-plus"></i>Pegawai</a>
-                </li>
+                <?php
+                if ($role == 'pemilik') {
+                    echo '<li class="item">';
+                    echo '<a href="pegawai.php"> <i class="fa-solid fa-user-plus"></i>Pegawai</a>';
+                    echo '</li>';
+                }
+                ?>
                 <li class="item">
                     <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>
@@ -87,11 +103,15 @@ $row = (new Kategori)->bacaDataById($id)->fetch_assoc();
     <form class="form-container popup-form" method="POST" action="updateKeranjang_Proses.php">
         <span class="form-title">Edit Keranjang</span>
         <input type="text" placeholder="Nama Alat" name="edit_nama" disabled value="<?php echo isset($row['nama']) ? $row['nama'] : ''; ?>" />
-        <input type="text" placeholder="Quantity" name="edit_qty" required value="<?php echo isset($row['url']) ? $row['url'] : ''; ?>" />
-        <input type="text" placeholder="Discount" name="edit_disc" required value="<?php echo isset($row['url']) ? $row['url'] : ''; ?>" />
+
+
+        <?php
+        echo '<input type="number" min="0" max="' . $row['stok_tersedia'] . '" placeholder="Quantity" name="edit_qty" required value="' . $qty . '" />';
+        echo '<input type="number" max="100" min="0" placeholder="Discount" name="edit_disc" required value="' . $disc . '" />';
+        ?>
         <input type="hidden" name="id" value="<?= $row['id'] ?>">
         <div class="button-container">
-            <a type="button" class="cancel-button" href="kategoriproduk.php" style='text-decoration:none;text-align:center'>Cancel</a>
+            <a type="button" class="cancel-button" href="keranjang.php" style='text-decoration:none;text-align:center'>Cancel</a>
             <button type="submit" class="submit-button" id="submitEditForm" name="submit">Edit</button>
         </div>
     </form>

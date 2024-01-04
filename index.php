@@ -7,6 +7,7 @@ if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
 }
 
 $username = $_SESSION['uname'];
+$role = $_SESSION['role'];
 
 $barang = new Barang();
 
@@ -41,7 +42,6 @@ $resultK = (new Kategori)->bacaData('%');
 if (isset($_GET['cart'])) {
   header("location: keranjang.php");
 }
-$nourut = 1;
 ?>
 
 <!DOCTYPE html>
@@ -105,9 +105,13 @@ $nourut = 1;
             </li>
           </ul>
         </li>
-        <li class="item">
-          <a href="pegawai.php"> <i class="fa-solid fa-user-plus"></i>Pegawai</a>
-        </li>
+        <?php
+        if ($role == 'pemilik') {
+          echo '<li class="item">';
+          echo '<a href="pegawai.php"> <i class="fa-solid fa-user-plus"></i>Pegawai</a>';
+          echo '</li>';
+        }
+        ?>
         <li class="item">
           <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
         </li>
@@ -160,8 +164,7 @@ $nourut = 1;
               $idproduk = $row['id'];
 
               echo "<tr>";
-              echo "<td>" . $nourut . "</td>";
-              $nourut++;
+              echo "<td>" . $idproduk . "</td>";
               echo "<td><img width='70' height='70' src=" . $row['url'] . "></td>";
               echo "<td class='left-align'>" . $row['nama'] . "</td>";
               echo "<td>" . $row['stok_tersedia'] . "</td>";

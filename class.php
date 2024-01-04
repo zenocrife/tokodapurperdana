@@ -276,6 +276,16 @@ class DetailPenjualan extends Koneksi
 		return $result;
 	}
 
+	public function getId()
+	{
+		$stmt = $this->con->prepare("SELECT MAX(id_transaksi) id FROM transaksi_penjualan");
+		$stmt->execute();
+
+		$result = $stmt->get_result();
+
+		return $result;
+	}
+
 	public function tambahDataTransaksiPenjualan($idkaryawan, $metodepembayaran = 'Tunai', $jumlahtotal = 0)
 	{
 		$stmt = $this->con->prepare('INSERT INTO transaksi_penjualan(metode_pembayaran, jumlah_total, id_user) VALUE(?, ?, ?)');
@@ -283,7 +293,7 @@ class DetailPenjualan extends Koneksi
 		$stmt->execute();
 	}
 
-	public function tambahDataDetailTransaksiPenjualan($idtransaksi, $idbarang, $jumlah, $harga, $total, $diskon)
+	public function tambahDataDetailTransaksiPenjualan($idtransaksi, $idbarang, $jumlah, $harga, $total, $diskon = 0)
 	{
 		$stmt = $this->con->prepare('INSERT INTO detail_transaksi_penjualan(jumlah_terjual, harga_satuan, total, diskon, id_transaksi_penjualan, id_barang) VALUE(?, ?, ?, ?, ?, ?)');
 		$stmt->bind_param("iiiiii", $jumlah, $harga, $total, $diskon, $idtransaksi, $idbarang);
@@ -326,7 +336,7 @@ class Pegawai extends Koneksi
 	public function updatePegawai($idpegawai, $usernamepegawai, $password, $namapegawai, $role)
 	{
 		$stmt = $this->con->prepare('UPDATE user SET username=?, password=?, nama=?, role=? WHERE id=?');
-		$stmt->bind_param("ssssi",$usernamepegawai, $password, $namapegawai, $role, $idpegawai);
+		$stmt->bind_param("ssssi", $usernamepegawai, $password, $namapegawai, $role, $idpegawai);
 		$stmt->execute();
 	}
 

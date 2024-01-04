@@ -1,7 +1,7 @@
 <?php
+session_start();
 require 'class.php';
 
-session_start();
 if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
     header("location: login.php");
 }
@@ -9,24 +9,23 @@ if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
 $username = $_SESSION['uname'];
 $role = $_SESSION['role'];
 
-$edit_nama = $_POST['edit_nama'];
-$edit_jual = $_POST['edit_jual'];
-$edit_beli = $_POST['edit_beli'];
-$edit_url = $_POST['edit_url'];
-$edit_stok = $_POST['edit_stok'];
-$edit_kategori = $_POST['edit_kategori'];
-$edit_id = $_POST['id'];
 
-$barang = new Barang();
-$result = ($barang)->updateBarang(
-    $edit_id,
-    $edit_nama,
-    $edit_beli,
-    $edit_jual,
-    $edit_url,
-    $edit_stok,
-    $edit_kategori
-);
+$getIdUser = (new User)->cekLogin($username)->fetch_assoc();
+
+(new DetailPenjualan)->tambahDataTransaksiPenjualan($getIdUser['id'], $_POST['metode']);
+
+$idkeranjang = (new DetailPenjualan)->getId()->fetch_assoc();
+$diskon = 0;
+
+if (isset($_SESSION['keranjang'])) {
+    $arrKeranjang = $_SESSION['keranjang'];
+    foreach ($arrKeranjang as $key => $value) {
+        $totalperbarang = ($value['qty'] * $value['price']) - ($value['qty'] * $value['price'] * $diskon / 100);
+        (new DetailPenjualan)->tambahDataDetailTransaksiPenjualan($idkeranjang['id'], $value['idbarang'], $value['qty'], $value['price'], $totalperbarang, $diskon);
+    }
+}
+
+unset($_SESSION['keranjang']);
 ?>
 
 <!DOCTYPE html>
@@ -110,9 +109,9 @@ $result = ($barang)->updateBarang(
         <div class="success-text">
             <p>Sukses</p>
             <div class="line"></div>
-            <p>Sukses mengubah produk</p>
+            <p>Sukses checkout</p>
         </div>
-        <a class="close-button" href="daftarproduk.php" style="text-decoration:none">OK</a>
+        <a class="close-button" href="index.php" style="text-decoration:none">OK</a>
     </div>
     </div>
 </body>

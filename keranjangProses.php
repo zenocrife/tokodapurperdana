@@ -1,3 +1,33 @@
+<?php
+session_start();
+require 'class.php';
+
+if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
+    header("location: login.php");
+}
+
+$username = $_SESSION['uname'];
+$role = $_SESSION['role'];
+
+
+$getIdUser = (new User)->cekLogin($username)->fetch_assoc();
+
+(new DetailPenjualan)->tambahDataTransaksiPenjualan($getIdUser['id'], $_POST['metode']);
+
+$idkeranjang = (new DetailPenjualan)->getId()->fetch_assoc();
+$diskon = 0;
+
+if (isset($_SESSION['keranjang'])) {
+    $arrKeranjang = $_SESSION['keranjang'];
+    foreach ($arrKeranjang as $key => $value) {
+        $totalperbarang = ($value['qty'] * $value['price']) - ($value['qty'] * $value['price'] * $diskon / 100);
+        (new DetailPenjualan)->tambahDataDetailTransaksiPenjualan($idkeranjang['id'], $value['idbarang'], $value['qty'], $value['price'], $totalperbarang, $diskon);
+    }
+}
+
+unset($_SESSION['keranjang']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,9 +87,13 @@
                         </li>
                     </ul>
                 </li>
-                <li class="item">
-                    <a href="pegawai.php"> <i class="fa-solid fa-user-plus"></i>Pegawai</a>
-                </li>
+                <?php
+                if ($role == 'pemilik') {
+                    echo '<li class="item">';
+                    echo '<a href="pegawai.php"> <i class="fa-solid fa-user-plus"></i>Pegawai</a>';
+                    echo '</li>';
+                }
+                ?>
                 <li class="item">
                     <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>

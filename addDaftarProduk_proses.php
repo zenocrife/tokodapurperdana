@@ -6,6 +6,9 @@ if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
     header("location: login.php");
 }
 
+$username = $_SESSION['uname'];
+$role = $_SESSION['role'];
+
 $addNama_daftarproduk = $_POST['addNama_daftarproduk'];
 $addJual_daftarproduk = $_POST['addJual_daftarproduk'];
 $addBeli_daftarproduk = $_POST['addBeli_daftarproduk'];
@@ -83,9 +86,13 @@ $addKategori_daftarproduk = $_POST['addKategori_daftarproduk'];
                         </li>
                     </ul>
                 </li>
-                <li class="item">
-                    <a href="pegawai.php"> <i class="fa-solid fa-user-plus"></i>Pegawai</a>
-                </li>
+                <?php
+                if ($role == 'pemilik') {
+                    echo '<li class="item">';
+                    echo '<a href="pegawai.php"> <i class="fa-solid fa-user-plus"></i>Pegawai</a>';
+                    echo '</li>';
+                }
+                ?>
                 <li class="item">
                     <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>

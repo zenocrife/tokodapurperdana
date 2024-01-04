@@ -6,6 +6,9 @@ if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
     header("location: login.php");
 }
 
+$username = $_SESSION['uname'];
+$role = $_SESSION['role'];
+
 $addNama_penyesuaian = $_POST['addNama_penyesuaian'];
 // $addTanggal_penyesuaian = $_POST['addTanggal_penyesuaian'];
 $addKeterangan_penyesuaian = $_POST['addKeterangan_penyesuaian'];
@@ -79,9 +82,13 @@ $addStok_penyesuaian = $_POST['addStok_penyesuaian'];
                         </li>
                     </ul>
                 </li>
-                <li class="item">
-                    <a href="pegawai.php"> <i class="fa-solid fa-user-plus"></i>Pegawai</a>
-                </li>
+                <?php
+                if ($role == 'pemilik') {
+                    echo '<li class="item">';
+                    echo '<a href="pegawai.php"> <i class="fa-solid fa-user-plus"></i>Pegawai</a>';
+                    echo '</li>';
+                }
+                ?>
                 <li class="item">
                     <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>

@@ -7,6 +7,7 @@ if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
 }
 
 $username = $_SESSION['uname'];
+$role = $_SESSION['role'];
 
 $barang = new Barang();
 $kategori = new Kategori();
@@ -104,9 +105,13 @@ $resultK = ($kategori)->bacaData('%');
                         </li>
                     </ul>
                 </li>
-                <li class="item">
-                    <a href="pegawai.php"> <i class="fa-solid fa-user-plus"></i>Pegawai</a>
-                </li>
+                <?php
+                if ($role == 'pemilik') {
+                    echo '<li class="item">';
+                    echo '<a href="pegawai.php"> <i class="fa-solid fa-user-plus"></i>Pegawai</a>';
+                    echo '</li>';
+                }
+                ?>
                 <li class="item">
                     <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>

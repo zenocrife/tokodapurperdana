@@ -9,23 +9,15 @@ if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
 }
 
 $username = $_SESSION['uname'];
+$role = $_SESSION['role'];
+
 if (isset($_SESSION['keranjang'])) {
   $arrKeranjang = $_SESSION['keranjang'];
 }
 
-$getIdUser = (new User)->cekLogin($username)->fetch_assoc();
+$idkeranjang = (new DetailPenjualan)->getId()->fetch_assoc();
 
-// pindah ke pencet button
-// ($transaksi)->tambahDataTransaksiPenjualan($getIdUser['id']);
-
-if (isset($_POST['submitDelete'])) {
-  $idbrng = $_POST['id'];
-  foreach ($arrKeranjang as $key => $value) {
-    if ($idbrng == $value['idbarang']) {
-      unset($_SESSION['keranjang'][$key]);
-    }
-  }
-}
+$total = 0;
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +29,7 @@ if (isset($_POST['submitDelete'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dapur Perdana</title>
+  <script type="text/javascript" src="js/code.jquery.com_jquery-3.7.0.js"></script>
   <link rel="stylesheet" href="keranjangstyle.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 </head>
@@ -89,9 +82,13 @@ if (isset($_POST['submitDelete'])) {
             </li>
           </ul>
         </li>
-        <li class="item">
-          <a href="pegawai.php"> <i class="fa-solid fa-user-plus"></i>Pegawai</a>
-        </li>
+        <?php
+        if ($role == 'pemilik') {
+          echo '<li class="item">';
+          echo '<a href="pegawai.php"> <i class="fa-solid fa-user-plus"></i>Pegawai</a>';
+          echo '</li>';
+        }
+        ?>
         <li class="item">
           <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
         </li>
@@ -111,12 +108,12 @@ if (isset($_POST['submitDelete'])) {
         </div>
         <div class="item item-kasir">
           <div class="teks_Kasir">Kasir</div>
-          <div class="teks_tgl_transaksi">Tanggal Transaksi</div>
-          <div class="teks_Invoice">Invoice</div>
+          <div class="teks_tgl_transaksi">Invoice</div>
+          <div class="teks_Invoice">Tanggal Transaksi</div>
           <?php
           echo '<div class="teks_edit_Nama">' . $username . '</div>';
-          echo '<div class="teks_edit_Invoice">YP102987389</div>';
-          echo '<div class="teks_edit_tgl">10/08/2023</div>';
+          echo '<div class="teks_edit_Invoice">' . ($idkeranjang['id'] + 1) . '</div>';
+          echo '<div class="teks_edit_tgl">' . date("Y/m/d") . '</div>';
           ?>
         </div>
         <div class="item item-pembayaran">
@@ -135,31 +132,50 @@ if (isset($_POST['submitDelete'])) {
             </label>
           </div>
           <div class="radio-column">
-            <label class="radio-container">QRIS
-              <input type="radio" name="payment" value="QRIS">
-              <span class="checkmark"></span>
-            </label>
-          </div>
-          <div class="radio-column">
             <label class="radio-container">Kartu Kredit
               <input type="radio" name="payment" value="Kartu Kredit">
               <span class="checkmark"></span>
             </label>
           </div>
+          <div class="radio-column">
+            <label class="radio-container">QRIS
+              <input type="radio" name="payment" value="QRIS">
+              <span class="checkmark"></span>
+            </label>
+          </div>
         </div>
         <div class="item item-cash">
-          <div class="teksCashTitle">Cash</div>
-          <div class="teksChange">Change</div>
-          <div class="teks_edit_change">Rp. 1.000</div>
-          <div class="teksCash">Cash</div>
+          <div class="teksCashTitle">Nominal</div>
+          <div class="teksChange">Kembalian</div>
+          <div class="teks_edit_change">Rp0</div>
+          <div class="teksCash"><b>Pembayaran</b></div>
           <input type="text" class="teksInputCash" name="teksInputCash">
         </div>
         <div class="item item-total">
-          <div class="total">Rp. 15.000,00</div>
+          <div class="total">
+            Rp
+            <?php
+            if (isset($_SESSION['keranjang'])) {
+              foreach ($arrKeranjang as $key => $value) {
+                $totalperbarang = $value['qty'] * $value['price'];
+                $total = $total + $totalperbarang;
+              }
+              echo $total;
+              // echo '<input type="hidden" id="totalSemua" value="' . $total . '">';
+            }
+            ?>
+          </div>
           <div class="teksTotal">Total</div>
         </div>
         <div class="item item-button">
-          <button class="selesai-button">Selesai</button>
+          <form action="keranjangProses.php" method="post">
+            <?php
+            echo '<input type="hidden" id="totalSemua" value="' . $total . '">';
+            echo '<input type="hidden" id="metode" name="metode" value="Tunai">';
+            // echo '<input type="hidden" id="diskon" name="diskon" value="' . $diskon . '">';
+            ?>
+            <button class="selesai-button">Selesai</button>
+          </form>
           <form action="clearkeranjang.php" method="post">
             <button class="batal-button">Batalkan</button>
           </form>
@@ -208,6 +224,7 @@ if (isset($_POST['submitDelete'])) {
   </main>
 
   <script src="js/script.js"></script>
+  <script type="text/javascript" src="js/keranjang.js"></script>
 </body>
 
 </html>
