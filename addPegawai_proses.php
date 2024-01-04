@@ -6,11 +6,11 @@ if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
     header("location: login.php");
 }
 $addUsername_pegawai = $_POST['addUsername_pegawai'];
-$addNama_pagawai = $_POST['addNama_pegawai'];
+$addNama_pegawai = $_POST['addNama_pegawai'];
 $addPassword_pegawai = $_POST['addPassword_pegawai'];
-$addRole_pagawai = $_POST['addRole_pegawai'];
+$addRole_pegawai = $_POST['addRole_pegawai'];
 
-(new Pegawai)->tambahPegawai($addUsername_pegawai, $addPassword_pegawai, $addNama_pagawai, $addRole_pagawai);
+(new Pegawai)->tambahPegawai($addUsername_pegawai, $addPassword_pegawai, $addNama_pegawai, $addRole_pegawai);
 ?>
 
 
