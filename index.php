@@ -41,7 +41,7 @@ $resultK = (new Kategori)->bacaData('%');
 if (isset($_GET['cart'])) {
   header("location: keranjang.php");
 }
-
+$nourut = 1;
 ?>
 
 <!DOCTYPE html>
@@ -157,7 +157,8 @@ if (isset($_GET['cart'])) {
               $idproduk = $row['id'];
 
               echo "<tr>";
-              echo "<td>" . $idproduk . "</td>";
+              echo "<td>" . $nourut . "</td>";
+              $nourut++;
               echo "<td><img width='70' height='70' src=" . $row['url'] . "></td>";
               echo "<td class='left-align'>" . $row['nama'] . "</td>";
               echo "<td>" . $row['stok_tersedia'] . "</td>";

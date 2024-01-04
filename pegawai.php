@@ -2,9 +2,13 @@
 session_start();
 require 'class.php';
 
+if (!isset($_SESSION['uname']) && !isset($_SESSION['pwd'])) {
+    header("location: login.php");
+}
+
 $username = $_SESSION['uname'];
 
-$kategori = new Kategori();
+$pegawai = new Pegawai();
 
 if (isset($_GET['key'])) {
     $search = "%" . $_GET['key'] . "%";
@@ -12,17 +16,15 @@ if (isset($_GET['key'])) {
     $search = "%";
 }
 
-$result = ($kategori)->bacaData($search);
+$result = ($pegawai)->bacaData($search);
 
 if (isset($_GET['key'])) {
     $key = $_GET['key'];
 } else {
     $key = "";
 }
-
 $nourut = 1;
 ?>
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -94,119 +96,57 @@ $nourut = 1;
             </div>
         </div>
     </nav>
+
     <main class="main">
         <div class="container">
-            <div class="add-produk">
+            <div class="add-supplier">
                 <div class="action-buttons">
                     <!-- ADD -->
-                    <a class="add-button" id="add-supp" href="addKategori.php" style='text-decoration:none;text-align:center'>Add</a>
+                    <a class="add-button" id="add-supp" href="addPegawai.php" style='text-decoration:none;text-align:center'>Add</a>
                 </div>
                 <div class="line"></div>
             </div>
             <div class="title-filter-search">
                 <div class="title-wrapper">
-                    <h2>Kategori Produk</h2>
+                    <h2>Pegawai</h2>
                 </div>
                 <div class="filter-search">
                     <form action="" method="GET">
-                        <?php echo '<input type="text" placeholder="Search..." id="search" name="key" value="' . $key . '" />' ?>
-                        <button id='search-button'><i class='fa-solid fa-search'></i></button>
+                        <?php echo '<input type="text" name="key" placeholder="Search..." id="search" value="' . $key . '">'; ?>
+                        <button type="submit" id="search-button" name="submit"><i class="fa-solid fa-search"></i></button>
                     </form>
                 </div>
             </div>
             <div class="table-wrapper">
                 <table class="table">
-                    <!-- <thead> -->
                     <tr>
                         <th>No.</th>
-                        <th>Kategori</th>
+                        <th>Username</th>
+                        <th>Name</th>
+                        <th>Role</th>
                         <th>Actions</th>
                     </tr>
-                    <!-- </thead>
-                    <tbody> -->
                     <?php
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . $nourut . "</td>";
                         $nourut++;
-                        echo "<td class='left-align'>" . $row['nama'] . "</td>";
-                        echo "<td>";
-                        $idKategoriProduk = $row['id'];
-                        // echo "<button class='edit-button' onclick='openEditForm()'>Edit</button>";
-                        // echo "<button class='delete-button' onclick='openDeleteConfirmation()'>Delete</button>";
-                        echo "
-                        <a href='updateKategori.php?id=$idKategoriProduk' class='edit-button'>Edit</a>
-                        <a href='deleteKategori.php?id=$idKategoriProduk' class='delete-button'>Delete</a>";
-                        echo "</td>";
-                        echo "</tr>";
+                        echo "<td>" . $row['username'] . "</td>";
+                        echo "<td>" . $row['nama'] . "</td>";
+                        echo "<td>" . $row['role'] . "</td>";
+                        $idpegawai = $row['id'];
+                        echo "<td>
+                                <a href='updatePegawai.php?id=$idpegawai' class='edit-button'>Edit</a>
+                                <a href='deletePegawai.php?id=$idpegawai' class='delete-button' >Delete</a>
+                            </td>";
                     }
                     ?>
-                    <!-- </tbody> -->
                 </table>
             </div>
         </div>
     </main>
 
-    <!-- <div class="popup-form" id="addForm">
-        <div class="form-header">
-            <span class="form-title">Add Kategori</span>
-            <span class="close-icon" onclick="closeAddForm()">&#10006;</span>
-        </div>
-        <form class="form-container">
-            <input type="text" placeholder="Nama Kategori" required />
-            <div class="button-container">
-                <button type="button" class="cancel-button" onclick="closeAddForm()">Cancel</button>
-                <button type="submit" class="submit-button" id="submitAddForm">Add</button>
-            </div>
-        </form>
-    </div> -->
 
-    <!-- <div class="popup-form" id="editForm">
-        <div class="form-header">
-            <span class="form-title">Edit Kategori</span>
-            <span class="close-icon" onclick="closeEditForm()">&#10006;</span>
-        </div>
-        <form class="form-container">
-            <input type="text" placeholder="Nama Kategori" required />
-            <div class="button-container">
-                <button type="button" class="cancel-button" onclick="closeEditForm()">Cancel</button>
-                <button type="submit" class="submit-button" id="submitEditForm">Edit</button>
-            </div>
-        </form>
-    </div> -->
-
-    <!-- <div class="popup-form" id="deleteConfirmation">
-        <div class="form-container">
-            <p>Apakah Anda yakin ingin menghapusnya?</p>
-            <div class="button-container">
-                <button type="submit" class="submit-button">Yes</button>
-                <button type="button" class="cancel-button" onclick="closeDeleteConfirmation()">No</button>
-            </div>
-        </div>
-    </div> -->
-
-    <!-- <div class="popup-form" id="addSuccessForm">
-        <div class="success-content">
-            <i class="fa-regular fa-circle-check success-icon"></i>
-            <div class="success-text">
-                <p>Sukses</p>
-                <div class="line"></div>
-                <p>Sukses menambah data</p>
-            </div>
-            <button class="close-button" onclick="closeAddSuccessForm()">OK</button>
-        </div>
-    </div>
-    <div class="popup-form" id="editSuccessForm">
-        <div class="success-content">
-            <i class="fa-regular fa-circle-check success-icon"></i>
-            <div class="success-text">
-                <p>Sukses</p>
-                <div class="line"></div>
-                <p>Sukses mengubah data</p>
-            </div>
-            <button class="close-button" onclick="closeEditSuccessForm()">OK</button>
-        </div>
-    </div> -->
     <script src="js/script.js"></script>
 </body>
 
