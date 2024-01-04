@@ -265,7 +265,7 @@ class DetailPenjualan extends Koneksi
 
 	public function bacaData($search)
 	{
-		$stmt = $this->con->prepare("SELECT DATE_FORMAT(tp.tanggal,'%Y-%m-%d') Hari, DATE_FORMAT(tp.tanggal,'%H:%i:%s') Waktu, b.nama, dtp.jumlah_terjual, dtp.total, tp.metode_pembayaran, b.harga_beli, dtp.total-harga_beli untung
+		$stmt = $this->con->prepare("SELECT tp.id_transaksi Kode, DATE_FORMAT(tp.tanggal,'%Y-%m-%d') Hari, DATE_FORMAT(tp.tanggal,'%H:%i:%s') Waktu, b.nama, dtp.jumlah_terjual, dtp.total, tp.metode_pembayaran, b.harga_beli, dtp.total-harga_beli untung
 		FROM transaksi_penjualan tp INNER JOIN detail_transaksi_penjualan dtp ON tp.id_transaksi = dtp.id_transaksi_penjualan
 		INNER JOIN barang b ON dtp.id_barang = b.id WHERE tp.tanggal LIKE ?");
 		$stmt->bind_param("s", $search);
