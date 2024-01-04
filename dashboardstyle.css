@@ -39,7 +39,7 @@
 }
 
 .menu-items {
-  height: auto;
+  height: 90%;
   width: 100%;
   list-style: none;
   transition: all 0.4s ease;
@@ -266,13 +266,16 @@
   height: 40px;
   text-align: center;
 }
+
 .table td .action-buttons {
   width: 100%;
 }
+
 .table td .add-button {
   margin: 0 auto;
   display: block;
 }
+
 .add-button:hover {
   background-color: #3456c8;
 }
@@ -329,6 +332,7 @@
   display: flex;
   padding-bottom: 10px;
 }
+
 #add-supp {
   display: flex;
   justify-content: center;
@@ -344,6 +348,7 @@
   width: 70px;
   height: 50px;
 }
+
 #add-supp:hover {
   background-color: #3456c8;
 }
@@ -399,6 +404,7 @@
   margin-top: 20px;
   align-items: center;
 }
+
 .button-container a {
   padding: 8px 5px;
 }
@@ -413,6 +419,7 @@
   border: none;
 
 }
+
 .popup-form#deleteConfirmation .button-container button {
   margin-right: 10px;
 }
@@ -501,6 +508,7 @@
 .close-button:hover {
   background-color: #3456c8;
 }
+
 #search-button,
 #print-button {
   background-color: transparent;
@@ -518,6 +526,7 @@
 #search-button:hover i {
   color: #4e4d4d;
 }
+
 #print-button {
   margin-right: 5px;
 }
@@ -531,6 +540,7 @@
 #print-button:hover i {
   color: #5c5a5a;
 }
+
 .user-profile {
   display: flex;
   align-items: center;
@@ -543,14 +553,17 @@
   color: #fff;
   font-size: 20px;
 }
+
 .user-icon {
   font-size: 20px;
   margin-right: 10px;
   color: #fff;
 }
+
 .form-group {
   margin-top: 10px;
 }
+
 .toggle-password {
   position: absolute;
   right: 35px;
@@ -558,4 +571,3 @@
   transform: translateY(-50%);
   cursor: pointer;
 }
-

@@ -62,9 +62,9 @@ $objUser = new User();
                   else
                      header("location: index.php");
                } else
-                  echo "Password Salah.";
+                  echo "<p style='color: white;'>Password Salah.</p>";
             } else {
-               echo "User Tidak Ditemukan.";
+               echo "<p style='color: white;'>User Tidak Ditemukan.</p>";
             }
          }
          ?>
