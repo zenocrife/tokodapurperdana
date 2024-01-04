@@ -157,7 +157,8 @@ $total = 0;
             <?php
             if (isset($_SESSION['keranjang'])) {
               foreach ($arrKeranjang as $key => $value) {
-                $totalperbarang = $value['qty'] * $value['price'];
+                $diskon = $value['diskon'];
+                $totalperbarang = ($value['qty'] * $value['price']) - ($value['qty'] * $value['price'] * $diskon / 100);
                 $total = $total + $totalperbarang;
               }
               echo $total;
@@ -197,7 +198,7 @@ $total = 0;
                 <?php
                 if (isset($_SESSION['keranjang'])) {
                   foreach ($arrKeranjang as $key => $value) {
-                    $totalperbarang = $value['qty'] * $value['price'];
+                    $totalperbarang = ($value['qty'] * $value['price']) - ($value['qty'] * $value['price'] * $diskon / 100);
                     $idbarang = $value['idbarang'];
 
                     $resBarang = ($barang)->bacaDataById($idbarang)->fetch_assoc();

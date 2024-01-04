@@ -15,11 +15,11 @@ $getIdUser = (new User)->cekLogin($username)->fetch_assoc();
 (new DetailPenjualan)->tambahDataTransaksiPenjualan($getIdUser['id'], $_POST['metode']);
 
 $idkeranjang = (new DetailPenjualan)->getId()->fetch_assoc();
-$diskon = 0;
 
 if (isset($_SESSION['keranjang'])) {
     $arrKeranjang = $_SESSION['keranjang'];
     foreach ($arrKeranjang as $key => $value) {
+        $diskon = $value['diskon'];
         $totalperbarang = ($value['qty'] * $value['price']) - ($value['qty'] * $value['price'] * $diskon / 100);
         (new DetailPenjualan)->tambahDataDetailTransaksiPenjualan($idkeranjang['id'], $value['idbarang'], $value['qty'], $value['price'], $totalperbarang, $diskon);
     }
