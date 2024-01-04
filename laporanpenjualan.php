@@ -115,6 +115,7 @@ if (isset($_GET['key'])) {
             <div class="table-wrapper">
                 <table class="table" id="table-output">
                     <tr>
+                        <th>No. Nota </th>
                         <th>Tanggal</th>
                         <th>Waktu</th>
                         <th>Barang</th>
@@ -127,6 +128,7 @@ if (isset($_GET['key'])) {
                     <?php
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
+                        echo "<td>" . $row['Kode'] . "</td>";
                         echo "<td>" . $row['Hari'] . "</td>";
                         echo "<td>" . $row['Waktu'] . "</td>";
                         echo "<td>" . $row['nama'] . "</td>";
