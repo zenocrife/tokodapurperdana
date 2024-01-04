@@ -70,6 +70,9 @@ if (isset($_GET['id']) && isset($_GET['submitDelete'])) {
                     </ul>
                 </li>
                 <li class="item">
+                    <a href="pegawai.php"> <i class="fa-solid fa-user-plus"></i>Pegawai</a>
+                </li>
+                <li class="item">
                     <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>
             </ul>
@@ -83,13 +86,13 @@ if (isset($_GET['id']) && isset($_GET['submitDelete'])) {
         <p>Apakah Anda yakin ingin menghapusnya?</p>
         <div class="button-container">
             <form action="deletePegawai.php" method="GET">
-            <button type="submit" class="submit-button"name="submitDelete" style='text-decoration:none;text-align:center' >Yes</button>
+                <button type="submit" class="submit-button" name="submitDelete" style='text-decoration:none;text-align:center'>Yes</button>
                 <!-- Tombol "No" hanya akan kembali ke halaman pegawai.php -->
                 <a href="pegawai.php" class="cancel-button" style='text-decoration:none;text-align:center'>No</a>
                 <!-- Menyertakan informasi ID untuk penghapusan -->
                 <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
             </form>
-            
+
         </div>
 
     </div>

@@ -77,6 +77,9 @@ $result = ($supplier)->updateSupplier($id_sup_edit, $edit_nama, $edit_alamat, $e
                     </ul>
                 </li>
                 <li class="item">
+                    <a href="pegawai.php"> <i class="fa-solid fa-user-plus"></i>Pegawai</a>
+                </li>
+                <li class="item">
                     <a href="logout.php"> <i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</a>
                 </li>
             </ul>
