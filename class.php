@@ -316,3 +316,53 @@ class Penyesuaian extends Koneksi
 		$stmt->execute();
 	}
 }
+class Pegawai extends Koneksi
+{
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+	public function updatePegawai($idpegawai, $usernamepegawai, $password, $namapegawai, $role)
+	{
+		$stmt = $this->con->prepare('UPDATE user SET username=?, password=?, nama=?, role=? WHERE id=?');
+		$stmt->bind_param("ssssi",$usernamepegawai, $password, $namapegawai, $role, $idpegawai);
+		$stmt->execute();
+	}
+
+	public function bacaData($search)
+	{
+		$stmt = $this->con->prepare("SELECT * FROM user WHERE nama LIKE ?");
+		$stmt->bind_param("s", $search);
+		$stmt->execute();
+
+		$result = $stmt->get_result();
+
+		return $result;
+	}
+
+	public function bacaDataById($id)
+	{
+		$stmt = $this->con->prepare("SELECT * FROM user WHERE id = ?");
+		$stmt->bind_param("i", $id);
+		$stmt->execute();
+
+		$result = $stmt->get_result();
+
+		return $result;
+	}
+
+	public function tambahPegawai($usernamepegawai, $password, $namapegawai, $role)
+	{
+		$stmt = $this->con->prepare('INSERT INTO user(username, password, nama, role) VALUE(?, ?, ?, ?)');
+		$stmt->bind_param("ssss", $usernamepegawai, $password, $namapegawai, $role);
+		$stmt->execute();
+	}
+
+	public function hapusPegawai($idpegawai)
+	{
+		$stmt = $this->con->prepare('DELETE FROM user WHERE id=?');
+		$stmt->bind_param("i", $idpegawai);
+		$stmt->execute();
+	}
+}

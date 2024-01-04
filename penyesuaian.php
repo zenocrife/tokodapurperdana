@@ -23,6 +23,7 @@ if (isset($_GET['key'])) {
 } else {
     $key = "";
 }
+$nourut = 1;
 ?>
 
 <!DOCTYPE html>
@@ -128,7 +129,8 @@ if (isset($_GET['key'])) {
                     <?php
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
-                        echo "<td>" . $row['id'] . "</td>";
+                        echo "<td>" . $nourut . "</td>";
+                        $nourut++;
                         echo "<td class='left-align'>" . $row['tanggal'] . "</td>";
                         echo "<td class='right-align'>" . $row['keterangan'] . "</td>";
                         echo "<td class='right-align'>" . $row['stok_penyesuaian'] . "</td>";

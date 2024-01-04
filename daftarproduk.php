@@ -39,7 +39,7 @@ if (isset($_GET['kategori'])) {
 
 // $resultKAdd = ($kategori)->bacaData('%');
 // $resultKEdit = ($kategori)->bacaData('%');
-
+$nourut = 1;
 $resultK = ($kategori)->bacaData('%');
 ?>
 
@@ -119,7 +119,7 @@ $resultK = ($kategori)->bacaData('%');
             <div class="add-produk">
                 <div class="action-buttons">
                     <!-- ADD -->
-                    <a class="add-button" id="add-daftarProduk" href="addDaftarProduk.php" style='text-decoration:none;text-align:center'>Add</a>
+                    <a class="add-button" id="add-supp" href="addDaftarProduk.php" style='text-decoration:none;text-align:center'>Add</a>
                 </div>
                 <div class="line"></div>
             </div>
@@ -154,7 +154,8 @@ $resultK = ($kategori)->bacaData('%');
                         $namaK = $kategoribarang->fetch_assoc();
 
                         echo "<tr>";
-                        echo "<td>" . $row['id'] . "</td>";
+                        echo "<td>" . $nourut . "</td>";
+                        $nourut++;
                         echo "<td class='left-align'>" . $row['nama'] . "</td>";
                         echo "<td class='right-align'>Rp" . number_format($row['harga_jual'], 0, ',', '.') . "</td>";
                         echo "<td class='right-align'>Rp" . number_format($row['harga_beli'], 0, ',', '.') . "</td>";

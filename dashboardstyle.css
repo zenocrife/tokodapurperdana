@@ -383,6 +383,7 @@
 
 .form-container input[type="text"],
 .form-container input[type="number"],
+.form-container input[type="password"],
 .form-container select,
 .form-container input[type="date"] {
   width: 100%;
@@ -397,6 +398,9 @@
   justify-content: space-between;
   margin-top: 20px;
   align-items: center;
+}
+.button-container a {
+  padding: 8px 5px;
 }
 
 .cancel-button,
@@ -546,5 +550,12 @@
 }
 .form-group {
   margin-top: 10px;
+}
+.toggle-password {
+  position: absolute;
+  right: 35px;
+  top: 53%;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
 
